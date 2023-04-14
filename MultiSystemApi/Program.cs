@@ -1,6 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using CommonInfraestructure.DbContexts;
+using EssentialCore.DbContexts;
 using EssentialCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -9,6 +9,8 @@ var entity = typeof(BaseEntityLongId).Assembly;
 
 #region ASSAMBLIES
 var essentialCoreAssembly = Assembly.Load(new AssemblyName("EssentialCore"));
+var essentialInfraestructureAssembly = Assembly.Load(new AssemblyName("EssentialInfraestructure"));
+var essentialApplicationAssembly = Assembly.Load(new AssemblyName("EssentialApplication"));
 var executingAssembly = Assembly.GetExecutingAssembly();
 
 var commonCoreAssembly = Assembly.Load(new AssemblyName("CommonCore"));
@@ -23,6 +25,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterAssemblyTypes(new List<Assembly> {
         essentialCoreAssembly,
+        essentialInfraestructureAssembly,
+        essentialApplicationAssembly,
         executingAssembly,
         commonCoreAssembly,
         commonInfraestructureAssembly,
@@ -37,6 +41,8 @@ builder.Services.AddAutoMapper(new List<Assembly> { commonApplicationAssembly })
 builder.Services.AddDbContext<SqlServerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+
+app.Services.GetService<SqlServerDbContext>()?.AddConfigurations(commonInfraestructureAssembly);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

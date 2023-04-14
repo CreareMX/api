@@ -1,5 +1,5 @@
-﻿using CommonApplication.Dtos;
-using CommonApplication.Interfaces;
+﻿using EssentialApplication.dtos;
+using EssentialApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers

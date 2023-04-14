@@ -1,9 +1,9 @@
-﻿using CommonCore.Entities;
-using CommonCore.Interfaces.Repositories;
-using CommonInfraestructure.DbContexts;
+﻿using EssentialCore.DbContexts;
+using EssentialCore.Entities;
+using EssentialCore.Interfaces.Repositories;
 using EssentialCore.Repositories;
 
-namespace CommonInfraestructure.Repository
+namespace EssentialInfraestructure.Repositories
 {
     public class UsuarioRepository : BaseRepository<Usuario, long>, IUsuarioRepository
     {

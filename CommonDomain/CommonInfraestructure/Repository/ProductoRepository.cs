@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities;
 using CommonCore.Interfaces.Repositories;
-using CommonInfraestructure.DbContexts;
+using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 
 namespace CommonInfraestructure.Repository

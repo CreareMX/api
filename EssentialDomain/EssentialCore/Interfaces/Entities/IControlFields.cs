@@ -2,10 +2,12 @@
 {
     public interface IControlFields<T> where T : struct
     {
-        bool IsActive { get; }
-        DateTime CreationDate { get; }
-        DateTime? LastUpdateDate { get; }
-        T CreationUser { get; }
-        T? LastUpdateUser { get; }
+        bool Activo { get; }
+        DateTime FehaCreacion { get; }
+        DateTime? FechaUltimaActualizacion { get; }
+        T UsuarioCreaId { get; }
+        IUsuario UsuarioCrea { get; }
+        T? UsuarioActualizaId { get; }
+        IUsuario UsuarioActualiza { get; }
     }
 }

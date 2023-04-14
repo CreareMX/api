@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using CommonApplication.Dtos;
-using CommonCore.Entities;
+using EssentialApplication.dtos;
+using EssentialCore.Entities;
 
-namespace CommonApplication.Mappers
+namespace EssentialApplication.Mappers
 {
-    public class ProductoProfile : Profile
+    public class UsuarioProfile : Profile
     {
-        public ProductoProfile()
+        public UsuarioProfile()
         {
 
-            CreateMap<Producto, ProductoDto>();
-            CreateMap<ProductoDto, Producto>()
+            CreateMap<Usuario, UsuarioDto>();
+            CreateMap<UsuarioDto, Usuario>()
                 .ForMember(dest => dest.FehaCreacion, opt => opt.Ignore())
                 .ForMember(dest => dest.FechaUltimaActualizacion, opt => opt.Ignore())
                 .ForMember(dest => dest.UsuarioActualizaId, opt => opt.Ignore())

@@ -1,21 +1,19 @@
-﻿using CommonCore.Entities;
+﻿using EssentialCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CommonInfraestructure.EntityConfigurations
+namespace EssentialInfraestructure.EntityConfigurations
 {
-    public class ProductoEntityConfiguration : IEntityTypeConfiguration<Producto>
+    public class UsuarioEntityConfiguration : IEntityTypeConfiguration<Usuario>
     {
-        public void Configure(EntityTypeBuilder<Producto> builder)
+        public void Configure(EntityTypeBuilder<Usuario> builder)
         {
-            builder.ToTable("Productos");
+            builder.ToTable("Usuarios");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
-            builder.Property(p => p.Name).HasColumnName("Nombre").IsRequired();
-            builder.Property(p => p.ShortName).HasColumnName("NombreCorto").IsRequired(false);
-            builder.Property(p => p.BarCode).HasColumnName("CodigoBarras").IsRequired();
-            builder.Property(p => p.ShortCode).HasColumnName("CodigoCorto").IsRequired(false);
+            builder.Property(p => p.NombreUsuario).HasColumnName("NumbreUsuario").IsRequired();
+            builder.Property(p => p.Contrasena).HasColumnName("Contrasena").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("Activo").IsRequired();
             builder.Property(p => p.FehaCreacion).HasColumnName("FechaCreacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("UsuarioCreacion").IsRequired();
