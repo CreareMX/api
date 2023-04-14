@@ -5,7 +5,7 @@ using EssentialCore.Interfaces.Service;
 
 namespace EssentialApplication.Interfaces
 {
-    public interface IRolService : IService<IRolRepository, Rol, long, RolDto>
+    public interface IPermisosRolService : IService<IPermisosRolRepository, PermisosRol, long, PermisosRolDto>
     {
     }
 }
