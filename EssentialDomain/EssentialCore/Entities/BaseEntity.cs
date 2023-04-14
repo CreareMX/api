@@ -10,6 +10,8 @@ namespace EssentialCore.Entities
         public DateTime? FechaUltimaActualizacion { get; private set; }
         public T UsuarioCreaId { get; private set; }
         public T? UsuarioActualizaId { get; private set; }
+        public IUsuario UsuarioCrea { get; private set; }
+        public IUsuario UsuarioActualiza { get; private set; }
 
         public void New(T userId)
         {

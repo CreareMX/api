@@ -4,17 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EssentialInfraestructure.EntityConfigurations
 {
-    public class UsuarioEntityConfiguration : IEntityTypeConfiguration<Usuario>
+    public class PermisoEntityConfiguration : IEntityTypeConfiguration<Permiso>
     {
-        public void Configure(EntityTypeBuilder<Usuario> builder)
+        public void Configure(EntityTypeBuilder<Permiso> builder)
         {
-            builder.ToTable("usuarios");
+            builder.ToTable("permisos");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();
-            builder.Property(p => p.NombreUsuario).HasColumnName("nombre_usuario").IsRequired();
-            builder.Property(p => p.Contrasena).HasColumnName("contrasena").IsRequired();
-            builder.Property(p => p.RolId).HasColumnName("id_rol").IsRequired();
+            builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
+            builder.Property(p => p.Descripcion).HasColumnName("descripcion").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FehaCreacion).HasColumnName("fecha_creacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();
