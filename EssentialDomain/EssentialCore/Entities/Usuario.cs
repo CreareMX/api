@@ -7,6 +7,6 @@ namespace EssentialCore.Entities
         public string NombreUsuario { get; set; }
         public string Contrasena { get; set; }
         public long RolId { get; set; }
-        public Rol Rol { get; set; }
+        public IRol Rol { get; set; }
     }
 }
