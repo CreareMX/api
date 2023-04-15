@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.ContPermisolers
 {
-    [Route("api/[contPermisoler]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PermisosController : ControllerBase
     {

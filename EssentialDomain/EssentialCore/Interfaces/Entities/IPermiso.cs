@@ -4,5 +4,6 @@
     {
         string Nombre { get; set; }
         string Descripcion { get; set; }
+        string RutaAcceso { get; set; }
     }
 }

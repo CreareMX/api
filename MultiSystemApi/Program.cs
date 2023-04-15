@@ -21,9 +21,9 @@ var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplicatio
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-    builder.RegisterAssemblyTypes(new List<Assembly> {
+    containerBuilder.RegisterAssemblyTypes(new List<Assembly> {
         essentialCoreAssembly,
         essentialInfraestructureAssembly,
         essentialApplicationAssembly,
@@ -32,17 +32,27 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
         commonInfraestructureAssembly,
         commonApplicationAssembly 
     }.ToArray()).AsImplementedInterfaces();
+
+    var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
+    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+    var context = new SqlServerDbContext(optionsBuilder.Options);
+    context.AddConfigurations(commonInfraestructureAssembly);
+    context.AddConfigurations(essentialInfraestructureAssembly);
+
+    containerBuilder.RegisterInstance(context).AsSelf();
 });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(new List<Assembly> { commonApplicationAssembly });
-builder.Services.AddDbContext<SqlServerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(new List<Assembly> { 
+    commonApplicationAssembly,
+    essentialApplicationAssembly
+});
+//builder.Services.AddDbContext<SqlServerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
-
-app.Services.GetService<SqlServerDbContext>()?.AddConfigurations(commonInfraestructureAssembly);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

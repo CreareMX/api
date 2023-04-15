@@ -2,6 +2,6 @@
 {
     public interface IBaseEntity<t> where t : struct
     {
-        t Id { get; set; }
+        t? Id { get; set; }
     }
 }

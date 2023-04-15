@@ -2,7 +2,7 @@
 
 namespace EssentialCore.Entities
 {
-    public abstract class BaseEntityLongId : BaseEntity<long>, IControlFields<long>
+    public abstract class BaseEntityLongId : BaseEntity<long>, IControlFields
     {   
     }
 }

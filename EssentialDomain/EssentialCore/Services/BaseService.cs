@@ -29,9 +29,12 @@ namespace EssentialCore.Services
             return Mapper.Map<D>(entity);
         }
 
-        public virtual void Delete(T id, T idUser)
+        public virtual void Delete(T? id, T idUser)
         {
-            var entity = Repository.GetById(id);
+            if (!id.HasValue)
+                throw new Exception("No se ha recibido un ID válido.");
+
+            var entity = Repository.GetById(id.Value);
             entity.Deactivate(idUser);
 
             Repository.SaveChanges();

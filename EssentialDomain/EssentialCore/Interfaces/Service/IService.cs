@@ -14,7 +14,7 @@ namespace EssentialCore.Interfaces.Service
 
         D Create(D dto, T idUser);
         void Update(D dto, T idUser);
-        void Delete(T id, T idUser);
+        void Delete(T? id, T idUser);
         D GetById(T id);
         IList<D> GetAll();
     }

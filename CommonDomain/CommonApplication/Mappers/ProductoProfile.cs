@@ -11,7 +11,7 @@ namespace CommonApplication.Mappers
 
             CreateMap<Producto, ProductoDto>();
             CreateMap<ProductoDto, Producto>()
-                .ForMember(dest => dest.FehaCreacion, opt => opt.Ignore())
+                .ForMember(dest => dest.FechaCreacion, opt => opt.Ignore())
                 .ForMember(dest => dest.FechaUltimaActualizacion, opt => opt.Ignore())
                 .ForMember(dest => dest.UsuarioActualizaId, opt => opt.Ignore())
                 .ForMember(dest => dest.UsuarioCreaId, opt => opt.Ignore())

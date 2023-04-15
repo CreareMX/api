@@ -11,10 +11,10 @@ namespace EssentialInfraestructure.EntityConfigurations
             builder.ToTable("roles");
             builder.HasKey(x => x.Id);
 
-            builder.Property(p => p.Id).HasColumnName("id").IsRequired();
+            builder.Property(p => p.Id).HasColumnName("id").IsRequired().ValueGeneratedOnAdd();
             builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
-            builder.Property(p => p.FehaCreacion).HasColumnName("fecha_creacion").IsRequired();
+            builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();
             builder.Property(p => p.FechaUltimaActualizacion).HasColumnName("fecha_ultima_actualizacion").IsRequired(false);
             builder.Property(p => p.UsuarioActualizaId).HasColumnName("id_usuario_ultima_actualizacion").IsRequired(false);

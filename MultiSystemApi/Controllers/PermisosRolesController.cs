@@ -6,20 +6,20 @@ namespace MultiSystemApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class PermisosRolesController : ControllerBase
     {
-        private IRolService Service { get; set; }
-        public RolesController(IRolService service)
+        private IPermisosRolService Service { get; set; }
+        public PermisosRolesController(IPermisosRolService service)
         {
             Service = service;
         }
 
         [HttpGet("id/{id}")]
-        public RolDto GetById(long id) => Service.GetById(id);
+        public PermisosRolDto GetById(long id) => Service.GetById(id);
         [HttpGet("all")]
-        public List<RolDto> GetAll() => Service.GetAll().ToList();
+        public List<PermisosRolDto> GetAll() => Service.GetAll().ToList();
         [HttpPost("{idUser}")]
-        public IActionResult Create(RolDto dto, long idUser)
+        public IActionResult Create(PermisosRolDto dto, long idUser)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace MultiSystemApi.Controllers
             }
         }
         [HttpPut("{idUser}")]
-        public IActionResult Update(RolDto dto, long idUser)
+        public IActionResult Update(PermisosRolDto dto, long idUser)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace MultiSystemApi.Controllers
             }
         }
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(RolDto dto, long idUser)
+        public IActionResult Delete(PermisosRolDto dto, long idUser)
         {
             try
             {

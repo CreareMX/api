@@ -8,6 +8,6 @@ namespace CommonApplication.Dtos
         public string ShortName { get; set; }
         public string BarCode { get; set; }
         public string ShortCode { get; set; }
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace EssentialApplication.dtos
     {
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public long Id { get; set; }
+        public string RutaAcceso { get; set; }
+        public long? Id { get; set; }
     }
 }

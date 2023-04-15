@@ -1,9 +1,10 @@
-﻿namespace EssentialCore.Interfaces.Entities
+﻿using EssentialCore.Entities;
+
+namespace EssentialCore.Interfaces.Entities
 {
     public interface IPermisosRol : IBaseEntity<long>
     {
-        IList<IPermiso> Permisos { get; set; }
+        long PermisoId { get; set; }
         long RolId { get; set; }
-        IRol Rol { get; set; }
     }
 }

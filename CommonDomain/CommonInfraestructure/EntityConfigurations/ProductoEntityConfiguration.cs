@@ -17,10 +17,18 @@ namespace CommonInfraestructure.EntityConfigurations
             builder.Property(p => p.BarCode).HasColumnName("CodigoBarras").IsRequired();
             builder.Property(p => p.ShortCode).HasColumnName("CodigoCorto").IsRequired(false);
             builder.Property(p => p.Activo).HasColumnName("Activo").IsRequired();
-            builder.Property(p => p.FehaCreacion).HasColumnName("FechaCreacion").IsRequired();
+            builder.Property(p => p.FechaCreacion).HasColumnName("FechaCreacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("UsuarioCreacion").IsRequired();
             builder.Property(p => p.FechaUltimaActualizacion).HasColumnName("FechaUltimaActualizacion").IsRequired(false);
             builder.Property(p => p.UsuarioActualizaId).HasColumnName("UsuarioUltimaActualizacion").IsRequired(false);
+
+            builder.HasOne(p => p.UsuarioCrea)
+                .WithMany()
+                .HasForeignKey(p => p.UsuarioCreaId);
+
+            builder.HasOne(p => p.UsuarioActualiza)
+                .WithMany()
+                .HasForeignKey(p => p.UsuarioActualizaId);
         }
     }
 }

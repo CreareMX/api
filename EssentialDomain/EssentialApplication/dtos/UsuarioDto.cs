@@ -1,4 +1,5 @@
-﻿using EssentialCore.Interfaces.Entities;
+﻿using EssentialCore.Entities;
+using EssentialCore.Interfaces.Entities;
 
 namespace EssentialApplication.dtos
 {
@@ -6,6 +7,7 @@ namespace EssentialApplication.dtos
     {
         public string NombreUsuario { get; set; }
         public string Contrasena { get; set; }
-        public long Id { get; set; }
+        public long? Id { get; set; }
+        public long RolId { get; set; }
     }
 }

@@ -5,22 +5,20 @@ namespace EssentialCore.DbContexts
 {
     public class SqlServerDbContext : DbContext
     {
-        private ModelBuilder ModelBuilder { get; set; }
+        private List<Assembly> assemblies;
         public SqlServerDbContext(DbContextOptions<SqlServerDbContext> options) : base(options)
         {
+            assemblies = new List<Assembly>();
+            assemblies.Add(this.GetType().Assembly);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            this.ModelBuilder = modelBuilder;
-
-            this.ModelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+            //base.OnModelCreating(modelBuilder);
+            foreach(var assembly in assemblies)
+                modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         }
 
-        public void AddConfigurations(Assembly assembly)
-        {
-            this.ModelBuilder.ApplyConfigurationsFromAssembly(assembly);
-        }
+        public void AddConfigurations(Assembly assembly) => assemblies.Add(assembly);
     }
 }
