@@ -1,5 +1,6 @@
 ﻿using EssentialApplication.dtos;
 using EssentialApplication.Interfaces;
+using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers
@@ -30,7 +31,7 @@ namespace MultiSystemApi.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         [HttpPut("{idUser}")]
@@ -43,7 +44,7 @@ namespace MultiSystemApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         [HttpDelete("{idUser}")]
@@ -56,7 +57,7 @@ namespace MultiSystemApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
     }

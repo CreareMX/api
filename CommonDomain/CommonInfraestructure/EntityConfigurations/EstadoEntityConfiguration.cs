@@ -4,18 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CommonInfraestructure.EntityConfigurations
 {
-    public class ProductoEntityConfiguration : IEntityTypeConfiguration<Producto>
+    public class EstadoEntityConfiguration : IEntityTypeConfiguration<Estado>
     {
-        public void Configure(EntityTypeBuilder<Producto> builder)
+        public void Configure(EntityTypeBuilder<Estado> builder)
         {
-            builder.ToTable("Productos");
+            builder.ToTable("estados");
             builder.HasKey(x => x.Id);
 
-            builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
+            builder.Property(p => p.Id).HasColumnName("id").IsRequired();
             builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
-            builder.Property(p => p.Descripcion).HasColumnName("descripcion").IsRequired(false);
-            builder.Property(p => p.CodigoBarras).HasColumnName("codigo_barras").IsRequired();
-            builder.Property(p => p.Codigo).HasColumnName("codigo_producto").IsRequired(false);
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();

@@ -1,26 +1,26 @@
-﻿using EssentialApplication.dtos;
-using EssentialApplication.Interfaces;
-using EssentialCore.Shared;
+﻿using CommonApplication.Dtos;
+using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using EssentialCore.Shared;
 
-namespace MultiSystemApi.ContPermisolers
+namespace MultiSystemApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermisosController : ControllerBase
+    public class EstadosController : ControllerBase
     {
-        private IPermisoService Service { get; set; }
-        public PermisosController(IPermisoService service)
+        private IEstadoService Service { get; set; }
+        public EstadosController(IEstadoService service)
         {
             Service = service;
         }
 
         [HttpGet("id/{id}")]
-        public PermisoDto GetById(long id) => Service.GetById(id);
+        public EstadoDto GetById(long id) => Service.GetById(id);
         [HttpGet("all")]
-        public List<PermisoDto> GetAll() => Service.GetAll().ToList();
+        public List<EstadoDto> GetAll() => Service.GetAll().ToList();
         [HttpPost("{idUser}")]
-        public IActionResult Create(PermisoDto dto, long idUser)
+        public IActionResult Create(EstadoDto dto, long idUser)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace MultiSystemApi.ContPermisolers
             }
         }
         [HttpPut("{idUser}")]
-        public IActionResult Update(PermisoDto dto, long idUser)
+        public IActionResult Update(EstadoDto dto, long idUser)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MultiSystemApi.ContPermisolers
             }
         }
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(PermisoDto dto, long idUser)
+        public IActionResult Delete(EstadoDto dto, long idUser)
         {
             try
             {

@@ -4,10 +4,10 @@ namespace CommonApplication.Dtos
 {
     public class ProductoDto : IProducto
     {
-        public string Name { get; set; }
-        public string ShortName { get; set; }
-        public string BarCode { get; set; }
-        public string ShortCode { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string CodigoBarras { get; set; }
+        public string Codigo { get; set; }
         public long? Id { get; set; }
     }
 }
