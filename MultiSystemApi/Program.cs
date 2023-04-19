@@ -16,6 +16,10 @@ var executingAssembly = Assembly.GetExecutingAssembly();
 var commonCoreAssembly = Assembly.Load(new AssemblyName("CommonCore"));
 var commonInfraestructureAssembly = Assembly.Load(new AssemblyName("CommonInfraestructure"));
 var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplication"));
+
+var contabilidadCoreAssembly = Assembly.Load(new AssemblyName("ContabilidadCore"));
+var contabilidadInfraestructureAssembly = Assembly.Load(new AssemblyName("ContabilidadInfraestructure"));
+var contabilidadApplicationAssembly = Assembly.Load(new AssemblyName("ContabilidadApplication"));
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +34,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         executingAssembly,
         commonCoreAssembly,
         commonInfraestructureAssembly,
-        commonApplicationAssembly 
+        commonApplicationAssembly,
+        contabilidadCoreAssembly,
+        contabilidadInfraestructureAssembly,
+        contabilidadApplicationAssembly
     }.ToArray()).AsImplementedInterfaces();
 
     var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
@@ -39,6 +46,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     var context = new SqlServerDbContext(optionsBuilder.Options);
     context.AddConfigurations(commonInfraestructureAssembly);
     context.AddConfigurations(essentialInfraestructureAssembly);
+    context.AddConfigurations(contabilidadInfraestructureAssembly);
 
     containerBuilder.RegisterInstance(context).AsSelf();
 });
@@ -48,9 +56,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(new List<Assembly> { 
     commonApplicationAssembly,
-    essentialApplicationAssembly
+    essentialApplicationAssembly,
+    contabilidadApplicationAssembly
 });
-//builder.Services.AddDbContext<SqlServerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

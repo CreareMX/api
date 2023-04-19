@@ -29,6 +29,9 @@
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonInfraestructure\CommonInfraestructure.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadCore\ContabilidadCore.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadInfraestructure\ContabilidadInfraestructure.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialApplication\EssentialApplication.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
