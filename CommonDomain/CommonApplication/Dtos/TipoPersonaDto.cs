@@ -6,5 +6,6 @@ namespace CommonApplication.Dtos
     {
         public string Nombre { get; set; }
         public long? Id { get; set; }
+        public bool EsPersonaMoral { get; set; }
     }
 }
