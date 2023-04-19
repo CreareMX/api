@@ -3,9 +3,9 @@ using ContabilidadApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Contabilidad
 {
-    [Route("api/[controller]")]
+    [Route("api/contabilidad/[controller]")]
     [ApiController]
     public class PersonasController : ControllerBase
     {
@@ -29,7 +29,7 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }

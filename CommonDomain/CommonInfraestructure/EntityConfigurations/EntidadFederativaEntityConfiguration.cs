@@ -8,7 +8,7 @@ namespace CommonInfraestructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<EntidadFederativa> builder)
         {
-            builder.ToTable("EntidadFederativas");
+            builder.ToTable("entidad_federativa");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("Id").IsRequired();

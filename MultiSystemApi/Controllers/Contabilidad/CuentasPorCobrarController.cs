@@ -3,24 +3,24 @@ using ContabilidadApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Contabilidad
 {
-    [Route("api/[controller]")]
+    [Route("api/contabilidad/[controller]")]
     [ApiController]
-    public class DatosFiscalesController : ControllerBase
+    public class CuentasPorCobrarController : ControllerBase
     {
-        private IDatosFiscalesService Service { get; set; }
-        public DatosFiscalesController(IDatosFiscalesService service)
+        private ICuentaPorCobrarService Service { get; set; }
+        public CuentasPorCobrarController(ICuentaPorCobrarService service)
         {
             Service = service;
         }
 
         [HttpGet("id/{id}")]
-        public DatosFiscalesDto GetById(long id) => Service.GetById(id);
+        public CuentaPorCobrarDto GetById(long id) => Service.GetById(id);
         [HttpGet("all")]
-        public List<DatosFiscalesDto> GetAll() => Service.GetAll().ToList();
+        public List<CuentaPorCobrarDto> GetAll() => Service.GetAll().ToList();
         [HttpPost("{idUser}")]
-        public IActionResult Create(DatosFiscalesDto dto, long idUser)
+        public IActionResult Create(CuentaPorCobrarDto dto, long idUser)
         {
             try
             {
@@ -29,13 +29,13 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         [HttpPut("{idUser}")]
-        public IActionResult Update(DatosFiscalesDto dto, long idUser)
+        public IActionResult Update(CuentaPorCobrarDto dto, long idUser)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MultiSystemApi.Controllers
             }
         }
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(DatosFiscalesDto dto, long idUser)
+        public IActionResult Delete(CuentaPorCobrarDto dto, long idUser)
         {
             try
             {
