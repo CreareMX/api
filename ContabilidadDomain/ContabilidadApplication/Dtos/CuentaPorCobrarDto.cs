@@ -15,5 +15,6 @@ namespace ContabilidadApplication.Dtos
         public EstadoDto? Estado { get; set; }
         public decimal Monto { get; set; }
         public decimal Saldo { get; set; }
+        public List<AbonoCuentaPorCobrarDto>? Abonos { get; set; }
     }
 }

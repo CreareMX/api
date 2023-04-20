@@ -19,6 +19,7 @@ namespace ContabilidadInfraestructure.Repository
                 .Include(c => c.Cliente.DatosFiscales)
                 .Include(c => c.Cliente.DatosFiscales.EntidadFederativa)
                 .Include(cc => cc.Estado)
+                .Include(cc => cc.AbonosCuentaPorCobrar)
                 .FirstOrDefault(cc => cc.Id == id);
     }
 }

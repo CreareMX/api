@@ -15,5 +15,6 @@ namespace ContabilidadCore.Entities
         public string? Comentarios { get; set; }
         public long IdEstado { get; set; }
         public Estado Estado { get; set; }
+        public List<AbonoCuentaPorCobrar> AbonosCuentaPorCobrar { get; set; }
     }
 }
