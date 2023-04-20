@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
+    <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
+    <ProjectReference Include="..\RRHHCore\RRHHCore.csproj" />
+  </ItemGroup>
+
+</Project>

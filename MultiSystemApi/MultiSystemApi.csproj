@@ -35,6 +35,9 @@
     <ProjectReference Include="..\EssentialDomain\EssentialApplication\EssentialApplication.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
+    <ProjectReference Include="..\RRHHDomain\RRHHApplication\RRHHApplication.csproj" />
+    <ProjectReference Include="..\RRHHDomain\RRHHCore\RRHHCore.csproj" />
+    <ProjectReference Include="..\RRHHDomain\RRHHInfraestructure\RRHHInfraestructure.csproj" />
   </ItemGroup>
 
 </Project>
