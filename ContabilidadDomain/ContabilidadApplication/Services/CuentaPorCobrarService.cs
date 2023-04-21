@@ -26,7 +26,7 @@ namespace ContabilidadApplication.Services
             var cliente = personaService.GetById(dto.IdCliente) ?? throw new Exception("No se ha establecido un cliente para la cuenta por cobrar.");
             dto.IdCliente = cliente.Id.Value;
 
-            if (cliente.TipoPersona.Nombre.ToUpper().Contains("CLIENTE"))
+            if (!cliente.TipoPersona.Nombre.ToUpper().Contains("CLIENTE"))
                 throw new Exception("La persona seleccionada no es un cliente.");
 
             if (dto.Monto <= 0)
