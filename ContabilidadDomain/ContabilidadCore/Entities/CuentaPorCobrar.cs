@@ -7,6 +7,7 @@ namespace ContabilidadCore.Entities
     public class CuentaPorCobrar : BaseEntityLongId, ICuentaPorCobrar
     {
         public long IdCliente { get; set; }
+        public string Folio { get; set; }
         public Persona Cliente { get; set; }
         public DateTime FechaVenta { get; set; }
         public DateTime FechaVencimiento { get; set; }

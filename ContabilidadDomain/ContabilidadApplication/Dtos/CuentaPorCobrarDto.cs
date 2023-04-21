@@ -6,6 +6,7 @@ namespace ContabilidadApplication.Dtos
     public class CuentaPorCobrarDto : ICuentaPorCobrar
     {
         public long? Id { get; set; }
+        public string Folio { get; set; }
         public string? Comentarios { get; set; }
         public DateTime FechaVencimiento { get; set; }
         public DateTime FechaVenta { get; set; }

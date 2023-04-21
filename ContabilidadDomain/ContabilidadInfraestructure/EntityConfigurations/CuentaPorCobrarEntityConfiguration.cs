@@ -12,6 +12,7 @@ namespace ContabilidadInfraestructure.EntityConfigurations
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();
+            builder.Property(p => p.Folio).HasColumnName("folio").IsRequired();
             builder.Property(p => p.IdCliente).HasColumnName("id_cliente").IsRequired();
             builder.Property(p => p.FechaVenta).HasColumnName("fecha_venta").IsRequired();
             builder.Property(p => p.FechaVencimiento).HasColumnName("fecha_vencimiento").IsRequired();
