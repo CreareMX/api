@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MultiSystemApi.Controllers
 {
     /// <summary>
-    /// Controlador del API de permisos
+    /// Controlador del API de Permiso de rols
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -16,30 +16,30 @@ namespace MultiSystemApi.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de permisos</param>
+        /// <param name="service">Servicio de Permiso de rols</param>
         public PermisosRolesController(IPermisosRolService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene un permiso por medio de su ID
+        /// Obtiene un Permiso de rol por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único del permiso</param>
-        /// <returns>Permisos</returns>
+        /// <param name="id">Identificador único del Permiso de rol</param>
+        /// <returns>Permisos de roles</returns>
         [HttpGet("id/{id}")]
         public PermisosRolDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de permisos
+        /// Obtiene toda la lista de Permiso de rols
         /// </summary>
-        /// <returns>Permisos</returns>
+        /// <returns>Permisos de roles</returns>
         [HttpGet("all")]
         public List<PermisosRolDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea un nuevo permiso
+        /// Crea un nuevo Permiso de rol
         /// </summary>
-        /// <param name="dto">Datos del permiso</param>
-        /// <param name="idUser">ID del usuario que crea el permiso</param>
-        /// <returns>Permiso</returns>   
+        /// <param name="dto">Datos del Permiso de rol</param>
+        /// <param name="idUser">ID del usuario que crea el Permiso de rol</param>
+        /// <returns>Permiso de rol</returns>   
         [HttpPost("{idUser}")]
         public IActionResult Create(PermisosRolDto dto, long idUser)
         {
@@ -56,10 +56,10 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Actualiza un permiso
+        /// Actualiza un Permiso de rol
         /// </summary>
-        /// <param name="dto">Datos del permiso</param>
-        /// <param name="idUser">ID del usuario que actualiza el permiso</param>
+        /// <param name="dto">Datos del Permiso de rol</param>
+        /// <param name="idUser">ID del usuario que actualiza el Permiso de rol</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
         public IActionResult Update(PermisosRolDto dto, long idUser)
@@ -75,10 +75,10 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Desactiva un permiso existente
+        /// Desactiva un Permiso de rol existente
         /// </summary>
-        /// <param name="dto">Datos del permiso (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva el permiso</param>
+        /// <param name="dto">Datos del Permiso de rol (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva el Permiso de rol</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
         public IActionResult Delete(PermisosRolDto dto, long idUser)
