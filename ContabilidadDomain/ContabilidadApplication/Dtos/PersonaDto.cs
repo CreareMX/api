@@ -12,7 +12,7 @@ namespace ContabilidadApplication.Dtos
         public string Nombre { get; set; }
         public string SitioWeb { get; set; }
         public string Telefono { get; set; }
-        public TipoPersonaDto? TipoPersona { get; set; }
-        public DatosFiscalesDto? DatosFiscales { get; set; }
+        public TipoPersonaDto TipoPersona { get; set; }
+        public DatosFiscalesDto DatosFiscales { get; set; }
     }
 }

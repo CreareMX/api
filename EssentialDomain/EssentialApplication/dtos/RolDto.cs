@@ -7,6 +7,6 @@ namespace EssentialApplication.dtos
     {
         public string Nombre { get; set; }
         public long? Id { get; set; }
-        public List<UsuarioDto>? Usuarios { get; set; }
+        public List<UsuarioDto> Usuarios { get; set; }
     }
 }

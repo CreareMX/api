@@ -11,6 +11,6 @@ namespace RRHHApplication.Dtos
         public string Nombre { get; set; }
         public string Relacion { get; set; }
         public string Telefono { get; set; }
-        public PersonaDto? Persona { get; set; }
+        public PersonaDto Persona { get; set; }
     }
 }

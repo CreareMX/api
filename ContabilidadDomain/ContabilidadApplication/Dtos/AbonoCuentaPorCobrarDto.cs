@@ -8,7 +8,7 @@ namespace ContabilidadApplication.Dtos
         public string? Comentarios { get; set; }
         public DateTime Fecha { get; set; }
         public long IdCuentaPorCobrar { get; set; }
-        public CuentaPorCobrarDto? CuentaPorCobrar { get; set; }
+        public CuentaPorCobrarDto CuentaPorCobrar { get; set; }
         public decimal Monto { get; set; }
     }
 }

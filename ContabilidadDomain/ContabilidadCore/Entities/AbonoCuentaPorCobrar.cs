@@ -10,6 +10,6 @@ namespace ContabilidadCore.Entities
         public CuentaPorCobrar CuentaPorCobrar { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Monto { get; set; }
-        public string? Comentarios { get; set; }
+        public string Comentarios { get; set; }
     }
 }

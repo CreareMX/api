@@ -3,7 +3,7 @@
     public interface ICuentaPorPagar
     {
         string Folio { get; set; }
-        string? Comentarios { get; set; }
+        string Comentarios { get; set; }
         DateTime FechaVencimiento { get; set; }
         long IdProveedor { get; set; }
         long IdEstado { get; set; }

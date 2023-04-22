@@ -19,6 +19,6 @@ namespace ContabilidadApplication.Dtos
         public string NumeroInterior { get; set; }
         public string RazonSocial { get; set; }
         public string Rfc { get; set; }
-        public EntidadFederativa? EntidadFederativa { get; set; }
+        public EntidadFederativa EntidadFederativa { get; set; }
     }
 }

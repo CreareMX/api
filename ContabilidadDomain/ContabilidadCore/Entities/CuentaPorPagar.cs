@@ -12,7 +12,7 @@ namespace ContabilidadCore.Entities
         public DateTime FechaVencimiento { get; set; }
         public decimal Monto { get; set; }
         public decimal Saldo { get; set; }
-        public string? Comentarios { get; set; }
+        public string Comentarios { get; set; }
         public long IdEstado { get; set; }
         public Estado Estado { get; set; }
         public List<AbonoCuentaPorPagar> AbonosCuentaPorPagar { get; set; }
