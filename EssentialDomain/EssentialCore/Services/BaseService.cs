@@ -41,9 +41,19 @@ namespace EssentialCore.Services
             Repository.ClearTracker();
         }
 
-        public virtual IList<D> GetAll() => Mapper.Map<List<D>>(Repository.GetAll());
+        public virtual IList<D> GetAll()
+        {
+            var result = Mapper.Map<List<D>>(Repository.GetAll());
+            Repository.ClearTracker();
+            return result;
+        }
 
-        public virtual D GetById(T id) => Mapper.Map<D>(Repository.GetById(id));
+        public virtual D GetById(T id)
+        {
+            var result = Mapper.Map<D>(Repository.GetById(id));
+            Repository.ClearTracker();
+            return result;
+        }
 
         public virtual void Update(D dto, T idUser)
         {

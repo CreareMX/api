@@ -12,15 +12,15 @@ namespace CommonInfraestructure.EntityConfigurations
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
-            builder.Property(p => p.Name).HasColumnName("Nombre").IsRequired();
-            builder.Property(p => p.ShortName).HasColumnName("NombreCorto").IsRequired(false);
-            builder.Property(p => p.BarCode).HasColumnName("CodigoBarras").IsRequired();
-            builder.Property(p => p.ShortCode).HasColumnName("CodigoCorto").IsRequired(false);
-            builder.Property(p => p.Activo).HasColumnName("Activo").IsRequired();
-            builder.Property(p => p.FechaCreacion).HasColumnName("FechaCreacion").IsRequired();
-            builder.Property(p => p.UsuarioCreaId).HasColumnName("UsuarioCreacion").IsRequired();
-            builder.Property(p => p.FechaUltimaActualizacion).HasColumnName("FechaUltimaActualizacion").IsRequired(false);
-            builder.Property(p => p.UsuarioActualizaId).HasColumnName("UsuarioUltimaActualizacion").IsRequired(false);
+            builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
+            builder.Property(p => p.Descripcion).HasColumnName("descripcion").IsRequired(false);
+            builder.Property(p => p.CodigoBarras).HasColumnName("codigo_barras").IsRequired();
+            builder.Property(p => p.Codigo).HasColumnName("codigo_producto").IsRequired(false);
+            builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
+            builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
+            builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();
+            builder.Property(p => p.FechaUltimaActualizacion).HasColumnName("fecha_ultima_actualizacion").IsRequired(false);
+            builder.Property(p => p.UsuarioActualizaId).HasColumnName("id_usuario_ultima_actualizacion").IsRequired(false);
 
             builder.HasOne(p => p.UsuarioCrea)
                 .WithMany()
