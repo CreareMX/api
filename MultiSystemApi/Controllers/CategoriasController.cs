@@ -6,7 +6,7 @@ using EssentialCore.Shared;
 namespace MultiSystemApi.Controllers
 {
     /// <summary>
-    /// Controlador del API de categorias
+    /// Controlador del API de categorías
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -16,7 +16,7 @@ namespace MultiSystemApi.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de categorias</param>
+        /// <param name="service">Servicio de categorías</param>
         public CategoriasController(ICategoriaService service)
         {
             Service = service;
