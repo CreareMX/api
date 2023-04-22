@@ -4,9 +4,9 @@ namespace CommonCore.Interfaces.Entities
 {
     public interface IProducto : IBaseEntity<long>
     {
-        string Name { get; set; }
-        string ShortName { get; set; }
-        string BarCode { get; set; }
-        string ShortCode { get; set; }
+        string Nombre { get; set; }
+        string Descripcion { get; set; }
+        string CodigoBarras { get; set; }
+        string Codigo { get; set; }
     }
 }

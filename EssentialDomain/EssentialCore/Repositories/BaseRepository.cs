@@ -21,13 +21,13 @@ namespace EssentialCore.Repositories
                 entry.State = EntityState.Detached;
         }
 
-        public E Create(E entity) => Context.Add(entity).Entity;
+        public virtual E Create(E entity) => Context.Add(entity).Entity;
 
-        public void Delete(E entity) => Context.Remove(entity);
+        public virtual void Delete(E entity) => Context.Remove(entity);
 
-        public IList<E> GetAll() => Context.Set<E>().ToList();
+        public virtual IList<E> GetAll() => Context.Set<E>().ToList();
 
-        public E GetById(T id) => Context.Set<E>().FirstOrDefault(e => e.Id.ToString() == id.ToString());
+        public virtual E GetById(T id) => Context.Set<E>().FirstOrDefault(e => e.Id.ToString() == id.ToString());
 
         public void SaveChanges() => Context.SaveChanges();
     }

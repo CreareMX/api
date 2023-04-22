@@ -1,5 +1,6 @@
 ﻿using EssentialApplication.dtos;
 using EssentialApplication.Interfaces;
+using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers
@@ -51,7 +52,7 @@ namespace MultiSystemApi.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
@@ -70,7 +71,7 @@ namespace MultiSystemApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
@@ -89,7 +90,7 @@ namespace MultiSystemApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
     }

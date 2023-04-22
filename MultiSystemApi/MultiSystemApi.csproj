@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>c2db2a6e-e4ef-44fc-9640-93777ee997fc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -29,9 +29,15 @@
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonInfraestructure\CommonInfraestructure.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadCore\ContabilidadCore.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadInfraestructure\ContabilidadInfraestructure.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialApplication\EssentialApplication.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
+    <ProjectReference Include="..\RRHHDomain\RRHHApplication\RRHHApplication.csproj" />
+    <ProjectReference Include="..\RRHHDomain\RRHHCore\RRHHCore.csproj" />
+    <ProjectReference Include="..\RRHHDomain\RRHHInfraestructure\RRHHInfraestructure.csproj" />
   </ItemGroup>
 
 </Project>

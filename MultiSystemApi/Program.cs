@@ -16,6 +16,14 @@ var executingAssembly = Assembly.GetExecutingAssembly();
 var commonCoreAssembly = Assembly.Load(new AssemblyName("CommonCore"));
 var commonInfraestructureAssembly = Assembly.Load(new AssemblyName("CommonInfraestructure"));
 var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplication"));
+
+var contabilidadCoreAssembly = Assembly.Load(new AssemblyName("ContabilidadCore"));
+var contabilidadInfraestructureAssembly = Assembly.Load(new AssemblyName("ContabilidadInfraestructure"));
+var contabilidadApplicationAssembly = Assembly.Load(new AssemblyName("ContabilidadApplication"));
+
+var rrhhCoreAssembly = Assembly.Load(new AssemblyName("RRHHCore"));
+var rrhhInfraestructureAssembly = Assembly.Load(new AssemblyName("RRHHInfraestructure"));
+var rrhhApplicationAssembly = Assembly.Load(new AssemblyName("RRHHApplication"));
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +38,13 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         executingAssembly,
         commonCoreAssembly,
         commonInfraestructureAssembly,
-        commonApplicationAssembly 
+        commonApplicationAssembly,
+        contabilidadCoreAssembly,
+        contabilidadInfraestructureAssembly,
+        contabilidadApplicationAssembly,
+        rrhhCoreAssembly,
+        rrhhInfraestructureAssembly,
+        rrhhApplicationAssembly
     }.ToArray()).AsImplementedInterfaces();
 
     var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
@@ -39,6 +53,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     var context = new SqlServerDbContext(optionsBuilder.Options);
     context.AddConfigurations(commonInfraestructureAssembly);
     context.AddConfigurations(essentialInfraestructureAssembly);
+    context.AddConfigurations(contabilidadInfraestructureAssembly);
+    context.AddConfigurations(rrhhInfraestructureAssembly);
 
     containerBuilder.RegisterInstance(context).AsSelf();
 });
@@ -48,9 +64,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(new List<Assembly> { 
     commonApplicationAssembly,
-    essentialApplicationAssembly
+    essentialApplicationAssembly,
+    contabilidadApplicationAssembly,
+    rrhhApplicationAssembly
 });
-//builder.Services.AddDbContext<SqlServerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
