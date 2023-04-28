@@ -15,6 +15,8 @@ namespace CommonInfraestructure.EntityConfigurations
             builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
             builder.Property(p => p.Descripcion).HasColumnName("descripcion").IsRequired(false);
             builder.Property(p => p.CodigoBarras).HasColumnName("codigo_barras").IsRequired();
+            builder.Property(p => p.NumeroSerie).HasColumnName("numero_serie").IsRequired();
+            builder.Property(p => p.IdCategoria).HasColumnName("id_categoria").IsRequired();
             builder.Property(p => p.Codigo).HasColumnName("codigo_producto").IsRequired(false);
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
@@ -29,6 +31,10 @@ namespace CommonInfraestructure.EntityConfigurations
             builder.HasOne(p => p.UsuarioActualiza)
                 .WithMany()
                 .HasForeignKey(p => p.UsuarioActualizaId);
+
+            builder.HasOne(p => p.Categoria)
+                .WithMany()
+                .HasForeignKey(p => p.IdCategoria);
         }
     }
 }
