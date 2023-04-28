@@ -6,7 +6,7 @@ using RRHHCore.Interfaces.Repositories;
 
 namespace RRHHInfraestructure.Repositories
 {
-    public class DatosEmpleadosRepository : BaseRepository<DatosEmpleado, long>, IDatosEmpleadosRepository
+    public class DatosEmpleadosRepository : BaseRepository<DatosEmpleado, long>, IDatosEmpleadoRepository
     {
         public DatosEmpleadosRepository(SqlServerDbContext context) : base(context)
         {
