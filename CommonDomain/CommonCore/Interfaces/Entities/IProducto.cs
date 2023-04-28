@@ -8,5 +8,7 @@ namespace CommonCore.Interfaces.Entities
         string Descripcion { get; set; }
         string CodigoBarras { get; set; }
         string Codigo { get; set; }
+        string NumeroSerie { get; set; }
+        long IdCategoria { get; set; }
     }
 }
