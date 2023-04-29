@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AlmacenDomain\AlmacenApplication\AlmacenApplication.csproj" />
+    <ProjectReference Include="..\AlmacenDomain\AlmacenCore\AlmacenCore.csproj" />
+    <ProjectReference Include="..\AlmacenDomain\AlmacenInfraestructure\AlmacenInfraestructure.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonInfraestructure\CommonInfraestructure.csproj" />
