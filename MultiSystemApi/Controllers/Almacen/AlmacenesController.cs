@@ -3,45 +3,45 @@ using AlmacenApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers.Alamacen
+namespace MultiSystemApi.Controllers.Almacen
 {
     /// <summary>
-    /// Controlador del API de tipos de almacen
+    /// Controlador del API de Almacenes
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class TiposAlmacenController : ControllerBase
+    public class AlmacenesController : ControllerBase
     {
-        private ITipoAlmacenService Service { get; set; }
+        private IAlmacenService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de tipos de almacen</param>
-        public TiposAlmacenController(ITipoAlmacenService service)
+        /// <param name="service">Servicio de Almacenes</param>
+        public AlmacenesController(IAlmacenService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene una Tipo de Almacen por medio de su ID
+        /// Obtiene una Almacen por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único de tipo de almacen</param>
-        /// <returns>tipo de almacen</returns>
+        /// <param name="id">Identificador único de Almacen</param>
+        /// <returns>Almacen</returns>
         [HttpGet("id/{id}")]
-        public TipoAlmacenDto GetById(long id) => Service.GetById(id);
+        public AlmacenDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de tipos de almacen
+        /// Obtiene toda la lista de Almacenes
         /// </summary>
-        /// <returns>tipos de almacen</returns>
+        /// <returns>Almacenes</returns>
         [HttpGet("all")]
-        public List<TipoAlmacenDto> GetAll() => Service.GetAll().ToList();
+        public List<AlmacenDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea una nueva tipo de almacen
+        /// Crea una nueva Almacen
         /// </summary>
-        /// <param name="dto">Datos de la tipo de almacen</param>
-        /// <param name="idUser">ID del usuario que crea la tipo de almacen</param>
-        /// <returns>tipo de almacen</returns>
+        /// <param name="dto">Datos de la Almacen</param>
+        /// <param name="idUser">ID del usuario que crea la Almacen</param>
+        /// <returns>Almacen</returns>
         [HttpPost("{idUser}")]
-        public IActionResult Create(TipoAlmacenDto dto, long idUser)
+        public IActionResult Create(AlmacenDto dto, long idUser)
         {
             try
             {
@@ -56,13 +56,13 @@ namespace MultiSystemApi.Controllers.Alamacen
             }
         }
         /// <summary>
-        /// Actualiza una tipo de almacen
+        /// Actualiza una Almacen
         /// </summary>
-        /// <param name="dto">Datos de la tipo de almacen</param>
-        /// <param name="idUser">ID del usuario que actualiza la tipo de almacen</param>
+        /// <param name="dto">Datos de la Almacen</param>
+        /// <param name="idUser">ID del usuario que actualiza la Almacen</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(TipoAlmacenDto dto, long idUser)
+        public IActionResult Update(AlmacenDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers.Alamacen
             }
         }
         /// <summary>
-        /// Desactiva una tipo de almacen existente
+        /// Desactiva una Almacen existente
         /// </summary>
-        /// <param name="dto">Datos de la tipo de almacen (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva la tipo de almacen</param>
+        /// <param name="dto">Datos de la Almacen (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva la Almacen</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(TipoAlmacenDto dto, long idUser)
+        public IActionResult Delete(AlmacenDto dto, long idUser)
         {
             try
             {
