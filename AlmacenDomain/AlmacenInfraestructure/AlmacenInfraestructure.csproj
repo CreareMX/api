@@ -16,9 +16,4 @@
     <ProjectReference Include="..\AlmacenCore\AlmacenCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

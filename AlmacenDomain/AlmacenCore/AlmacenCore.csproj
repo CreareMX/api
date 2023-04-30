@@ -11,9 +11,4 @@
     <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Entities\" />
-    <Folder Include="Interfaces\Repositories\" />
-  </ItemGroup>
-
 </Project>
