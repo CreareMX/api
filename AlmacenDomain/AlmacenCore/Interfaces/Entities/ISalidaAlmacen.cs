@@ -1,9 +1,9 @@
 ﻿namespace AlmacenCore.Interfaces.Entities
 {
-    public interface IEntradaAlmacen
+    public interface ISalidaAlmacen
     {
         decimal Cantidad { get; set; }
-        DateTime FechaEntrada { get; set; }
+        DateTime FechaSalida { get; set; }
         long IdAlmacen { get; set; }
         long IdProducto { get; set; }
         long IdUnidad { get; set; }
