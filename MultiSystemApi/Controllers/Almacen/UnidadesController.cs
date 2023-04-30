@@ -3,45 +3,45 @@ using AlmacenApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers.Alamacen
+namespace MultiSystemApi.Controllers.Almacen
 {
     /// <summary>
-    /// Controlador del API de Almacenes
+    /// Controlador del API de Unidades
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class AlmacenesController : ControllerBase
+    public class UnidadesController : ControllerBase
     {
-        private IAlmacenService Service { get; set; }
+        private IUnidadService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de Almacenes</param>
-        public AlmacenesController(IAlmacenService service)
+        /// <param name="service">Servicio de Unidades</param>
+        public UnidadesController(IUnidadService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene una Almacen por medio de su ID
+        /// Obtiene una Unidad por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único de Almacen</param>
-        /// <returns>Almacen</returns>
+        /// <param name="id">Identificador único de Unidad</param>
+        /// <returns>Unidad</returns>
         [HttpGet("id/{id}")]
-        public AlmacenDto GetById(long id) => Service.GetById(id);
+        public UnidadDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de Almacenes
+        /// Obtiene toda la lista de Unidades
         /// </summary>
-        /// <returns>Almacenes</returns>
+        /// <returns>Unidades</returns>
         [HttpGet("all")]
-        public List<AlmacenDto> GetAll() => Service.GetAll().ToList();
+        public List<UnidadDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea una nueva Almacen
+        /// Crea una nueva Unidad
         /// </summary>
-        /// <param name="dto">Datos de la Almacen</param>
-        /// <param name="idUser">ID del usuario que crea la Almacen</param>
-        /// <returns>Almacen</returns>
+        /// <param name="dto">Datos de la Unidad</param>
+        /// <param name="idUser">ID del usuario que crea la Unidad</param>
+        /// <returns>Unidad</returns>
         [HttpPost("{idUser}")]
-        public IActionResult Create(AlmacenDto dto, long idUser)
+        public IActionResult Create(UnidadDto dto, long idUser)
         {
             try
             {
@@ -56,13 +56,13 @@ namespace MultiSystemApi.Controllers.Alamacen
             }
         }
         /// <summary>
-        /// Actualiza una Almacen
+        /// Actualiza una Unidad
         /// </summary>
-        /// <param name="dto">Datos de la Almacen</param>
-        /// <param name="idUser">ID del usuario que actualiza la Almacen</param>
+        /// <param name="dto">Datos de la Unidad</param>
+        /// <param name="idUser">ID del usuario que actualiza la Unidad</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(AlmacenDto dto, long idUser)
+        public IActionResult Update(UnidadDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers.Alamacen
             }
         }
         /// <summary>
-        /// Desactiva una Almacen existente
+        /// Desactiva una Unidad existente
         /// </summary>
-        /// <param name="dto">Datos de la Almacen (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva la Almacen</param>
+        /// <param name="dto">Datos de la Unidad (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva la Unidad</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(AlmacenDto dto, long idUser)
+        public IActionResult Delete(UnidadDto dto, long idUser)
         {
             try
             {
