@@ -8,7 +8,7 @@ namespace AlmacenInfraestructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Almacen> builder)
         {
-            builder.ToTable("tipos_almacenes");
+            builder.ToTable("almacenes");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();

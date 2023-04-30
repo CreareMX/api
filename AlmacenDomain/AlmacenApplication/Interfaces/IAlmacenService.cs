@@ -5,7 +5,7 @@ using EssentialCore.Interfaces.Service;
 
 namespace AlmacenApplication.Interfaces
 {
-    public interface ITipoAlmacenService : IService<ITipoAlmacenRepository, TipoAlmacen, long, TipoAlmacenDto>
+    public interface IAlmacenService : IService<IAlmacenRepository, Almacen, long, AlmacenDto>
     {
     }
 }
