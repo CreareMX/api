@@ -8,7 +8,7 @@ namespace MultiSystemApi.Controllers.Ventas
     /// <summary>
     /// Controlador del API de Precios
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/Ventas/[controller]")]
     [ApiController]
     public class PreciosController : ControllerBase
     {

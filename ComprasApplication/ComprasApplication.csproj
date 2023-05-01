@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
+    <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
+    <ProjectReference Include="..\ComprasDomain\ComprasCore\ComprasCore.csproj" />
+    <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

@@ -32,6 +32,9 @@
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonInfraestructure\CommonInfraestructure.csproj" />
+    <ProjectReference Include="..\ComprasApplication\ComprasApplication.csproj" />
+    <ProjectReference Include="..\ComprasDomain\ComprasCore\ComprasCore.csproj" />
+    <ProjectReference Include="..\ComprasInfraestructure\ComprasInfraestructure.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadCore\ContabilidadCore.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadInfraestructure\ContabilidadInfraestructure.csproj" />
@@ -44,6 +47,10 @@
     <ProjectReference Include="..\VentasDomain\VentasApplication\VentasApplication.csproj" />
     <ProjectReference Include="..\VentasDomain\VentasCore\VentasCore.csproj" />
     <ProjectReference Include="..\VentasDomain\VentasInfraestructure\VentasInfraestructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Compras\" />
   </ItemGroup>
 
 </Project>
