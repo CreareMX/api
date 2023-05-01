@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
+    <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Interfaces\Entities\" />
+    <Folder Include="Interfaces\Repositories\" />
+  </ItemGroup>
+
+</Project>

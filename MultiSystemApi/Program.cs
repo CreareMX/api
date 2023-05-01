@@ -28,6 +28,10 @@ var rrhhApplicationAssembly = Assembly.Load(new AssemblyName("RRHHApplication"))
 var almacenCoreAssembly = Assembly.Load(new AssemblyName("AlmacenCore"));
 var almacenInfraestructureAssembly = Assembly.Load(new AssemblyName("AlmacenInfraestructure"));
 var almacenApplicationAssembly = Assembly.Load(new AssemblyName("AlmacenApplication"));
+
+var ventasCoreAssembly = Assembly.Load(new AssemblyName("VentasCore"));
+var ventasInfraestructureAssembly = Assembly.Load(new AssemblyName("VentasInfraestructure"));
+var ventasApplicationAssembly = Assembly.Load(new AssemblyName("VentasApplication"));
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +55,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         rrhhApplicationAssembly,
         almacenCoreAssembly,
         almacenInfraestructureAssembly,
-        almacenApplicationAssembly
+        almacenApplicationAssembly,
+        ventasCoreAssembly,
+        ventasInfraestructureAssembly,
+        ventasApplicationAssembly
     }.ToArray()).AsImplementedInterfaces();
 
     var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
@@ -63,6 +70,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     context.AddConfigurations(contabilidadInfraestructureAssembly);
     context.AddConfigurations(rrhhInfraestructureAssembly);
     context.AddConfigurations(almacenInfraestructureAssembly);
+    context.AddConfigurations(ventasInfraestructureAssembly);
 
     containerBuilder.RegisterInstance(context).AsSelf();
 });
@@ -78,7 +86,8 @@ builder.Services.AddAutoMapper(new List<Assembly> {
     essentialApplicationAssembly,
     contabilidadApplicationAssembly,
     rrhhApplicationAssembly,
-    almacenApplicationAssembly
+    almacenApplicationAssembly,
+    ventasApplicationAssembly
 });
 
 var app = builder.Build();
