@@ -41,6 +41,9 @@
     <ProjectReference Include="..\RRHHDomain\RRHHApplication\RRHHApplication.csproj" />
     <ProjectReference Include="..\RRHHDomain\RRHHCore\RRHHCore.csproj" />
     <ProjectReference Include="..\RRHHDomain\RRHHInfraestructure\RRHHInfraestructure.csproj" />
+    <ProjectReference Include="..\VentasDomain\VentasApplication\VentasApplication.csproj" />
+    <ProjectReference Include="..\VentasDomain\VentasCore\VentasCore.csproj" />
+    <ProjectReference Include="..\VentasDomain\VentasInfraestructure\VentasInfraestructure.csproj" />
   </ItemGroup>
 
 </Project>
