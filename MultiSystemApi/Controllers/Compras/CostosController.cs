@@ -1,14 +1,14 @@
-﻿using EssentialCore.Shared;
+﻿using ComprasApplication.Dtos;
+using ComprasApplication.Interfaces;
+using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
-using VentasApplication.Dtos;
-using VentasApplication.Interfaces;
 
 namespace MultiSystemApi.Controllers.Compras
 {
     /// <summary>
     /// Controlador del API de Costos
     /// </summary>
-    [Route("api/Ventas/[controller]")]
+    [Route("api/Compras/[controller]")]
     [ApiController]
     public class CostosController : ControllerBase
     {

@@ -49,8 +49,4 @@
     <ProjectReference Include="..\VentasDomain\VentasInfraestructure\VentasInfraestructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Compras\" />
-  </ItemGroup>
-
 </Project>
