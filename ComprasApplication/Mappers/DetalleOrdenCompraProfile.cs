@@ -4,12 +4,12 @@ using ComprasCore.Entites;
 
 namespace ComprasApplication.Mappers
 {
-    public class CostoProfile : Profile
+    public class DetalleOrdenCompraProfile : Profile
     {
-        public CostoProfile()
+        public DetalleOrdenCompraProfile()
         {
-            CreateMap<Costo, CostoDto>();
-            CreateMap<CostoDto, Costo>()
+            CreateMap<DetalleOrdenCompra, DetalleOrdenCompraDto>();
+            CreateMap<DetalleOrdenCompraDto, DetalleOrdenCompra>()
                 .ForMember(dest => dest.FechaCreacion, opt => opt.Ignore())
                 .ForMember(dest => dest.FechaUltimaActualizacion, opt => opt.Ignore())
                 .ForMember(dest => dest.UsuarioActualizaId, opt => opt.Ignore())
