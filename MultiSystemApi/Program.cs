@@ -32,6 +32,10 @@ var almacenApplicationAssembly = Assembly.Load(new AssemblyName("AlmacenApplicat
 var ventasCoreAssembly = Assembly.Load(new AssemblyName("VentasCore"));
 var ventasInfraestructureAssembly = Assembly.Load(new AssemblyName("VentasInfraestructure"));
 var ventasApplicationAssembly = Assembly.Load(new AssemblyName("VentasApplication"));
+
+var comprasCoreAssembly = Assembly.Load(new AssemblyName("ComprasCore"));
+var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
+var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,7 +62,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         almacenApplicationAssembly,
         ventasCoreAssembly,
         ventasInfraestructureAssembly,
-        ventasApplicationAssembly
+        ventasApplicationAssembly,
+        comprasCoreAssembly,
+        comprasInfraestructureAssembly,
+        comprasApplicationAssembly,
     }.ToArray()).AsImplementedInterfaces();
 
     var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
@@ -71,6 +78,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     context.AddConfigurations(rrhhInfraestructureAssembly);
     context.AddConfigurations(almacenInfraestructureAssembly);
     context.AddConfigurations(ventasInfraestructureAssembly);
+    context.AddConfigurations(comprasInfraestructureAssembly);
 
     containerBuilder.RegisterInstance(context).AsSelf();
 });
@@ -87,7 +95,8 @@ builder.Services.AddAutoMapper(new List<Assembly> {
     contabilidadApplicationAssembly,
     rrhhApplicationAssembly,
     almacenApplicationAssembly,
-    ventasApplicationAssembly
+    ventasApplicationAssembly,
+    comprasApplicationAssembly
 });
 
 var app = builder.Build();

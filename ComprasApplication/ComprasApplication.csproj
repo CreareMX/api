@@ -10,11 +10,8 @@
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\ComprasDomain\ComprasCore\ComprasCore.csproj" />
+    <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>

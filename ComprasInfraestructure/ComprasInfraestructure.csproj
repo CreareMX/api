@@ -16,8 +16,4 @@
     <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
-  </ItemGroup>
-
 </Project>
