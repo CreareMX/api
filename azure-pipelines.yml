@@ -4,13 +4,19 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- Development
+  batch: true
+  branches:
+    include:
+      - main
+      - qa
+      - develop
+      - feature/*
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'MultiSystemApi.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -18,17 +24,42 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
+  displayName: 'Restore NuGets'
   inputs:
     restoreSolution: '$(solution)'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
+  displayName: 'Build Project'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
+    command: 'build'
+    arguments: '$(solution)'
 - task: VSTest@2
+  displayName: 'Running Tests'
   inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    diagnosticsEnabled: true
+    codeCoverageEnabled: true
     platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    configuration: '$(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing'
+  inputs:
+    command: publish
+    publishWebProjects: True
+    projects: |
+      Sources/NetCore6/*.csproj
+      !**/*Tests*.csproj
+    arguments: '--configuration $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)'
+    modifyOutputPath: true
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Creating Artifact'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'CreareAPI'
