@@ -13,7 +13,7 @@ trigger:
       - feature/*
 
 pool:
-  name: 'MyPool'
+  name: 'Azure Pipelines'
 
 variables:
   solution: 'MultiSystemApi.sln'
