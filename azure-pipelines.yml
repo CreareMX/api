@@ -13,7 +13,7 @@ trigger:
       - feature/*
 
 pool:
-  vmImage: 'windows-latest'
+  name: 'Hosted Agent'
 
 variables:
   solution: 'MultiSystemApi.sln'
