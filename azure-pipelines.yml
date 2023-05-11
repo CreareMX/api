@@ -13,7 +13,7 @@ trigger:
       - feature/*
 
 pool:
-  name: 'Hosted Agent'
+  name: 'MyPool'
 
 variables:
   solution: 'MultiSystemApi.sln'
