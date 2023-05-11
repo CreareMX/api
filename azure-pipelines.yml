@@ -7,7 +7,7 @@ trigger:
       - develop
       - feature/*
 
-pool: 'ubuntu_lastest'
+pool: 'windows_lastest'
 
 variables:
   solution: 'MultiSystemApi.sln'
