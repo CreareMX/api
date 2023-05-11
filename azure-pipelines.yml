@@ -12,7 +12,7 @@ trigger:
       - develop
       - feature/*
 
-pool: 'MyPool'
+pool: 'Default'
 
 variables:
   solution: 'MultiSystemApi.sln'
