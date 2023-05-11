@@ -7,7 +7,7 @@ trigger:
       - develop
       - feature/*
 
-pool: 'Creare Api'
+pool: 'ubuntu_lastest'
 
 variables:
   solution: 'MultiSystemApi.sln'
