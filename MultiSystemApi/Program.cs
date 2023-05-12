@@ -37,7 +37,7 @@ var comprasCoreAssembly = Assembly.Load(new AssemblyName("ComprasCore"));
 var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
 var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
 #endregion
-
+//prueba de cambio< 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
