@@ -12,6 +12,7 @@ namespace CommonInfraestructure.EntityConfigurations
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();
+            builder.Property(p => p.IdSeccion).HasColumnName("id_seccion").IsRequired();
             builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
@@ -26,6 +27,10 @@ namespace CommonInfraestructure.EntityConfigurations
             builder.HasOne(p => p.UsuarioActualiza)
                 .WithMany()
                 .HasForeignKey(p => p.UsuarioActualizaId);
+
+            builder.HasOne(p => p.Seccion)
+                .WithMany()
+                .HasForeignKey(p => p.IdSeccion);
         }
     }
 }
