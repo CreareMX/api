@@ -13,12 +13,15 @@ namespace ComprasApplication.Services
     {
         readonly IPersonaService personaService;
         readonly IEstadoService estadoService;
+        readonly ISucursalService sucursalService;
 
         public OrdenCompraService(IOrdenCompraRepository repository,
-            IPersonaService personaService, IEstadoService estadoService, IMapper mapper) : base(repository, mapper)
+            IPersonaService personaService, IEstadoService estadoService, 
+            ISucursalService sucursalService, IMapper mapper) : base(repository, mapper)
         {
             this.personaService = personaService;
             this.estadoService = estadoService;
+            this.sucursalService = sucursalService;
         }
 
         public override OrdenCompraDto Create(OrdenCompraDto dto, long idUser)
@@ -33,10 +36,13 @@ namespace ComprasApplication.Services
                 throw new Exception("No se ha seleccionado un cliente válido.");
             dto.IdEmpleado = empleado.Id.Value;
 
+            var sucursal = this.sucursalService.GetById(dto.IdSucursal) ?? throw new Exception("La sucursal indicada no existe.");
+            dto.IdSucursal = sucursal.Id.Value;
+
             var estados = estadoService.GetAll();
-            var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("pendiente de pago", StringComparison.InvariantCultureIgnoreCase));
+            var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("requisicion", StringComparison.InvariantCultureIgnoreCase));
             if (estadoPendientePago == null)
-                throw new Exception("No se ha dado de alta el estado 'PENDIENTE DE PAGO' comuniquese con su administrador del sistema.");
+                throw new Exception("No se ha dado de alta el estado 'REQUISICION' comuniquese con su administrador del sistema.");
             dto.IdEstado = estadoPendientePago.Id.Value;
 
             return base.Create(dto, idUser);

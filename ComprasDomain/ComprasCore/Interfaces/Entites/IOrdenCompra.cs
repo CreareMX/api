@@ -12,6 +12,6 @@ namespace ComprasCore.Interfaces.Entites
         long IdCliente { get; set; }
         long IdEmpleado { get; set; }
         long IdEstado { get; set; }
-        long? IdVenta { get; set; }
+        long IdSucursal { get; set; }
     }
 }

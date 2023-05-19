@@ -15,7 +15,8 @@ namespace ComprasApplication.Dtos
         public DateTime FechaCompromiso { get; set; }
         public DateTime FechaEnvio { get; set; }
         public string FormaEnvio { get; set; }
-        public long? IdVenta { get; set; }
+        public long IdSucursal { get; set; }
+        public SucursalDto Sucursal { get; set; }
         public string Comentarios { get; set; }
         public long IdEstado { get; set; }
         public EstadoDto Estado { get; set; }

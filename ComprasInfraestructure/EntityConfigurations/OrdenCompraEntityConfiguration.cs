@@ -18,7 +18,7 @@ namespace ComprasInfraestructure.EntityConfigurations
             builder.Property(p => p.FechaCompromiso).HasColumnName("fecha_compromiso").IsRequired();
             builder.Property(p => p.FechaEnvio).HasColumnName("fecha_envio").IsRequired();
             builder.Property(p => p.FormaEnvio).HasColumnName("forma_envio").IsRequired();
-            builder.Property(p => p.IdVenta).HasColumnName("id_venta").IsRequired(false);
+            builder.Property(p => p.IdSucursal).HasColumnName("id_sucursal").IsRequired(false);
             builder.Property(p => p.Comentarios).HasColumnName("comentarios").IsRequired(false);
             builder.Property(p => p.IdEstado).HasColumnName("id_estado").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
@@ -46,6 +46,10 @@ namespace ComprasInfraestructure.EntityConfigurations
             builder.HasOne(p => p.Estado)
                 .WithMany()
                 .HasForeignKey(p => p.IdEstado);
+
+            builder.HasOne(p => p.Sucursal)
+                .WithMany()
+                .HasForeignKey(p => p.IdSucursal);
 
             builder.HasMany(p => p.Detalles)
                 .WithOne(p => p.OrdenCompra)
