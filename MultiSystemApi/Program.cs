@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using EssentialCore.DbContexts;
 using EssentialCore.Entities;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -37,7 +38,6 @@ var comprasCoreAssembly = Assembly.Load(new AssemblyName("ComprasCore"));
 var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
 var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
 #endregion
-//prueba de cambio< 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -69,7 +69,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     }.ToArray()).AsImplementedInterfaces();
 
     var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
-    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
     var context = new SqlServerDbContext(optionsBuilder.Options);
     context.AddConfigurations(commonInfraestructureAssembly);
@@ -102,16 +103,18 @@ builder.Services.AddAutoMapper(new List<Assembly> {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
+//}
+//else
+//app.UseHttpsRedirection();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

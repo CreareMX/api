@@ -8,7 +8,7 @@ namespace ComprasInfraestructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<DetalleOrdenCompra> builder)
         {
-            builder.ToTable("ordenes");
+            builder.ToTable("ordenes_detalle");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();
