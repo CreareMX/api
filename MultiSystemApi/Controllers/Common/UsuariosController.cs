@@ -3,7 +3,7 @@ using EssentialApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
     /// Controlador de usuarios
@@ -50,7 +50,7 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }

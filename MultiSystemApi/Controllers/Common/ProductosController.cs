@@ -1,47 +1,47 @@
 ﻿using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using EssentialCore.Shared;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
-    /// Controlador del API de categorías
+    /// Controlador del API de productos
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriasController : ControllerBase
+    public class ProductosController : ControllerBase
     {
-        private ICategoriaService Service { get; set; }
+        private IProductoService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de categorías</param>
-        public CategoriasController(ICategoriaService service)
+        /// <param name="service">Servicio de productos</param>
+        public ProductosController(IProductoService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene una categoria por medio de su ID
+        /// Obtiene un producto por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único de categoría</param>
-        /// <returns>Categoría</returns>
+        /// <param name="id">Identificador único del producto</param>
+        /// <returns>Productos</returns>
         [HttpGet("id/{id}")]
-        public CategoriaDto GetById(long id) => Service.GetById(id);
+        public ProductoDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de categorías
+        /// Obtiene toda la lista de productos
         /// </summary>
-        /// <returns>Categorías</returns>
+        /// <returns>Productos</returns>
         [HttpGet("all")]
-        public List<CategoriaDto> GetAll() => Service.GetAll().ToList();
+        public List<ProductoDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea una nueva categoría
+        /// Crea un nuevo producto
         /// </summary>
-        /// <param name="dto">Datos de la categoría</param>
-        /// <param name="idUser">ID del usuario que crea la categoría</param>
-        /// <returns>Categoría</returns>
+        /// <param name="dto">Datos del producto</param>
+        /// <param name="idUser">ID del usuario que crea el producto</param>
+        /// <returns>Producto</returns>
         [HttpPost("{idUser}")]
-        public IActionResult Create(CategoriaDto dto, long idUser)
+        public IActionResult Create(ProductoDto dto, long idUser)
         {
             try
             {
@@ -50,19 +50,19 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
-        /// Actualiza una categoría
+        /// Actualiza un producto
         /// </summary>
-        /// <param name="dto">Datos de la categoría</param>
-        /// <param name="idUser">ID del usuario que actualiza la categoría</param>
+        /// <param name="dto">Datos del producto</param>
+        /// <param name="idUser">ID del usuario que actualiza el producto</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(CategoriaDto dto, long idUser)
+        public IActionResult Update(ProductoDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Desactiva una categoría existente
+        /// Desactiva un producto existente
         /// </summary>
-        /// <param name="dto">Datos de la categoría (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva la categoría</param>
+        /// <param name="dto">Datos del producto (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva el producto</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(CategoriaDto dto, long idUser)
+        public IActionResult Delete(ProductoDto dto, long idUser)
         {
             try
             {

@@ -1,47 +1,47 @@
-﻿using EssentialApplication.dtos;
-using EssentialApplication.Interfaces;
-using EssentialCore.Shared;
+﻿using CommonApplication.Dtos;
+using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using EssentialCore.Shared;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
-    /// Controlador del API de roles
+    /// Controlador del API de estados
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class EstadosController : ControllerBase
     {
-        private IRolService Service { get; set; }
+        private IEstadoService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de roles</param>
-        public RolesController(IRolService service)
+        /// <param name="service">Servicio de estados</param>
+        public EstadosController(IEstadoService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene un rol por medio de su ID
+        /// Obtiene un estado por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único del rol</param>
-        /// <returns>Roles</returns>
+        /// <param name="id">Identificador único del estado</param>
+        /// <returns>Estados</returns>
         [HttpGet("id/{id}")]
-        public RolDto GetById(long id) => Service.GetById(id);
+        public EstadoDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de roles
+        /// Obtiene toda la lista de estados
         /// </summary>
-        /// <returns>Roles</returns>
+        /// <returns>Estados</returns>
         [HttpGet("all")]
-        public List<RolDto> GetAll() => Service.GetAll().ToList();
+        public List<EstadoDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea un nuevo rol
+        /// Crea un nuevo estado
         /// </summary>
-        /// <param name="dto">Datos del rol</param>
-        /// <param name="idUser">ID del usuario que crea el rol</param>
-        /// <returns>Rol</returns>
+        /// <param name="dto">Datos del estado</param>
+        /// <param name="idUser">ID del usuario que crea el estado</param>
+        /// <returns>Estado</returns>
         [HttpPost("{idUser}")]
-        public IActionResult Create(RolDto dto, long idUser)
+        public IActionResult Create(EstadoDto dto, long idUser)
         {
             try
             {
@@ -50,19 +50,19 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
-        /// Actualiza un rol
+        /// Actualiza un estado
         /// </summary>
-        /// <param name="dto">Datos del rol</param>
-        /// <param name="idUser">ID del usuario que actualiza el rol</param>
+        /// <param name="dto">Datos del estado</param>
+        /// <param name="idUser">ID del usuario que actualiza el estado</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(RolDto dto, long idUser)
+        public IActionResult Update(EstadoDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Desactiva un rol existente
+        /// Desactiva un estado existente
         /// </summary>
-        /// <param name="dto">Datos del rol (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva el rol</param>
+        /// <param name="dto">Datos del estado (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva el estado</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(RolDto dto, long idUser)
+        public IActionResult Delete(EstadoDto dto, long idUser)
         {
             try
             {

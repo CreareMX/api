@@ -3,7 +3,7 @@ using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EssentialCore.Shared;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
     /// Controlador del API de tipos personas
@@ -50,7 +50,7 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }

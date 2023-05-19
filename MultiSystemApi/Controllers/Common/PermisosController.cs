@@ -1,47 +1,47 @@
-﻿using CommonApplication.Dtos;
-using CommonApplication.Interfaces;
+﻿using EssentialApplication.dtos;
+using EssentialApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
-    /// Controlador del API de productos
+    /// Controlador del API de permisos
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductosController : ControllerBase
+    public class PermisosController : ControllerBase
     {
-        private IProductoService Service { get; set; }
+        private IPermisoService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de productos</param>
-        public ProductosController(IProductoService service)
+        /// <param name="service">Servicio de permisos</param>
+        public PermisosController(IPermisoService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene un producto por medio de su ID
+        /// Obtiene un permiso por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único del producto</param>
-        /// <returns>Productos</returns>
+        /// <param name="id">Identificador único del permiso</param>
+        /// <returns>Permisos</returns>
         [HttpGet("id/{id}")]
-        public ProductoDto GetById(long id) => Service.GetById(id);
+        public PermisoDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de productos
+        /// Obtiene toda la lista de permisos
         /// </summary>
-        /// <returns>Productos</returns>
+        /// <returns>Permisos</returns>
         [HttpGet("all")]
-        public List<ProductoDto> GetAll() => Service.GetAll().ToList();
+        public List<PermisoDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea un nuevo producto
+        /// Crea un nuevo permiso
         /// </summary>
-        /// <param name="dto">Datos del producto</param>
-        /// <param name="idUser">ID del usuario que crea el producto</param>
-        /// <returns>Producto</returns>
+        /// <param name="dto">Datos del permiso</param>
+        /// <param name="idUser">ID del usuario que crea el permiso</param>
+        /// <returns>Permiso</returns>   
         [HttpPost("{idUser}")]
-        public IActionResult Create(ProductoDto dto, long idUser)
+        public IActionResult Create(PermisoDto dto, long idUser)
         {
             try
             {
@@ -50,19 +50,19 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
-        /// Actualiza un producto
+        /// Actualiza un permiso
         /// </summary>
-        /// <param name="dto">Datos del producto</param>
-        /// <param name="idUser">ID del usuario que actualiza el producto</param>
+        /// <param name="dto">Datos del permiso</param>
+        /// <param name="idUser">ID del usuario que actualiza el permiso</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(ProductoDto dto, long idUser)
+        public IActionResult Update(PermisoDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Desactiva un producto existente
+        /// Desactiva un permiso existente
         /// </summary>
-        /// <param name="dto">Datos del producto (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva el producto</param>
+        /// <param name="dto">Datos del permiso (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva el permiso</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(ProductoDto dto, long idUser)
+        public IActionResult Delete(PermisoDto dto, long idUser)
         {
             try
             {

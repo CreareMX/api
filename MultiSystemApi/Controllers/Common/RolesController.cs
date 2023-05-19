@@ -3,45 +3,45 @@ using EssentialApplication.Interfaces;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
-    /// Controlador del API de Permiso de rols
+    /// Controlador del API de roles
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class PermisosRolesController : ControllerBase
+    public class RolesController : ControllerBase
     {
-        private IPermisosRolService Service { get; set; }
+        private IRolService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de Permiso de rols</param>
-        public PermisosRolesController(IPermisosRolService service)
+        /// <param name="service">Servicio de roles</param>
+        public RolesController(IRolService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene un Permiso de rol por medio de su ID
+        /// Obtiene un rol por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único del Permiso de rol</param>
-        /// <returns>Permisos de roles</returns>
+        /// <param name="id">Identificador único del rol</param>
+        /// <returns>Roles</returns>
         [HttpGet("id/{id}")]
-        public PermisosRolDto GetById(long id) => Service.GetById(id);
+        public RolDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de Permiso de rols
+        /// Obtiene toda la lista de roles
         /// </summary>
-        /// <returns>Permisos de roles</returns>
+        /// <returns>Roles</returns>
         [HttpGet("all")]
-        public List<PermisosRolDto> GetAll() => Service.GetAll().ToList();
+        public List<RolDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea un nuevo Permiso de rol
+        /// Crea un nuevo rol
         /// </summary>
-        /// <param name="dto">Datos del Permiso de rol</param>
-        /// <param name="idUser">ID del usuario que crea el Permiso de rol</param>
-        /// <returns>Permiso de rol</returns>   
+        /// <param name="dto">Datos del rol</param>
+        /// <param name="idUser">ID del usuario que crea el rol</param>
+        /// <returns>Rol</returns>
         [HttpPost("{idUser}")]
-        public IActionResult Create(PermisosRolDto dto, long idUser)
+        public IActionResult Create(RolDto dto, long idUser)
         {
             try
             {
@@ -50,19 +50,19 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
-        /// Actualiza un Permiso de rol
+        /// Actualiza un rol
         /// </summary>
-        /// <param name="dto">Datos del Permiso de rol</param>
-        /// <param name="idUser">ID del usuario que actualiza el Permiso de rol</param>
+        /// <param name="dto">Datos del rol</param>
+        /// <param name="idUser">ID del usuario que actualiza el rol</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(PermisosRolDto dto, long idUser)
+        public IActionResult Update(RolDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Desactiva un Permiso de rol existente
+        /// Desactiva un rol existente
         /// </summary>
-        /// <param name="dto">Datos del Permiso de rol (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva el Permiso de rol</param>
+        /// <param name="dto">Datos del rol (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva el rol</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(PermisosRolDto dto, long idUser)
+        public IActionResult Delete(RolDto dto, long idUser)
         {
             try
             {

@@ -3,45 +3,45 @@ using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EssentialCore.Shared;
 
-namespace MultiSystemApi.Controllers
+namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
-    /// Controlador del API de estados
+    /// Controlador del API de categorías
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class EstadosController : ControllerBase
+    public class CategoriasController : ControllerBase
     {
-        private IEstadoService Service { get; set; }
+        private ICategoriaService Service { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="service">Servicio de estados</param>
-        public EstadosController(IEstadoService service)
+        /// <param name="service">Servicio de categorías</param>
+        public CategoriasController(ICategoriaService service)
         {
             Service = service;
         }
         /// <summary>
-        /// Obtiene un estado por medio de su ID
+        /// Obtiene una categoria por medio de su ID
         /// </summary>
-        /// <param name="id">Identificador único del estado</param>
-        /// <returns>Estados</returns>
+        /// <param name="id">Identificador único de categoría</param>
+        /// <returns>Categoría</returns>
         [HttpGet("id/{id}")]
-        public EstadoDto GetById(long id) => Service.GetById(id);
+        public CategoriaDto GetById(long id) => Service.GetById(id);
         /// <summary>
-        /// Obtiene toda la lista de estados
+        /// Obtiene toda la lista de categorías
         /// </summary>
-        /// <returns>Estados</returns>
+        /// <returns>Categorías</returns>
         [HttpGet("all")]
-        public List<EstadoDto> GetAll() => Service.GetAll().ToList();
+        public List<CategoriaDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
-        /// Crea un nuevo estado
+        /// Crea una nueva categoría
         /// </summary>
-        /// <param name="dto">Datos del estado</param>
-        /// <param name="idUser">ID del usuario que crea el estado</param>
-        /// <returns>Estado</returns>
+        /// <param name="dto">Datos de la categoría</param>
+        /// <param name="idUser">ID del usuario que crea la categoría</param>
+        /// <returns>Categoría</returns>
         [HttpPost("{idUser}")]
-        public IActionResult Create(EstadoDto dto, long idUser)
+        public IActionResult Create(CategoriaDto dto, long idUser)
         {
             try
             {
@@ -50,19 +50,19 @@ namespace MultiSystemApi.Controllers
                     return NoContent();
                 return Ok(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
         /// <summary>
-        /// Actualiza un estado
+        /// Actualiza una categoría
         /// </summary>
-        /// <param name="dto">Datos del estado</param>
-        /// <param name="idUser">ID del usuario que actualiza el estado</param>
+        /// <param name="dto">Datos de la categoría</param>
+        /// <param name="idUser">ID del usuario que actualiza la categoría</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
-        public IActionResult Update(EstadoDto dto, long idUser)
+        public IActionResult Update(CategoriaDto dto, long idUser)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace MultiSystemApi.Controllers
             }
         }
         /// <summary>
-        /// Desactiva un estado existente
+        /// Desactiva una categoría existente
         /// </summary>
-        /// <param name="dto">Datos del estado (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva el estado</param>
+        /// <param name="dto">Datos de la categoría (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva la categoría</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
-        public IActionResult Delete(EstadoDto dto, long idUser)
+        public IActionResult Delete(CategoriaDto dto, long idUser)
         {
             try
             {
