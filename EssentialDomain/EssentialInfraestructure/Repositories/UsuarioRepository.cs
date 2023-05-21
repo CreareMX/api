@@ -2,6 +2,7 @@
 using EssentialCore.Entities;
 using EssentialCore.Interfaces.Repositories;
 using EssentialCore.Repositories;
+using System.Linq.Expressions;
 
 namespace EssentialInfraestructure.Repositories
 {

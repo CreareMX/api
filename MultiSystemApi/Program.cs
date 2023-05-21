@@ -1,10 +1,14 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using CommonApplication.Dtos;
 using EssentialCore.DbContexts;
 using EssentialCore.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 var entity = typeof(BaseEntityLongId).Assembly;
 
@@ -70,7 +74,9 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 
     var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    var jwt = builder.Configuration.GetSection("Jwt").Get<Jwt>();
+
+    optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));    
 
     var context = new SqlServerDbContext(optionsBuilder.Options);
     context.AddConfigurations(commonInfraestructureAssembly);
@@ -82,6 +88,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     context.AddConfigurations(comprasInfraestructureAssembly);
 
     containerBuilder.RegisterInstance(context).AsSelf();
+    containerBuilder.RegisterInstance(jwt).AsImplementedInterfaces();
 });
 
 builder.Services.AddControllers();
@@ -99,6 +106,26 @@ builder.Services.AddAutoMapper(new List<Assembly> {
     ventasApplicationAssembly,
     comprasApplicationAssembly
 });
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
@@ -115,6 +142,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

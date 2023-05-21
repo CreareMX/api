@@ -1,4 +1,5 @@
-﻿using EssentialCore.Interfaces.Entities;
+﻿using EssentialCore.Interfaces.Criterias;
+using EssentialCore.Interfaces.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EssentialCore.Interfaces.Repositories
@@ -11,9 +12,12 @@ namespace EssentialCore.Interfaces.Repositories
 
         E Create(E entity);
         void Delete(E entity);
+        
         E GetById(T id);
         IList<E> GetAll();
 
+        E GetByCriteria(IBaseCriteria<E, T> criteria);
+        IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria);
 
         void SaveChanges();
         void ClearTracker();

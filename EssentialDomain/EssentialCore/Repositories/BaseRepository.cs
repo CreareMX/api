@@ -1,4 +1,5 @@
 ﻿using EssentialCore.Entities;
+using EssentialCore.Interfaces.Criterias;
 using EssentialCore.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,5 +31,9 @@ namespace EssentialCore.Repositories
         public virtual E GetById(T id) => Context.Set<E>().FirstOrDefault(e => e.Id.ToString() == id.ToString());
 
         public void SaveChanges() => Context.SaveChanges();
+
+        public E GetByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().FirstOrDefault(criteria.GetExpression());
+
+        public IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().Where(criteria.GetExpression()).ToList();
     }
 }

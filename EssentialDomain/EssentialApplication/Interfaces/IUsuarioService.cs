@@ -7,5 +7,6 @@ namespace EssentialApplication.Interfaces
 {
     public interface IUsuarioService : IService<IUsuarioRepository, Usuario, long, UsuarioDto>
     {
+        UsuarioDto Login(string usuario, string contrasena);
     }
 }

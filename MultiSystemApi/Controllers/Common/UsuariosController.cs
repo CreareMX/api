@@ -1,6 +1,7 @@
 ﻿using EssentialApplication.dtos;
 using EssentialApplication.Interfaces;
 using EssentialCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Common
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Common
     /// <summary>
     /// Controlador de usuarios
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuariosController : ControllerBase
