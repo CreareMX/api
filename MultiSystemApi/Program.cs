@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
 
@@ -93,9 +94,35 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(o => {
+builder.Services.AddSwaggerGen(c => {
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    o.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Creare API - MultiSystem",
+        Version = "v1"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "La autorizacion JWT usa el esquema Bearer. \r\n\r\nEscriba 'bearer' [espacio] y luego el valore del token de autorización.\r\n\r\nPor ejemplo: \"bearer 1safsfsdfdfd\"",
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+        {
+            new OpenApiSecurityScheme {
+                Reference = new OpenApiReference {
+                    Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 builder.Services.AddAutoMapper(new List<Assembly> { 
     commonApplicationAssembly,
