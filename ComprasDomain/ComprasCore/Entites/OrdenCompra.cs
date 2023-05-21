@@ -9,8 +9,8 @@ namespace ComprasCore.Entites
     {
         public long IdCliente { get; set; }
         public Persona Cliente { get; set; }
-        public long IdEmpleado { get; set; }
-        public Persona Empleado { get; set; }
+        public long IdEmpleadoCrea { get; set; }
+        public Persona EmpleadoCrea { get; set; }
         public DateTime Fecha { get; set; }
         public DateTime FechaCompromiso { get; set; }
         public DateTime FechaEnvio { get; set; }
@@ -21,5 +21,8 @@ namespace ComprasCore.Entites
         public long IdEstado { get; set; }
         public Estado Estado { get; set; }
         public List<DetalleOrdenCompra> Detalles { get; set; }
+        public long? IdEmpleadoAutoriza { get; set; }
+        public Persona EmpleadoAutoriza { get; set; }
+        public DateTime? FechaAutorizacion { get; set; }
     }
 }

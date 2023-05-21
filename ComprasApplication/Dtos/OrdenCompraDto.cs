@@ -9,8 +9,8 @@ namespace ComprasApplication.Dtos
         public long? Id { get; set; }
         public long IdCliente { get; set; }
         public PersonaDto Cliente { get; set; }
-        public long IdEmpleado { get; set; }
-        public PersonaDto Empleado { get; set; }
+        public long IdEmpleadoCrea { get; set; }
+        public PersonaDto EmpleadoCrea { get; set; }
         public DateTime Fecha { get; set; }
         public DateTime FechaCompromiso { get; set; }
         public DateTime FechaEnvio { get; set; }
@@ -20,5 +20,8 @@ namespace ComprasApplication.Dtos
         public string Comentarios { get; set; }
         public long IdEstado { get; set; }
         public EstadoDto Estado { get; set; }
+        public long? IdEmpleadoAutoriza { get; set; }
+        public PersonaDto EmpleadoAutoriza { get; set; }
+        public DateTime? FechaAutorizacion { get; set; }
     }
 }

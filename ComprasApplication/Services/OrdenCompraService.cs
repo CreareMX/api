@@ -31,10 +31,10 @@ namespace ComprasApplication.Services
                 throw new Exception("No se ha seleccionado un cliente válido.");
             dto.IdCliente = cliente.Id.Value;
 
-            var empleado = this.personaService.GetById(dto.IdEmpleado) ?? throw new Exception("El empleado indicado no existe.");
+            var empleado = this.personaService.GetById(dto.IdEmpleadoCrea) ?? throw new Exception("El empleado indicado no existe.");
             if (!empleado.TipoPersona.Nombre.Equals("empleado", StringComparison.InvariantCultureIgnoreCase))
                 throw new Exception("No se ha seleccionado un cliente válido.");
-            dto.IdEmpleado = empleado.Id.Value;
+            dto.IdEmpleadoCrea = empleado.Id.Value;
 
             var sucursal = this.sucursalService.GetById(dto.IdSucursal) ?? throw new Exception("La sucursal indicada no existe.");
             dto.IdSucursal = sucursal.Id.Value;

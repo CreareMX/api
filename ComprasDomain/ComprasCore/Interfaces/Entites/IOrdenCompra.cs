@@ -10,8 +10,10 @@ namespace ComprasCore.Interfaces.Entites
         DateTime FechaEnvio { get; set; }
         string FormaEnvio { get; set; }
         long IdCliente { get; set; }
-        long IdEmpleado { get; set; }
+        long IdEmpleadoCrea { get; set; }
         long IdEstado { get; set; }
         long IdSucursal { get; set; }
+        long? IdEmpleadoAutoriza { get; set; }
+        DateTime? FechaAutorizacion { get; set; }
     }
 }
