@@ -1,4 +1,5 @@
 ﻿using EssentialCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VentasApplication.Dtos;
 using VentasApplication.Interfaces;
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Ventas
     /// <summary>
     /// Controlador del API de Precios
     /// </summary>
+    [Authorize]
     [Route("api/Ventas/[controller]")]
     [ApiController]
     public class PreciosController : ControllerBase

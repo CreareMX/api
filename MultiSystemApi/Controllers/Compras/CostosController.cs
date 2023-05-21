@@ -1,6 +1,7 @@
 ﻿using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
 using EssentialCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Compras
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Compras
     /// <summary>
     /// Controlador del API de Costos
     /// </summary>
+    [Authorize]
     [Route("api/Compras/[controller]")]
     [ApiController]
     public class CostosController : ControllerBase

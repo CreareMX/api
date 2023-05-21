@@ -2,12 +2,14 @@
 using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EssentialCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MultiSystemApi.Controllers.Common
 {
     /// <summary>
     /// Controlador del API de tipos personas
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TiposPersonasController : ControllerBase

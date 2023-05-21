@@ -1,6 +1,7 @@
 ﻿using ContabilidadApplication.Dtos;
 using ContabilidadApplication.Interfaces;
 using EssentialCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Contabilidad
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Contabilidad
     /// <summary>
     /// Controlador del API de abonos a cuentas por cobrar
     /// </summary>
+    [Authorize]
     [Route("api/contabilidad/[controller]")]
     [ApiController]
     public class AbonosCuentasPorCobrarController : ControllerBase

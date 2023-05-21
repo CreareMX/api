@@ -1,6 +1,7 @@
 ﻿using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
 using EssentialCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Common
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Common
     /// <summary>
     /// Controlador del API de productos
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductosController : ControllerBase
