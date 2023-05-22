@@ -59,20 +59,18 @@ namespace EssentialApplication.Services
             }
         }
 
-        private string EncriptarContrasena(string contrasena)
+        private static string EncriptarContrasena(string contrasena)
         {
-            using (var encripter = SHA256.Create())
+            using var encripter = SHA256.Create();
+            var hashLogin = encripter.ComputeHash(Encoding.ASCII.GetBytes(contrasena));
+            var stringHash = string.Empty;
+            for (int i = 0; i < hashLogin.Length; i++)
             {
-                var hashLogin = encripter.ComputeHash(Encoding.ASCII.GetBytes(contrasena));
-                var stringHash = string.Empty;
-                for (int i = 0; i < hashLogin.Length; i++)
-                {
-                    stringHash += ($"{hashLogin[i]:X2}");
-                    if ((i % 4) == 3) stringHash += " ";
-                }
-
-                return stringHash.Trim();
+                stringHash += ($"{hashLogin[i]:X2}");
+                if ((i % 4) == 3) stringHash += " ";
             }
+
+            return stringHash.Trim();
         }
     }
 }

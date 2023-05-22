@@ -10,18 +10,29 @@ using System.Text;
 
 namespace MultiSystemApi.Controllers.Seguridad
 {
+    /// <summary>
+    /// Controlador de autenticación para el uso de las API's
+    /// </summary>
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
-    {
+    {        
         readonly IJwt _jwt;
         readonly IUsuarioService _usuarioService;
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public LoginController(IJwt jwt, IUsuarioService usuarioService)
         {
             _jwt = jwt;
             _usuarioService = usuarioService;
         }
+        /// <summary>
+        /// Logeo de usuarios para obtener token de acceso
+        /// </summary>
+        /// <param name="usuario">Objeto de transferencia de datos de usuario</param>
+        /// <returns>Token de autorización</returns>
         [HttpPost]
         public IActionResult Login(UsuarioDto usuario)
         {

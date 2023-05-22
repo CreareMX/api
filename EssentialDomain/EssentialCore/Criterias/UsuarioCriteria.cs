@@ -7,7 +7,13 @@ namespace EssentialCore.Criterias
     {
         public IUsuarioCriteria Login(string usuario, string contrasena)
         {
-            _expression = x => x.NombreUsuario.ToLower().Trim() == usuario.ToLower().Trim() && x.Contrasena == contrasena;
+            _expression = x => x.NombreUsuario.ToLower().Trim() == usuario.ToLower().Trim() && x.Contrasena == contrasena && x.Activo;
+            return this;
+        }
+
+        public IUsuarioCriteria NombreUsuarioExiste(string usuario)
+        {
+            _expression = x => x.NombreUsuario.ToLower().Trim() == usuario.ToLower().Trim();
             return this;
         }
     }
