@@ -27,6 +27,36 @@ namespace ComprasApplication.Services
             this.ordenCompraCriteria = ordenCompraCriteria;
         }
 
+        public void Autorizar(long idOrdenCompra, long idUsuarioAutoriza)
+        {
+            var ordenCompra = Repository.GetById(idOrdenCompra);
+            if (!ordenCompra.Activo)
+                throw new Exception($"La orden de compra {idOrdenCompra} actualmente se encuentra cancelada.");
+
+            var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
+            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase)) ?? 
+                throw new Exception("No esiste un estado AUTORIZADO para la sección ORDENES DE COMPRA.");
+
+            ordenCompra.IdEstado = estadoAutorizado.Id.Value;
+            ordenCompra.Update(idUsuarioAutoriza);
+            Repository.SaveChanges();
+        }
+
+        public void Cancelar(long idOrdenCompra, long idUsuarioCancela)
+        {
+            var ordenCompra = Repository.GetById(idOrdenCompra);
+            if (!ordenCompra.Activo)
+                throw new Exception($"La orden de compra {idOrdenCompra} actualmente se encuentra cancelada.");
+
+            var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
+            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("cancelado", StringComparison.InvariantCultureIgnoreCase)) ??
+                throw new Exception("No esiste un estado CANCELADO para la sección ORDENES DE COMPRA.");
+
+            ordenCompra.IdEstado = estadoAutorizado.Id.Value;
+            ordenCompra.Update(idUsuarioCancela);
+            Repository.SaveChanges();
+        }
+
         public override OrdenCompraDto Create(OrdenCompraDto dto, long idUser)
         {
             var cliente = this.personaService.GetById(dto.IdCliente) ?? throw new Exception("El cliente indicado no existe.");
@@ -54,20 +84,23 @@ namespace ComprasApplication.Services
         public IList<OrdenCompraDto> OrdenesPorAlmacen(long idAlmacen)
         {
             var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
-            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase));
-            var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idAlmacen));
+            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase)) ??
+                throw new Exception("No esiste un estado AUTORIZADO para la sección ORDENES DE COMPRA.");
+
+            var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idAlmacen)).Where(oc => oc.IdEstado == estadoAutorizado.Id).ToList();
             if (results == null || results.Count == 0)
                 return null;
 
             return Mapper.Map<List<OrdenCompraDto>>(results);
         }
 
-        public IList<OrdenCompraDto> RequisicionesPorAlmacen(long idAlmacen, long idSucursal)
+        public IList<OrdenCompraDto> RequisicionesPorSucursal(long idSucursal)
         {
             var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
-            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("requisicion", StringComparison.InvariantCultureIgnoreCase));
-                        
-            var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idAlmacen, idSucursal));
+            var estadoRequisicion = estados.SingleOrDefault(e => e.Nombre.Equals("requisicion", StringComparison.InvariantCultureIgnoreCase)) ??
+                throw new Exception("No esiste un estado REQUISICION para la sección ORDENES DE COMPRA.");
+
+            var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idSucursal)).Where(oc => oc.IdEstado == estadoRequisicion.Id).ToList();
             if (results == null || results.Count == 0)
                 return null;
 

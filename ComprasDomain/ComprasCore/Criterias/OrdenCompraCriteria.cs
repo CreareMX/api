@@ -11,5 +11,11 @@ namespace ComprasCore.Criterias
             _expression = x => x.IdAlmacen == idAlmacen && x.Activo;
             return this;
         }
+
+        public IOrdenCompraCriteria PorSucursal(long idSucursal)
+        {
+            _expression = x => x.IdSucursal == idSucursal && x.Activo;
+            return this;
+        }
     }
 }

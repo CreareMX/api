@@ -4,6 +4,7 @@ using EssentialCore.Entities;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Eventing.Reader;
 
 namespace MultiSystemApi.Controllers.Compras
 {
@@ -42,14 +43,15 @@ namespace MultiSystemApi.Controllers.Compras
         /// </summary>
         /// <param name="idAlmacen">Identificador único de almacén</param>
         /// <returns>Ordenes de compras</returns>
+        [HttpGet("poralmacen/{idAlmacen}")] 
         public List<OrdenCompraDto> GetOrdenesByAlmacen(long idAlmacen) => Service.OrdenesPorAlmacen(idAlmacen).ToList();
         /// <summary>
-        /// Obtiene las ordenes de compra con estatus de requisición de un almacén en específico en una sucursal en específico
+        /// Obtiene las ordenes de compra con estatus de requisición de una sucursal en específico
         /// </summary>
-        /// <param name="idAlmacen">Identificador único de almacén</param>
         /// <param name="idSucursal">Identificador único de sucursal</param>
         /// <returns>Ordenes de compras</returns>
-        public List<OrdenCompraDto> GetRequiscionesByAlmacen(long idAlmacen, long idSucursal) => Service.RequisicionesPorAlmacen(idAlmacen, idSucursal).ToList();
+        [HttpGet("requisiciones/{idSucursal}")]
+        public List<OrdenCompraDto> RequisicionesPorSucursal(long idSucursal) => Service.RequisicionesPorSucursal(idSucursal).ToList();
 
         /// <summary>
         /// Crea una nueva Orden de Compra
@@ -91,6 +93,45 @@ namespace MultiSystemApi.Controllers.Compras
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
+        /// <summary>
+        /// Autoriza una requisicion la cual a partir de este momento se conocerá como orden de compra
+        /// </summary>
+        /// <param name="idOrdenCompra">Identificador único de la requisición</param>
+        /// <param name="idUser">Identificador único del usuario que autoriza</param>
+        /// <returns></returns>
+        [HttpPut("autoriza/{idOrdenCompra}/{idUser}")]
+        public IActionResult Autoriza(long idOrdenCompra, long idUser)
+        {
+            try
+            {
+                Service.Autorizar(idOrdenCompra, idUser);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
+            }
+        }
+        /// <summary>
+        /// Canceña una orden de compra
+        /// </summary>
+        /// <param name="idOrdenCompra">Identificador único de la requisición</param>
+        /// <param name="idUser">Identificador único del usuario que cancela</param>
+        /// <returns></returns>
+        [HttpPut("cancela/{idOrdenCompra}/{idUser}")]
+        public IActionResult Cancela(long idOrdenCompra, long idUser)
+        {
+            try
+            {
+                Service.Cancelar(idOrdenCompra, idUser);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
+            }
+        }
+
         /// <summary>
         /// Desactiva una Orden de Compra existente
         /// </summary>
