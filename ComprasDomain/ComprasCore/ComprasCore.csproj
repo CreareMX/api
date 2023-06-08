@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AlmacenDomain\AlmacenCore\AlmacenCore.csproj" />
     <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\..\ContabilidadDomain\ContabilidadCore\ContabilidadCore.csproj" />
     <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />

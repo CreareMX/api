@@ -1,4 +1,5 @@
-﻿using CommonApplication.Dtos;
+﻿using AlmacenApplication.Dtos;
+using CommonApplication.Dtos;
 using ComprasCore.Interfaces.Entites;
 using ContabilidadApplication.Dtos;
 
@@ -15,6 +16,8 @@ namespace ComprasApplication.Dtos
         public DateTime FechaCompromiso { get; set; }
         public DateTime FechaEnvio { get; set; }
         public string FormaEnvio { get; set; }
+        public long IdAlmacen { get; set; }
+        public AlmacenDto Almacen { get; set; }
         public long IdSucursal { get; set; }
         public SucursalDto Sucursal { get; set; }
         public string Comentarios { get; set; }

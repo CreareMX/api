@@ -1,4 +1,5 @@
-﻿using CommonCore.Entities;
+﻿using AlmacenCore.Entities;
+using CommonCore.Entities;
 using ComprasCore.Interfaces.Entites;
 using ContabilidadCore.Entities;
 using EssentialCore.Entities;
@@ -15,6 +16,8 @@ namespace ComprasCore.Entites
         public DateTime FechaCompromiso { get; set; }
         public DateTime FechaEnvio { get; set; }
         public string FormaEnvio { get; set; }
+        public long IdAlmacen { get; set; }
+        public Almacen Almacen { get; set; }
         public long IdSucursal { get; set; }
         public Sucursal Sucursal { get; set; }
         public string Comentarios { get; set; }
