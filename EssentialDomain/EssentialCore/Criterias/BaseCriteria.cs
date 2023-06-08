@@ -7,7 +7,7 @@ namespace EssentialCore.Criterias
     public abstract class BaseCriteria<E, T> : IBaseCriteria<E, T> where E : IBaseEntity<T>
         where T : struct
     {
-        internal Expression<Func<E, bool>> _expression;
+        protected Expression<Func<E, bool>> _expression;
 
         public void PorId(T id)
         {

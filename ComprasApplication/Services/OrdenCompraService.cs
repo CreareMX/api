@@ -3,6 +3,7 @@ using CommonApplication.Interfaces;
 using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
 using ComprasCore.Entites;
+using ComprasCore.Interfaces.Criterias;
 using ComprasCore.Interfaces.Repositories;
 using ContabilidadApplication.Interfaces;
 using EssentialCore.Services;
@@ -14,14 +15,16 @@ namespace ComprasApplication.Services
         readonly IPersonaService personaService;
         readonly IEstadoService estadoService;
         readonly ISucursalService sucursalService;
+        readonly IOrdenCompraCriteria ordenCompraCriteria;
 
-        public OrdenCompraService(IOrdenCompraRepository repository,
+        public OrdenCompraService(IOrdenCompraRepository repository, IOrdenCompraCriteria ordenCompraCriteria,
             IPersonaService personaService, IEstadoService estadoService, 
             ISucursalService sucursalService, IMapper mapper) : base(repository, mapper)
         {
             this.personaService = personaService;
             this.estadoService = estadoService;
             this.sucursalService = sucursalService;
+            this.ordenCompraCriteria = ordenCompraCriteria;
         }
 
         public override OrdenCompraDto Create(OrdenCompraDto dto, long idUser)
@@ -46,6 +49,29 @@ namespace ComprasApplication.Services
             dto.IdEstado = estadoPendientePago.Id.Value;
 
             return base.Create(dto, idUser);
+        }
+
+        public IList<OrdenCompraDto> OrdenesPorAlmacen(long idAlmacen)
+        {
+            var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
+            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase));
+            var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idAlmacen));
+            if (results == null || results.Count == 0)
+                return null;
+
+            return Mapper.Map<List<OrdenCompraDto>>(results);
+        }
+
+        public IList<OrdenCompraDto> RequisicionesPorAlmacen(long idAlmacen, long idSucursal)
+        {
+            var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
+            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("requisicion", StringComparison.InvariantCultureIgnoreCase));
+                        
+            var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idAlmacen, idSucursal));
+            if (results == null || results.Count == 0)
+                return null;
+
+            return Mapper.Map<List<OrdenCompraDto>>(results);
         }
     }
 }

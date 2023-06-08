@@ -1,5 +1,6 @@
 ﻿using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
+using EssentialCore.Entities;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,20 @@ namespace MultiSystemApi.Controllers.Compras
         /// <returns>Ordenes de Compras</returns>
         [HttpGet("all")]
         public List<OrdenCompraDto> GetAll() => Service.GetAll().ToList();
+        /// <summary>
+        /// Obtiene las ordenes de compra de un almacén en específico
+        /// </summary>
+        /// <param name="idAlmacen">Identificador único de almacén</param>
+        /// <returns>Ordenes de compras</returns>
+        public List<OrdenCompraDto> GetOrdenesByAlmacen(long idAlmacen) => Service.OrdenesPorAlmacen(idAlmacen).ToList();
+        /// <summary>
+        /// Obtiene las ordenes de compra con estatus de requisición de un almacén en específico en una sucursal en específico
+        /// </summary>
+        /// <param name="idAlmacen">Identificador único de almacén</param>
+        /// <param name="idSucursal">Identificador único de sucursal</param>
+        /// <returns>Ordenes de compras</returns>
+        public List<OrdenCompraDto> GetRequiscionesByAlmacen(long idAlmacen, long idSucursal) => Service.RequisicionesPorAlmacen(idAlmacen, idSucursal).ToList();
+
         /// <summary>
         /// Crea una nueva Orden de Compra
         /// </summary>

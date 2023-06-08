@@ -7,5 +7,6 @@ namespace CommonApplication.Interfaces
 {
     public interface IEstadoService : IService<IEstadoRepository, Estado, long, EstadoDto>
     {
+        IList<EstadoDto> PorSeccion(string seccion);
     }
 }
