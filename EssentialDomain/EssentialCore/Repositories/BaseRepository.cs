@@ -16,19 +16,20 @@ namespace EssentialCore.Repositories
             Context = context;
         }
 
-        public void ClearTracker()
+        public void ClearTracker(bool fullClear = false)
         {
-            foreach (var entry in Context.ChangeTracker.Entries().Where(e => e.Entity.GetType() == typeof(E)))
+            var entries = (fullClear ? Context.ChangeTracker.Entries() : Context.ChangeTracker.Entries().Where(e => e.Entity.GetType() == typeof(E))).ToList();
+            foreach (var entry in entries.Where(e => e.State != EntityState.Detached && e.State != EntityState.Unchanged))
                 entry.State = EntityState.Detached;
         }
 
         public virtual E Create(E entity) => Context.Add(entity).Entity;
-
+        public virtual void Update(E entity) => Context.Update(entity);
         public virtual void Delete(E entity) => Context.Remove(entity);
 
-        public virtual IList<E> GetAll() => Context.Set<E>().ToList();
+        public virtual IList<E> GetAll() => Context.Set<E>().Where(e => e.Activo).ToList();
 
-        public virtual E GetById(T id) => Context.Set<E>().FirstOrDefault(e => e.Id.ToString() == id.ToString());
+        public virtual E GetById(T id) => Context.Set<E>().FirstOrDefault(e => e.Id.ToString() == id.ToString() && e.Activo);
 
         public void SaveChanges() => Context.SaveChanges();
 

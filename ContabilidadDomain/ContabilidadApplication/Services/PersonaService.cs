@@ -27,13 +27,41 @@ namespace ContabilidadApplication.Services
             if (tipoPersona.EsPersonaMoral && dto.DatosFiscales == null)
                 throw new Exception("Una persona moral debe tener datos fiscales");
 
-            if (dto.DatosFiscales != null && !dto.DatosFiscales.Id.HasValue)
-                dto.DatosFiscales = this.datosFiscalesService.Create(dto.DatosFiscales, idUser);
+            var entity = Mapper.Map<Persona>(dto);
 
-            dto.idDatosFiscales = dto.DatosFiscales?.Id;
-            dto.DatosFiscales = null;
+            if (dto.DatosFiscales != null && (!dto.DatosFiscales.Id.HasValue || dto.DatosFiscales.Id.Value == 0))
+                entity.DatosFiscales.New(idUser);
 
-            return base.Create(dto, idUser);
+            entity.New(idUser);
+            entity = Repository.Create(entity);
+
+            Repository.SaveChanges();
+            Repository.ClearTracker();
+            return Mapper.Map<PersonaDto>(entity);
+        }
+
+        public override void Update(PersonaDto dto, long idUser)
+        {
+            var tipoPersona = this.tipoPersonaService.GetById(dto.idTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
+            var persona = this.Repository.GetById(dto.Id.Value) ?? throw new Exception("No se ha selecionado el registro de la personas que desea actualizar.");
+            Repository.ClearTracker(true);
+
+            if (tipoPersona.EsPersonaMoral && dto.DatosFiscales == null)
+                throw new Exception("Una persona moral debe tener datos fiscales");
+
+            persona.Email = dto.Email;
+            persona.idDatosFiscales = dto.idDatosFiscales;
+            persona.idTipoPersona = dto.idTipoPersona;
+            persona.Nombre = dto.Nombre;
+            persona.SitioWeb = dto.SitioWeb;
+            persona.Telefono = dto.Telefono;
+                        
+            persona.Update(idUser);
+            persona.DatosFiscales?.Update(idUser);
+
+            Repository.Update(persona);
+            Repository.SaveChanges();
+            Repository.ClearTracker(true);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ComprasInfraestructure.EntityConfigurations
             builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();
             builder.Property(p => p.FechaUltimaActualizacion).HasColumnName("fecha_ultima_actualizacion").IsRequired(false);
             builder.Property(p => p.UsuarioActualizaId).HasColumnName("id_usuario_ultima_actualizacion").IsRequired(false);
+            builder.Property(p => p.IdAlmacen).HasColumnName("id_almacen").IsRequired();
 
             builder.HasOne(p => p.UsuarioCrea)
                 .WithMany()
@@ -52,6 +53,14 @@ namespace ComprasInfraestructure.EntityConfigurations
             builder.HasOne(p => p.Sucursal)
                 .WithMany()
                 .HasForeignKey(p => p.IdSucursal);
+
+            builder.HasOne(p => p.Almacen)
+                .WithMany()
+                .HasForeignKey(p => p.IdAlmacen);
+
+            builder.HasOne(p => p.EmpleadoAutoriza)
+                .WithMany()
+                .HasForeignKey(p => p.IdEmpleadoAutoriza);
 
             builder.HasMany(p => p.Detalles)
                 .WithOne(p => p.OrdenCompra)

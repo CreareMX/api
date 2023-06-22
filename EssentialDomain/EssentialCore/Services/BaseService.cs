@@ -44,14 +44,14 @@ namespace EssentialCore.Services
         public virtual IList<D> GetAll()
         {
             var result = Mapper.Map<List<D>>(Repository.GetAll());
-            Repository.ClearTracker();
+            Repository.ClearTracker(true);
             return result;
         }
 
         public virtual D GetById(T id)
         {
             var result = Mapper.Map<D>(Repository.GetById(id));
-            Repository.ClearTracker();
+            Repository.ClearTracker(true);
             return result;
         }
 
@@ -60,9 +60,21 @@ namespace EssentialCore.Services
             var IdProperty = typeof(D).GetProperty("Id");
             if (IdProperty != null) {
                 var entity = Repository.GetById((T)IdProperty.GetValue(dto));
-                Mapper.Map(dto, entity);
+                Repository.ClearTracker(true);
+
+                var dtoProperties = dto.GetType().GetProperties().ToList();
+                var properties = entity.GetType().GetProperties().ToList();
+
+                foreach (var pi in properties.Where(dp => dtoProperties.Any(ep => dp.Name.Equals(ep.Name, StringComparison.InvariantCultureIgnoreCase))))
+                {
+                    var sourceProperty = dtoProperties.FirstOrDefault(p => p.Name.Equals(pi.Name, StringComparison.InvariantCultureIgnoreCase));
+                    if (sourceProperty == null) continue;
+
+                    pi.SetValue(entity, sourceProperty.GetValue(dto));
+                }
                 entity.Update(idUser);
 
+                Repository.Update(entity);
                 Repository.SaveChanges();
                 Repository.ClearTracker();
             }

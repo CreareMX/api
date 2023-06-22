@@ -11,6 +11,7 @@ namespace EssentialCore.Interfaces.Repositories
         DbContext Context { get; }
 
         E Create(E entity);
+        void Update(E entity);
         void Delete(E entity);
         
         E GetById(T id);
@@ -20,6 +21,6 @@ namespace EssentialCore.Interfaces.Repositories
         IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria);
 
         void SaveChanges();
-        void ClearTracker();
+        void ClearTracker(bool fullClear = false);
     }
 }
