@@ -61,6 +61,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasInfraestructure", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasApplication", "ComprasApplication\ComprasApplication.csproj", "{FD387322-94D9-45CA-BA9B-BF216EC89E09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBaseScripts", "{60899E56-ABD1-411B-885F-43514F0391EE}"
+	ProjectSection(SolutionItems) = preProject
+		DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql = DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql
+		DataBaseScripts\ADD TABLE tipos_precios.sql = DataBaseScripts\ADD TABLE tipos_precios.sql
+		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
