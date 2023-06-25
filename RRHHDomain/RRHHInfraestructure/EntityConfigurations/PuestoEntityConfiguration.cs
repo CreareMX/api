@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CommonCore.Entities.Rrhh;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RRHHCore.Entities;
 
 namespace RRHHInfraestructure.EntityConfigurations
 {

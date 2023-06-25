@@ -1,4 +1,4 @@
-﻿using CommonCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities.Types;
 
 namespace CommonApplication.Dtos
 {

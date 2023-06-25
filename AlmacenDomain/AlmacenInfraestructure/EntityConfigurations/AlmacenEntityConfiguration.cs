@@ -1,4 +1,4 @@
-﻿using AlmacenCore.Entities;
+﻿using CommonCore.Entities.Catalogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

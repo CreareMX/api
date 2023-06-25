@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
-    <ProjectReference Include="..\ContabilidadCore\ContabilidadCore.csproj" />
   </ItemGroup>
 
 </Project>

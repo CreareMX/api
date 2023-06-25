@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using CommonCore.Entities.Rrhh;
 using ContabilidadApplication.Interfaces;
 using EssentialCore.Services;
 using RRHHApplication.Dtos;
 using RRHHApplication.Interfaces;
-using RRHHCore.Entities;
 using RRHHCore.Interfaces.Repositories;
 
 namespace RRHHApplication.Services

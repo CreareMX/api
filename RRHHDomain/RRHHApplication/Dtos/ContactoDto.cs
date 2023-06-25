@@ -1,5 +1,5 @@
-﻿using ContabilidadApplication.Dtos;
-using RRHHCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities.Rrhh;
+using ContabilidadApplication.Dtos;
 
 namespace RRHHApplication.Dtos
 {

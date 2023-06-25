@@ -1,4 +1,4 @@
-﻿using AlmacenCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities.Types;
 
 namespace AlmacenApplication.Dtos
 {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using CommonApplication.Interfaces;
+using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Catalogs;
 using ContabilidadApplication.Dtos;
 using ContabilidadApplication.Interfaces;
-using ContabilidadCore.Entities;
-using ContabilidadCore.Interfaces.Reporitories;
 using EssentialCore.Services;
 
 namespace ContabilidadApplication.Services
@@ -22,7 +22,7 @@ namespace ContabilidadApplication.Services
 
         public override PersonaDto Create(PersonaDto dto, long idUser)
         {
-            var tipoPersona = this.tipoPersonaService.GetById(dto.idTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
+            var tipoPersona = this.tipoPersonaService.GetById(dto.IdTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
 
             if (tipoPersona.EsPersonaMoral && dto.DatosFiscales == null)
                 throw new Exception("Una persona moral debe tener datos fiscales");
@@ -42,7 +42,7 @@ namespace ContabilidadApplication.Services
 
         public override void Update(PersonaDto dto, long idUser)
         {
-            var tipoPersona = this.tipoPersonaService.GetById(dto.idTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
+            var tipoPersona = this.tipoPersonaService.GetById(dto.IdTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
             var persona = this.Repository.GetById(dto.Id.Value) ?? throw new Exception("No se ha selecionado el registro de la personas que desea actualizar.");
             Repository.ClearTracker(true);
 
@@ -50,8 +50,8 @@ namespace ContabilidadApplication.Services
                 throw new Exception("Una persona moral debe tener datos fiscales");
 
             persona.Email = dto.Email;
-            persona.idDatosFiscales = dto.idDatosFiscales;
-            persona.idTipoPersona = dto.idTipoPersona;
+            persona.IdDatosFiscales = dto.IdDatosFiscales;
+            persona.IdTipoPersona = dto.IdTipoPersona;
             persona.Nombre = dto.Nombre;
             persona.SitioWeb = dto.SitioWeb;
             persona.Telefono = dto.Telefono;

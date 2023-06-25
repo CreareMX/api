@@ -1,5 +1,5 @@
-﻿using AlmacenCore.Entities;
-using AlmacenCore.Interfaces.Repositories;
+﻿using CommonCore.Entities.Types;
+using CommonCore.Interfaces.Repositories.Types;
 using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 

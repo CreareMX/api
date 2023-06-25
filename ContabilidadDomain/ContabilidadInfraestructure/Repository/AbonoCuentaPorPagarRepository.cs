@@ -1,5 +1,5 @@
-﻿using ContabilidadCore.Entities;
-using ContabilidadCore.Interfaces.Reporitories;
+﻿using CommonCore.Entities.Accounting;
+using CommonCore.Interfaces.Repositories.Accounting;
 using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 

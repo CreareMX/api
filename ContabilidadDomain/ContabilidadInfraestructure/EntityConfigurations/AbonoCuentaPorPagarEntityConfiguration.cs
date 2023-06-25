@@ -1,4 +1,4 @@
-﻿using ContabilidadCore.Entities;
+﻿using CommonCore.Entities.Accounting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,6 +1,6 @@
 ﻿using AlmacenApplication.Dtos;
-using AlmacenCore.Entities;
-using AlmacenCore.Interfaces.Repositories;
+using CommonCore.Entities.Types;
+using CommonCore.Interfaces.Repositories.Types;
 using EssentialCore.Interfaces.Service;
 
 namespace AlmacenApplication.Interfaces

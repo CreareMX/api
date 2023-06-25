@@ -1,6 +1,6 @@
-﻿using ContabilidadApplication.Dtos;
-using ContabilidadCore.Entities;
-using ContabilidadCore.Interfaces.Reporitories;
+﻿using CommonCore.Entities.Accounting;
+using CommonCore.Interfaces.Repositories.Accounting;
+using ContabilidadApplication.Dtos;
 using EssentialCore.Interfaces.Service;
 
 namespace ContabilidadApplication.Interfaces

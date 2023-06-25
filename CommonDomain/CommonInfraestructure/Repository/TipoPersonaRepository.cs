@@ -1,5 +1,5 @@
-﻿using CommonCore.Entities;
-using CommonCore.Interfaces.Repositories;
+﻿using CommonCore.Entities.Types;
+using CommonCore.Interfaces.Repositories.Types;
 using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 

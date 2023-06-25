@@ -1,9 +1,10 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
-using AlmacenCore.Entities;
-using AlmacenCore.Interfaces.Repositories;
 using AutoMapper;
-using CommonCore.Interfaces.Repositories;
+using CommonCore.Entities.Warehouse;
+using CommonCore.Interfaces.Repositories.Catalogs;
+using CommonCore.Interfaces.Repositories.Warehouse;
+using ComprasCore.Interfaces.Repositories;
 using EssentialCore.Services;
 
 namespace AlmacenApplication.Services

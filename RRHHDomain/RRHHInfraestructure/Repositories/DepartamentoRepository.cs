@@ -1,7 +1,7 @@
-﻿using EssentialCore.DbContexts;
+﻿using CommonCore.Entities.Rrhh;
+using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 using Microsoft.EntityFrameworkCore;
-using RRHHCore.Entities;
 using RRHHCore.Interfaces.Repositories;
 
 namespace RRHHInfraestructure.Repositories

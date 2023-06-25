@@ -10,7 +10,6 @@
     <ProjectReference Include="..\..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-    <ProjectReference Include="..\ContabilidadCore\ContabilidadCore.csproj" />
   </ItemGroup>
 
 </Project>

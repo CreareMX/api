@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CommonApplication.Dtos;
-using CommonCore.Entities;
+using CommonCore.Entities.Catalogs;
 
 namespace CommonApplication.Mappers
 {

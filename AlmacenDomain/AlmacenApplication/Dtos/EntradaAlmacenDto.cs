@@ -1,5 +1,5 @@
-﻿using AlmacenCore.Interfaces.Entities;
-using CommonApplication.Dtos;
+﻿using CommonApplication.Dtos;
+using CommonCore.Interfaces.Entities.Warehouse;
 
 namespace AlmacenApplication.Dtos
 {

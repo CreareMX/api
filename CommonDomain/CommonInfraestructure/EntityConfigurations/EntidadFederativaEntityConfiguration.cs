@@ -1,4 +1,4 @@
-﻿using CommonCore.Entities;
+﻿using CommonCore.Entities.Catalogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

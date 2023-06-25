@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using CommonCore.Entities.Rrhh;
 using RRHHApplication.Dtos;
-using RRHHCore.Entities;
 
 namespace RRHHApplication.Mappers
 {

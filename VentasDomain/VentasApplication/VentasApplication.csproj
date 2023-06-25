@@ -7,10 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\PrecioDto.cs" />
+    <Compile Remove="Interfaces\IPrecioService.cs" />
+    <Compile Remove="Mappers\PrecioProfile.cs" />
+    <Compile Remove="Services\PrecioService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-    <ProjectReference Include="..\VentasCore\VentasCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

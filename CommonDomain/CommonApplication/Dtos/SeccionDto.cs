@@ -1,4 +1,4 @@
-﻿using CommonCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities.Catalogs;
 
 namespace CommonApplication.Dtos
 {

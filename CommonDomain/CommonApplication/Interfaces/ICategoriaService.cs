@@ -1,6 +1,6 @@
 ﻿using CommonApplication.Dtos;
-using CommonCore.Entities;
-using CommonCore.Interfaces.Repositories;
+using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Catalogs;
 using EssentialCore.Interfaces.Service;
 
 namespace CommonApplication.Interfaces

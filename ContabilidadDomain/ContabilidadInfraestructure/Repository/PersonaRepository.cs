@@ -1,5 +1,5 @@
-﻿using ContabilidadCore.Entities;
-using ContabilidadCore.Interfaces.Reporitories;
+﻿using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Catalogs;
 using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 using Microsoft.EntityFrameworkCore;

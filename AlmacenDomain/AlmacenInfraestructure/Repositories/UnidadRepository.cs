@@ -1,5 +1,5 @@
-﻿using AlmacenCore.Entities;
-using AlmacenCore.Interfaces.Repositories;
+﻿using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Catalogs;
 using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 
