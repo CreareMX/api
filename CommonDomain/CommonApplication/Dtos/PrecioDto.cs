@@ -1,4 +1,5 @@
 ﻿using CommonCore.Interfaces.Entities.Purchases;
+using Microsoft.Extensions.Logging;
 
 namespace CommonApplication.Dtos
 {
@@ -6,7 +7,8 @@ namespace CommonApplication.Dtos
     {
         public long? Id { get; set; }
         public long IdProducto { get; set; }
-        public ProductoDto Producto { get; set; }
         public decimal Monto { get; set; }
+        public long IdTipoPrecio { get; set; }
+        public TipoPrecioDto TipoPrecio { get; set; }
     }
 }

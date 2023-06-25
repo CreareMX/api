@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 try
 {
@@ -25,23 +26,18 @@ try
     var commonInfraestructureAssembly = Assembly.Load(new AssemblyName("CommonInfraestructure"));
     var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplication"));
 
-    var contabilidadCoreAssembly = Assembly.Load(new AssemblyName("ContabilidadCore"));
     var contabilidadInfraestructureAssembly = Assembly.Load(new AssemblyName("ContabilidadInfraestructure"));
     var contabilidadApplicationAssembly = Assembly.Load(new AssemblyName("ContabilidadApplication"));
 
-    var rrhhCoreAssembly = Assembly.Load(new AssemblyName("RRHHCore"));
     var rrhhInfraestructureAssembly = Assembly.Load(new AssemblyName("RRHHInfraestructure"));
     var rrhhApplicationAssembly = Assembly.Load(new AssemblyName("RRHHApplication"));
 
-    var almacenCoreAssembly = Assembly.Load(new AssemblyName("AlmacenCore"));
     var almacenInfraestructureAssembly = Assembly.Load(new AssemblyName("AlmacenInfraestructure"));
     var almacenApplicationAssembly = Assembly.Load(new AssemblyName("AlmacenApplication"));
 
-    var ventasCoreAssembly = Assembly.Load(new AssemblyName("VentasCore"));
     var ventasInfraestructureAssembly = Assembly.Load(new AssemblyName("VentasInfraestructure"));
     var ventasApplicationAssembly = Assembly.Load(new AssemblyName("VentasApplication"));
 
-    var comprasCoreAssembly = Assembly.Load(new AssemblyName("ComprasCore"));
     var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
     var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
     #endregion
@@ -58,19 +54,14 @@ try
         commonCoreAssembly,
         commonInfraestructureAssembly,
         commonApplicationAssembly,
-        contabilidadCoreAssembly,
         contabilidadInfraestructureAssembly,
         contabilidadApplicationAssembly,
-        rrhhCoreAssembly,
         rrhhInfraestructureAssembly,
         rrhhApplicationAssembly,
-        almacenCoreAssembly,
         almacenInfraestructureAssembly,
         almacenApplicationAssembly,
-        ventasCoreAssembly,
         ventasInfraestructureAssembly,
         ventasApplicationAssembly,
-        comprasCoreAssembly,
         comprasInfraestructureAssembly,
         comprasApplicationAssembly,
         }.ToArray()).AsImplementedInterfaces();
@@ -94,7 +85,8 @@ try
         containerBuilder.RegisterInstance(jwt).AsImplementedInterfaces();
     });
 
-    builder.Services.AddControllers();
+    builder.Services.AddControllers().AddJsonOptions(x =>
+        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(c =>
     {
@@ -113,7 +105,7 @@ try
             Scheme = "Bearer",
             BearerFormat = "JWT",
             In = ParameterLocation.Header,
-            Description = "La autorizacion JWT usa el esquema Bearer. \r\n\r\nEscriba 'bearer' [espacio] y luego el valore del token de autorización.\r\n\r\nPor ejemplo: \"bearer 1safsfsdfdfd\"",
+            Description = "La autorizacion JWT usa el esquema Bearer. \r\n\r\nEscriba 'bearer' [espacio] y luego el valore del token de autorización.\r\n\r\nPor ejemplo: \"bearer 1safsfsdfdfd\""
         });
         c.AddSecurityRequirement(new OpenApiSecurityRequirement {
         {

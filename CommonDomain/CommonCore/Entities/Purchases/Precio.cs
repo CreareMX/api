@@ -1,4 +1,5 @@
 ﻿using CommonCore.Entities.Catalogs;
+using CommonCore.Entities.Types;
 using CommonCore.Interfaces.Entities.Purchases;
 using EssentialCore.Entities;
 
@@ -8,6 +9,8 @@ namespace CommonCore.Entities.Purchases
     {
         public long IdProducto { get; set; }
         public Producto Producto { get; set; }
+        public long IdTipoPrecio { get; set; }
+        public TipoPrecio TipoPrecio { get; set; }
         public decimal Monto { get; set; }
     }
 }

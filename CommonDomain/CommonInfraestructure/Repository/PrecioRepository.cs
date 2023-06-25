@@ -3,7 +3,7 @@ using CommonCore.Interfaces.Repositories.Purchases;
 using EssentialCore.DbContexts;
 using EssentialCore.Repositories;
 
-namespace ComprasInfraestructure.Repositories
+namespace CommonInfraestructure.Repository
 {
     public class PrecioRepository : BaseRepository<Precio, long>, IPrecioRepository
     {

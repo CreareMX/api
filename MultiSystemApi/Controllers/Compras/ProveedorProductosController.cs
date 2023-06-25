@@ -37,6 +37,20 @@ namespace MultiSystemApi.Controllers.Compras
         [HttpGet("all")]
         public List<ProveedorProductoDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
+        /// Obtiene toda la lista de ProveedorProductos filtrados por producto
+        /// </summary>
+        /// <param name="idProducto">Identificador único de producto</param>
+        /// <returns>ProveedorProductos</returns>
+        [HttpGet("porproducto/{idProducto}")]
+        public List<ProveedorProductoDto> GetByProducto(long idProducto) => Service.GetByProducto(idProducto).ToList();
+        /// <summary>
+        /// Obtiene toda la lista de ProveedorProductos filtrados por proveedor
+        /// </summary>
+        /// <param name="idProveedor">Identificador único de proveedor</param>
+        /// <returns>ProveedorProductos</returns>
+        [HttpGet("porproveedor/{idProveedor}")]
+        public List<ProveedorProductoDto> GetByProveedor(long idProveedor) => Service.GetByProveedor(idProveedor).ToList();
+        /// <summary>
         /// Crea una nueva ProveedorProducto
         /// </summary>
         /// <param name="dto">Datos de la ProveedorProducto</param>

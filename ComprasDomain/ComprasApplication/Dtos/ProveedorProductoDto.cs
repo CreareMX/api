@@ -1,5 +1,6 @@
 ﻿using CommonApplication.Dtos;
 using CommonCore.Interfaces.Entities.Purchases;
+using ContabilidadApplication.Dtos;
 
 namespace ComprasApplication.Dtos
 {
@@ -11,6 +12,6 @@ namespace ComprasApplication.Dtos
         public long IdProducto { get; set; }
         public ProductoDto Producto { get; set; }
         public long IdProveedor { get; set; }
-        public ProveedorProductoDto ProveedorProducto { get; set; }
+        public PersonaDto Proveedor { get; set; }
     }
 }

@@ -1,19 +1,18 @@
-﻿using CommonCore.Entities.Purchases;
+﻿using CommonCore.Entities.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ComprasInfraestructure.EntityConfigurations
+namespace CommonInfraestructure.EntityConfigurations
 {
-    public class PrecioEntityConfiguration : IEntityTypeConfiguration<Precio>
+    public class TipoPrecioEntityConfiguration : IEntityTypeConfiguration<TipoPrecio>
     {
-        public void Configure(EntityTypeBuilder<Precio> builder)
+        public void Configure(EntityTypeBuilder<TipoPrecio> builder)
         {
-            builder.ToTable("Precios");
+            builder.ToTable("tipo_precio");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();
-            builder.Property(p => p.IdProducto).HasColumnName("id_producto").IsRequired();
-            builder.Property(p => p.Monto).HasColumnName("precio").IsRequired();
+            builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();
@@ -27,10 +26,6 @@ namespace ComprasInfraestructure.EntityConfigurations
             builder.HasOne(p => p.UsuarioActualiza)
                 .WithMany()
                 .HasForeignKey(p => p.UsuarioActualizaId);
-
-            builder.HasOne(p => p.Producto)
-                .WithMany()
-                .HasForeignKey(p => p.IdProducto);
         }
     }
 }
