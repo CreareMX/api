@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AlmacenDomain\AlmacenApplication\AlmacenApplication.csproj" />
-    <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
-    <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
-    <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
+    <ProjectReference Include="..\..\AlmacenDomain\AlmacenApplication\AlmacenApplication.csproj" />
+    <ProjectReference Include="..\..\CommonDomain\CommonApplication\CommonApplication.csproj" />
+    <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
+    <ProjectReference Include="..\..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
   </ItemGroup>
 
 </Project>

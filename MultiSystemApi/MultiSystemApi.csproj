@@ -37,8 +37,8 @@
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonInfraestructure\CommonInfraestructure.csproj" />
-    <ProjectReference Include="..\ComprasApplication\ComprasApplication.csproj" />
-    <ProjectReference Include="..\ComprasInfraestructure\ComprasInfraestructure.csproj" />
+    <ProjectReference Include="..\ComprasDomain\ComprasApplication\ComprasApplication.csproj" />
+    <ProjectReference Include="..\ComprasDomain\ComprasInfraestructure\ComprasInfraestructure.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadInfraestructure\ContabilidadInfraestructure.csproj" />
     <ProjectReference Include="..\EssentialDomain\EssentialApplication\EssentialApplication.csproj" />

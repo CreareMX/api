@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33414.496
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiSystemApi", "MultiSystemApi\MultiSystemApi.csproj", "{62947F4E-F06A-498A-8616-3713E0D19971}"
 EndProject
@@ -47,16 +47,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VentasApplication", "Ventas
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComprasDomain", "ComprasDomain", "{BA5A4689-70DC-4A8A-8EC1-856D54D418B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasInfraestructure", "ComprasInfraestructure\ComprasInfraestructure.csproj", "{304A5DA0-8DAA-407A-BE9C-2AB675C4568F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasApplication", "ComprasApplication\ComprasApplication.csproj", "{FD387322-94D9-45CA-BA9B-BF216EC89E09}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBaseScripts", "{60899E56-ABD1-411B-885F-43514F0391EE}"
 	ProjectSection(SolutionItems) = preProject
 		DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql = DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql
 		DataBaseScripts\ADD TABLE tipos_precios.sql = DataBaseScripts\ADD TABLE tipos_precios.sql
 		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasInfraestructure", "ComprasDomain\ComprasInfraestructure\ComprasInfraestructure.csproj", "{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasApplication", "ComprasDomain\ComprasApplication\ComprasApplication.csproj", "{97C9CBA0-363F-4FED-989B-4221F89E3685}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -124,14 +124,14 @@ Global
 		{D4A38B93-8AA3-4833-884F-2F1B4FA5D65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A38B93-8AA3-4833-884F-2F1B4FA5D65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A38B93-8AA3-4833-884F-2F1B4FA5D65C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{304A5DA0-8DAA-407A-BE9C-2AB675C4568F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{304A5DA0-8DAA-407A-BE9C-2AB675C4568F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{304A5DA0-8DAA-407A-BE9C-2AB675C4568F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{304A5DA0-8DAA-407A-BE9C-2AB675C4568F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD387322-94D9-45CA-BA9B-BF216EC89E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD387322-94D9-45CA-BA9B-BF216EC89E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD387322-94D9-45CA-BA9B-BF216EC89E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD387322-94D9-45CA-BA9B-BF216EC89E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97C9CBA0-363F-4FED-989B-4221F89E3685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97C9CBA0-363F-4FED-989B-4221F89E3685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97C9CBA0-363F-4FED-989B-4221F89E3685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97C9CBA0-363F-4FED-989B-4221F89E3685}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,8 +151,8 @@ Global
 		{538BB682-C784-417D-B6F2-DC60DF1237AC} = {9590BC5B-C719-46D7-A76A-49B11FBF2B06}
 		{F5400C98-88D5-4D5D-B5C9-9BE0B4FFC713} = {0618E389-25FE-4E68-9AD1-762D3FB921A8}
 		{D4A38B93-8AA3-4833-884F-2F1B4FA5D65C} = {0618E389-25FE-4E68-9AD1-762D3FB921A8}
-		{304A5DA0-8DAA-407A-BE9C-2AB675C4568F} = {BA5A4689-70DC-4A8A-8EC1-856D54D418B4}
-		{FD387322-94D9-45CA-BA9B-BF216EC89E09} = {BA5A4689-70DC-4A8A-8EC1-856D54D418B4}
+		{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5} = {BA5A4689-70DC-4A8A-8EC1-856D54D418B4}
+		{97C9CBA0-363F-4FED-989B-4221F89E3685} = {BA5A4689-70DC-4A8A-8EC1-856D54D418B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B85928C-3671-4A6B-92DC-8127AAF5E6AD}
