@@ -1,5 +1,4 @@
 ﻿using CommonCore.Entities.Catalogs;
-using CommonCore.Entities.Purchases;
 using ComprasCore.Interfaces.Repositories;
 using EssentialCore.DbContexts;
 using EssentialCore.Interfaces.Criterias;
