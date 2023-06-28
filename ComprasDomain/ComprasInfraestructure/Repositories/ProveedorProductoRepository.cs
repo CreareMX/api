@@ -1,6 +1,7 @@
 ﻿using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
 using EssentialCore.DbContexts;
+using EssentialCore.Interfaces.Criterias;
 using EssentialCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,16 @@ namespace ComprasInfraestructure.Repositories
                 .Include(pp => pp.Producto)
                 .ThenInclude(p => p.Precios)
                 .ThenInclude(pr => pr.TipoPrecio)
-                .FirstOrDefault(pp => pp.Id == id);  
+                .FirstOrDefault(pp => pp.Id == id);
+
+        public override IList<ProveedorProducto> GetListByCriteria(IBaseCriteria<ProveedorProducto, long> criteria) => 
+            Context.Set<ProveedorProducto>()
+                .Include(pp => pp.Producto)
+                .ThenInclude(p => p.Categoria)
+                .Include(pp => pp.Producto)
+                .ThenInclude(p => p.Precios)
+                .ThenInclude(pr => pr.TipoPrecio)
+                .Where(criteria.GetExpression())
+                .ToList();
     }
 }

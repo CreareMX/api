@@ -69,11 +69,12 @@ namespace ComprasApplication.Services
                 throw new Exception("No se ha seleccionado un empleado válido.");
             dto.IdEmpleadoCrea = empleado.Id.Value;
 
-            var sucursal = this.sucursalService.GetById(dto.IdSucursal) ?? throw new Exception("La sucursal indicada no existe.");
+            var sucursal = this.sucursalService.GetById(dto.IdSucursal.Value) ?? throw new Exception("La sucursal indicada no existe.");
             dto.IdSucursal = sucursal.Id.Value;
 
             var estados = estadoService.GetAll();
-            var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("requisicion", StringComparison.InvariantCultureIgnoreCase)) ?? throw new Exception("No se ha dado de alta el estado 'REQUISICION' comuniquese con su administrador del sistema.");
+            var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("req_pendiente", StringComparison.InvariantCultureIgnoreCase)) ?? 
+                throw new Exception("No se ha dado de alta el estado 'REQUISICION PENDIENTE' (req_pendiente) comuniquese con su administrador del sistema.");
             dto.IdEstado = estadoPendientePago.Id.Value;
 
             return base.Create(dto, idUser);

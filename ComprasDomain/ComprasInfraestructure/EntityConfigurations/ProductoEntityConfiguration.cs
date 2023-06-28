@@ -14,8 +14,8 @@ namespace ComprasInfraestructure.EntityConfigurations
             builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
             builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
             builder.Property(p => p.Descripcion).HasColumnName("descripcion").IsRequired(false);
-            builder.Property(p => p.CodigoBarras).HasColumnName("codigo_barras").IsRequired();
-            builder.Property(p => p.NumeroSerie).HasColumnName("numero_serie").IsRequired();
+            builder.Property(p => p.CodigoBarras).HasColumnName("codigo_barras").IsRequired(false);
+            builder.Property(p => p.NumeroSerie).HasColumnName("numero_serie").IsRequired(false);
             builder.Property(p => p.IdCategoria).HasColumnName("id_categoria").IsRequired();
             builder.Property(p => p.Codigo).HasColumnName("codigo_producto").IsRequired(false);
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();

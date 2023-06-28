@@ -33,8 +33,8 @@ namespace EssentialCore.Repositories
 
         public void SaveChanges() => Context.SaveChanges();
 
-        public E GetByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().FirstOrDefault(criteria.GetExpression());
+        public virtual E GetByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().FirstOrDefault(criteria.GetExpression());
 
-        public IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().Where(criteria.GetExpression()).ToList();
+        public virtual IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().Where(criteria.GetExpression()).ToList();
     }
 }

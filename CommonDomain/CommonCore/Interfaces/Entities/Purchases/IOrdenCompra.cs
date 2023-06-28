@@ -10,7 +10,7 @@
         long IdCliente { get; set; }
         long IdEmpleadoCrea { get; set; }
         long IdEstado { get; set; }
-        long IdSucursal { get; set; }
+        long? IdSucursal { get; set; }
         long IdAlmacen { get; set; }
         long? IdEmpleadoAutoriza { get; set; }
         DateTime? FechaAutorizacion { get; set; }
