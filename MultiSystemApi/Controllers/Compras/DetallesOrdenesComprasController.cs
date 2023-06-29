@@ -37,6 +37,13 @@ namespace MultiSystemApi.Controllers.Compras
         [HttpGet("all")]
         public List<DetalleOrdenCompraDto> GetAll() => Service.GetAll().ToList();
         /// <summary>
+        /// Obtiene toda la lista de Detalles de Ordenes de Compras
+        /// <param name="idOrdenCompra">Identificador de la orden de compra</param>
+        /// </summary>
+        /// <returns>Detalles de Ordenes de Compras</returns>
+        [HttpGet("ordencompra/{idOrdenCompra}")]
+        public List<DetalleOrdenCompraDto> GetByOrdenCompra(long idOrdenCompra) => Service.GetByOrdenCompra(idOrdenCompra).ToList();
+        /// <summary>
         /// Crea una nueva Detalle de Orden de Compra
         /// </summary>
         /// <param name="dto">Datos de la Detalle de Orden de Compra</param>

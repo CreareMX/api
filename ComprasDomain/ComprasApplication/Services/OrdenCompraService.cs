@@ -59,18 +59,7 @@ namespace ComprasApplication.Services
 
         public override OrdenCompraDto Create(OrdenCompraDto dto, long idUser)
         {
-            var cliente = this.personaService.GetById(dto.IdCliente) ?? throw new Exception("El cliente indicado no existe.");
-            if (!cliente.TipoPersona.Nombre.Equals("proveedor", StringComparison.InvariantCultureIgnoreCase))
-                throw new Exception("No se ha seleccionado un tipo de cliente válido (PROVEEDOR).");
-            dto.IdCliente = cliente.Id.Value;
-
-            var empleado = this.personaService.GetById(dto.IdEmpleadoCrea) ?? throw new Exception("El empleado indicado no existe.");
-            if (!empleado.TipoPersona.Nombre.Equals("empleado", StringComparison.InvariantCultureIgnoreCase))
-                throw new Exception("No se ha seleccionado un empleado válido.");
-            dto.IdEmpleadoCrea = empleado.Id.Value;
-
-            var sucursal = this.sucursalService.GetById(dto.IdSucursal.Value) ?? throw new Exception("La sucursal indicada no existe.");
-            dto.IdSucursal = sucursal.Id.Value;
+            ValidaOrdenCompra(dto);
 
             var estados = estadoService.GetAll();
             var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("req_pendiente", StringComparison.InvariantCultureIgnoreCase)) ?? 
@@ -78,6 +67,34 @@ namespace ComprasApplication.Services
             dto.IdEstado = estadoPendientePago.Id.Value;
 
             return base.Create(dto, idUser);
+        }
+
+        public override void Update(OrdenCompraDto dto, long idUser)
+        {
+            ValidaOrdenCompra(dto);
+            var ordenCompra = Repository.GetById(dto.Id.Value);
+            if (ordenCompra == null)
+                throw new Exception($"La orden de compra con ID {dto.Id} no ha sido localizada o bien ya no esta activa");
+
+            Repository.ClearTracker(true);
+
+            ordenCompra.IdAlmacen = dto.IdAlmacen;
+            ordenCompra.IdCliente = dto.IdCliente;
+            ordenCompra.IdEmpleadoAutoriza = dto.IdEmpleadoAutoriza;
+            ordenCompra.IdEstado = dto.IdEstado;
+            ordenCompra.IdSucursal = dto.IdSucursal;
+            ordenCompra.Fecha = dto.Fecha;
+            ordenCompra.FechaCompromiso = dto.FechaCompromiso;
+            ordenCompra.FechaEnvio = dto.FechaEnvio;
+            ordenCompra.FechaAutorizacion = dto.FechaAutorizacion;
+            ordenCompra.FormaEnvio = dto.FormaEnvio;
+            ordenCompra.Comentarios = dto.Comentarios;
+
+            ordenCompra.Update(idUser);
+
+            Repository.Update(ordenCompra);
+            Repository.SaveChanges();
+            Repository.ClearTracker(true);
         }
 
         public IList<OrdenCompraDto> OrdenesPorAlmacen(long idAlmacen)
@@ -104,6 +121,22 @@ namespace ComprasApplication.Services
                 return null;
 
             return Mapper.Map<List<OrdenCompraDto>>(results);
+        }
+
+        private void ValidaOrdenCompra(OrdenCompraDto dto)
+        {
+            var cliente = this.personaService.GetById(dto.IdCliente) ?? throw new Exception("El cliente indicado no existe.");
+            if (!cliente.TipoPersona.Nombre.Equals("proveedor", StringComparison.InvariantCultureIgnoreCase))
+                throw new Exception("No se ha seleccionado un tipo de cliente válido (PROVEEDOR).");
+            dto.IdCliente = cliente.Id.Value;
+
+            var empleado = this.personaService.GetById(dto.IdEmpleadoCrea) ?? throw new Exception("El empleado indicado no existe.");
+            if (!empleado.TipoPersona.Nombre.Equals("empleado", StringComparison.InvariantCultureIgnoreCase))
+                throw new Exception("No se ha seleccionado un empleado válido.");
+            dto.IdEmpleadoCrea = empleado.Id.Value;
+
+            var sucursal = this.sucursalService.GetById(dto.IdSucursal.Value) ?? throw new Exception("La sucursal indicada no existe.");
+            dto.IdSucursal = sucursal.Id.Value;
         }
     }
 }

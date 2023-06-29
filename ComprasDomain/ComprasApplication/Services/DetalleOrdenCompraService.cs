@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CommonApplication.Interfaces;
 using CommonCore.Entities.Purchases;
+using CommonCore.Interfaces.Criterias.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
 using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
@@ -12,11 +13,14 @@ namespace ComprasApplication.Services
     {
         readonly IOrdenCompraService ordenCompraService;
         readonly IProductoService productoService;
+        readonly IDetalleOrdenCompraCriteria detalleOrdenCompraCriteria;
+
         public DetalleOrdenCompraService(IDetalleOrdenCompraRepository repository, IOrdenCompraService ordenCompraService,
-            IProductoService productoService, IMapper mapper) : base(repository, mapper)
+            IProductoService productoService, IMapper mapper, IDetalleOrdenCompraCriteria detalleOrdenCompraCriteria) : base(repository, mapper)
         {
             this.ordenCompraService = ordenCompraService;
             this.productoService = productoService;
+            this.detalleOrdenCompraCriteria = detalleOrdenCompraCriteria;
         }
 
         public override DetalleOrdenCompraDto Create(DetalleOrdenCompraDto dto, long idUser)
@@ -28,6 +32,15 @@ namespace ComprasApplication.Services
             dto.IdProducto = producto.Id.Value;
 
             return base.Create(dto, idUser);
+        }
+
+        public List<DetalleOrdenCompraDto> GetByOrdenCompra(long idOrdenCompra)
+        {
+            if (idOrdenCompra <= 0)
+                throw new Exception("El identificador de la orden de compra debe ser un número entero mayor a cero.");
+
+            var entities = this.Repository.GetListByCriteria(detalleOrdenCompraCriteria.PorOrdenCompra(idOrdenCompra));
+            return Mapper.Map<List<DetalleOrdenCompraDto>>(entities);
         }
     }
 }
