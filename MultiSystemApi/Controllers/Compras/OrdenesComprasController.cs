@@ -1,10 +1,8 @@
 ﻿using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
-using EssentialCore.Entities;
 using EssentialCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics.Eventing.Reader;
 
 namespace MultiSystemApi.Controllers.Compras
 {
@@ -94,36 +92,18 @@ namespace MultiSystemApi.Controllers.Compras
             }
         }
         /// <summary>
-        /// Autoriza una requisicion la cual a partir de este momento se conocerá como orden de compra
+        /// Cancela una orden de compra
         /// </summary>
         /// <param name="idOrdenCompra">Identificador único de la requisición</param>
-        /// <param name="idUser">Identificador único del usuario que autoriza</param>
-        /// <returns></returns>
-        [HttpPut("autoriza/{idOrdenCompra}/{idUser}")]
-        public IActionResult Autoriza(long idOrdenCompra, long idUser)
-        {
-            try
-            {
-                Service.Autorizar(idOrdenCompra, idUser);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ExceptionHelper.GetFullMessage(ex));
-            }
-        }
-        /// <summary>
-        /// Canceña una orden de compra
-        /// </summary>
-        /// <param name="idOrdenCompra">Identificador único de la requisición</param>
+        /// <param name="idEstado">Identificador único de la estado de la OC</param>
         /// <param name="idUser">Identificador único del usuario que cancela</param>
         /// <returns></returns>
-        [HttpPut("cancela/{idOrdenCompra}/{idUser}")]
-        public IActionResult Cancela(long idOrdenCompra, long idUser)
+        [HttpPut("estado/{idOrdenCompra}/{idEstado}/{idUser}")]
+        public IActionResult UpdateStatus(long idOrdenCompra, long idEstado, long idUser)
         {
             try
             {
-                Service.Cancelar(idOrdenCompra, idUser);
+                Service.UpdateStatus(idOrdenCompra, idEstado, idUser);
                 return Ok();
             }
             catch (Exception ex)

@@ -43,6 +43,7 @@ try
     #endregion
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+    var corsOrigins = builder.Configuration.GetSection("cors_origins").Get<string[]>();
 
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
@@ -150,17 +151,7 @@ try
     {
         options.AddPolicy("MyAllowSpecificOrigins", policy =>
         {
-            policy.WithOrigins(new[] {
-            "http://localhost:3000",
-            "http://localhost:5000",
-            "http://localhost:5001",
-            "http://localhost:5002",
-            "http://18.189.205.28",
-            "http://18.189.205.28:82",
-            "http://18.189.205.28:83",
-            "https://mayoreodeloriente.netlify.app",
-            "https://cnseguridad.netlify.app"
-            });
+            policy.WithOrigins(corsOrigins.ToArray());
             policy.AllowAnyHeader();
             policy.AllowAnyMethod();
         });

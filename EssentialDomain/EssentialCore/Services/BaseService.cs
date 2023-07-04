@@ -25,7 +25,7 @@ namespace EssentialCore.Services
             entity = Repository.Create(entity);
 
             Repository.SaveChanges();
-            Repository.ClearTracker();
+            Repository.ClearTracker(true);
             return Mapper.Map<D>(entity);
         }
 
@@ -38,7 +38,7 @@ namespace EssentialCore.Services
             entity.Deactivate(idUser);
 
             Repository.SaveChanges();
-            Repository.ClearTracker();
+            Repository.ClearTracker(true);
         }
 
         public virtual IList<D> GetAll()
@@ -76,8 +76,8 @@ namespace EssentialCore.Services
 
                 Repository.Update(entity);
                 Repository.SaveChanges();
-                Repository.ClearTracker();
             }
+            Repository.ClearTracker(true);
         }
     }
 }

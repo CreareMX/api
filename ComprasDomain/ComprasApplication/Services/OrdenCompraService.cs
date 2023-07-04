@@ -27,32 +27,15 @@ namespace ComprasApplication.Services
             this.ordenCompraCriteria = ordenCompraCriteria;
         }
 
-        public void Autorizar(long idOrdenCompra, long idUsuarioAutoriza)
+        public void UpdateStatus(long idOrdenCompra, long idEstado, long idUsuarioCancela)
         {
             var ordenCompra = Repository.GetById(idOrdenCompra);
             if (!ordenCompra.Activo)
                 throw new Exception($"La orden de compra {idOrdenCompra} actualmente se encuentra cancelada.");
 
-            var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
-            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase)) ?? 
-                throw new Exception("No esiste un estado AUTORIZADO para la sección ORDENES DE COMPRA.");
+            var estado = estadoService.GetById(idEstado) ?? throw new Exception("El estado seleccionado no existe.");
 
-            ordenCompra.IdEstado = estadoAutorizado.Id.Value;
-            ordenCompra.Update(idUsuarioAutoriza);
-            Repository.SaveChanges();
-        }
-
-        public void Cancelar(long idOrdenCompra, long idUsuarioCancela)
-        {
-            var ordenCompra = Repository.GetById(idOrdenCompra);
-            if (!ordenCompra.Activo)
-                throw new Exception($"La orden de compra {idOrdenCompra} actualmente se encuentra cancelada.");
-
-            var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
-            var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("cancelado", StringComparison.InvariantCultureIgnoreCase)) ??
-                throw new Exception("No esiste un estado CANCELADO para la sección ORDENES DE COMPRA.");
-
-            ordenCompra.IdEstado = estadoAutorizado.Id.Value;
+            ordenCompra.IdEstado = estado.Id.Value;
             ordenCompra.Update(idUsuarioCancela);
             Repository.SaveChanges();
         }

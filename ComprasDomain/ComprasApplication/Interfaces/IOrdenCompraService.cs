@@ -9,7 +9,6 @@ namespace ComprasApplication.Interfaces
     {
         IList<OrdenCompraDto> OrdenesPorAlmacen(long idAlmacen);
         IList<OrdenCompraDto> RequisicionesPorSucursal(long idSucursal);
-        void Autorizar(long idOrdenCompra, long idUsuarioAutoriza);
-        void Cancelar(long idOrdenCompra, long idUsuarioCancela);
+        void UpdateStatus(long idOrdenCompra, long idEstado, long idUsuarioCancela);
     }
 }

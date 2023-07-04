@@ -36,5 +36,14 @@ namespace ComprasInfraestructure.Repositories
                 .ThenInclude(pr => pr.TipoPrecio)
                 .Where(criteria.GetExpression())
                 .ToList();
+
+        public override IList<ProveedorProducto> GetAll() =>
+            Context.Set<ProveedorProducto>()
+                .Include(pp => pp.Producto)
+                .ThenInclude(p => p.Categoria)
+                .Include(pp => pp.Producto)
+                .ThenInclude(p => p.Precios)
+                .ThenInclude(pr => pr.TipoPrecio)
+                .ToList();
     }
 }
