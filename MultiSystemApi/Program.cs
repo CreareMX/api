@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MultiSystemApi;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -71,6 +72,14 @@ try
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         var jwt = builder.Configuration.GetSection("Jwt").Get<Jwt>();
 
+        try
+        {
+            File.AppendAllText(Path.Combine(AppContext.BaseDirectory, "my_log.txt"), $"{DateTime.Now:dd-MM-yyyy HH:mm:ss}{Environment.NewLine}{connectionString}{Environment.NewLine}{Environment.NewLine}");
+        }
+        catch
+        {
+            Console.WriteLine(connectionString);
+        }
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
         var context = new SqlServerDbContext(optionsBuilder.Options);
@@ -162,7 +171,7 @@ try
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.EnvironmentName.Contains("Development"))
+    if (app.Environment.EnvironmentName.Contains("Development") || app.Environment.EnvironmentName.Contains("Local"))
     {
         app.UseSwagger();
         app.UseSwaggerUI();
@@ -182,6 +191,8 @@ try
     app.Run();
 }catch(Exception ex)
 {
+    File.AppendAllText(Path.Combine(AppContext.BaseDirectory, "my_log.txt"), $"{DateTime.Now:dd-MM-yyyy HH:mm:ss}{Environment.NewLine}{MultiSystemException.ExMessage(ex)}{Environment.NewLine}- {ex.StackTrace}{Environment.NewLine}{Environment.NewLine}");
+
     Console.WriteLine("Errores del sistema:");
     Console.WriteLine(ex.Message);
     if(ex.InnerException != null)
