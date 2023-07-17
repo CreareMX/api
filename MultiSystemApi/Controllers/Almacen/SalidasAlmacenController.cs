@@ -77,6 +77,26 @@ namespace MultiSystemApi.Controllers.Almacen
             }
         }
         /// <summary>
+        /// Actualiza el estatus de una entrada de almacen
+        /// </summary>
+        /// <param name="idEntrada">Identificador de la entrada</param>
+        /// <param name="idEstado">Identificador del nuevo estado de la entrada</param>
+        /// <param name="idUsuario">Identificador del usuario que modifica el registro</param>
+        /// <returns>Success</returns>
+        [HttpPut("actualiza/estatus/{idEntrada}/{idEstado}/{idUsuario}")]
+        public IActionResult UpdateStatus(long idEntrada, long idEstado, long idUsuario)
+        {
+            try
+            {
+                Service.ActualizaEstado(idEntrada, idEstado, idUsuario);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
+            }
+        }
+        /// <summary>
         /// Desactiva una Salida de almacen existente
         /// </summary>
         /// <param name="dto">Datos de la Salida de almacen (se requiere únicamente el ID)</param>

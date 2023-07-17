@@ -7,5 +7,6 @@ namespace CommonApplication.Interfaces
 {
     public interface ISeccionService : IService<ISeccionRepository, Seccion, long, SeccionDto>
     {
+        SeccionDto PorSeccion(string seccion);
     }
 }

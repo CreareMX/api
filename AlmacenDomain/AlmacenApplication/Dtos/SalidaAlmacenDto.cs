@@ -14,5 +14,7 @@ namespace AlmacenApplication.Dtos
         public UnidadDto Unidad { get; set; }
         public decimal Cantidad { get; set; }
         public DateTime FechaSalida { get; set; }
+        public long IdEstado { get; set; }
+        public EstadoDto Estado { get; set; }
     }
 }

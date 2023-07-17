@@ -14,7 +14,7 @@ namespace AlmacenInfraestructure.EntityConfigurations
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();
             builder.Property(p => p.Nombre).HasColumnName("nombre").IsRequired();
             builder.Property(p => p.Descripcion).HasColumnName("descripcion").IsRequired();
-            builder.Property(p => p.Abreviatura).HasColumnName("abreviatura").IsRequired();
+            builder.Property(p => p.Abreviatura).HasColumnName("abreviatura").IsRequired(false);
             builder.Property(p => p.Contenido).HasColumnName("contenido").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();

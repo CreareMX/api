@@ -7,5 +7,6 @@
         long IdAlmacen { get; set; }
         long IdProducto { get; set; }
         long IdUnidad { get; set; }
+        long IdEstado { get; set; }
     }
 }

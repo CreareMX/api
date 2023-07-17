@@ -7,5 +7,7 @@ namespace AlmacenApplication.Interfaces
 {
     public interface ISalidaAlmacenService : IService<ISalidaAlmacenRepository, SalidaAlmacen, long, SalidaAlmacenDto>
     {
+        void ActualizaEstado(long idEntrada, long idEstado, long idUsuario);
+        List<SalidaAlmacenDto> PorAlmacen(long idAlmacen);
     }
 }

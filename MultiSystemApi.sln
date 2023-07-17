@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33328.57
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiSystemApi", "MultiSystemApi\MultiSystemApi.csproj", "{62947F4E-F06A-498A-8616-3713E0D19971}"
 EndProject
@@ -50,6 +50,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBaseScripts", "{60899E56-ABD1-411B-885F-43514F0391EE}"
 	ProjectSection(SolutionItems) = preProject
 		DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql = DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql
+		DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql = DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql
 		DataBaseScripts\ADD TABLE tipos_precios.sql = DataBaseScripts\ADD TABLE tipos_precios.sql
 		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
 	EndProjectSection

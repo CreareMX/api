@@ -18,8 +18,15 @@ namespace EssentialCore.Services
             Mapper = mapper;
         }
 
+        protected virtual void Validaciones(D dto) {
+            if (dto == null)
+                throw new Exception("No se ha recibido un objeto de transferencia de datos.");
+        }
+
         public virtual D Create(D dto, T idUser)
         {
+            Validaciones(dto);
+
             var entity = Mapper.Map<E>(dto);
             entity.New(idUser);
             entity = Repository.Create(entity);
@@ -57,6 +64,8 @@ namespace EssentialCore.Services
 
         public virtual void Update(D dto, T idUser)
         {
+            Validaciones(dto);
+
             var IdProperty = typeof(D).GetProperty("Id");
             if (IdProperty != null) {
                 var entity = Repository.GetById((T)IdProperty.GetValue(dto));

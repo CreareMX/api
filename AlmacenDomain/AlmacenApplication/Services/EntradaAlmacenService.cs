@@ -1,40 +1,82 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
 using AutoMapper;
+using CommonApplication.Interfaces;
 using CommonCore.Entities.Warehouse;
-using CommonCore.Interfaces.Repositories.Catalogs;
+using CommonCore.Interfaces.Criterias.Warehouse;
 using CommonCore.Interfaces.Repositories.Warehouse;
-using ComprasCore.Interfaces.Repositories;
 using EssentialCore.Services;
 
 namespace AlmacenApplication.Services
 {
-    internal class EntradaAlmacenService : BaseService<IEntradaAlmacenRepository, EntradaAlmacen, long, EntradaAlmacenDto>, IEntradaAlmacenService
+    public class EntradaAlmacenService : BaseService<IEntradaAlmacenRepository, EntradaAlmacen, long, EntradaAlmacenDto>, IEntradaAlmacenService
     {
-        private readonly IProductoRepository productoRepository;
-        private readonly IAlmacenRepository almacenRepository;
-        private readonly IUnidadRepository unidadRepository;
+        readonly IProductoService productoService;
+        readonly IAlmacenService almacenService;
+        readonly IUnidadService unidadService;
+        readonly ISeccionService seccionService;
+        readonly IEstadoService estadoService;
+        readonly IEntradaAlmacenCriteria entradaAlmacenCriteria;
 
-        public EntradaAlmacenService(IEntradaAlmacenRepository repository, IProductoRepository productoRepository,
-            IAlmacenRepository almacenRepository, IUnidadRepository unidadRepository, IMapper mapper) : base(repository, mapper)
+        public EntradaAlmacenService(IEntradaAlmacenRepository repository, IProductoService productoService,
+            IAlmacenService almacenService, IUnidadService unidadService, ISeccionService seccionService,
+            IEstadoService estadoService, IEntradaAlmacenCriteria entradaAlmacenCriteria, IMapper mapper) : base(repository, mapper)
         {
-            this.productoRepository = productoRepository;
-            this.almacenRepository = almacenRepository;
-            this.unidadRepository = unidadRepository;
+            this.productoService = productoService;
+            this.almacenService = almacenService;
+            this.unidadService = unidadService;
+            this.seccionService = seccionService;
+            this.estadoService = estadoService;
+            this.entradaAlmacenCriteria = entradaAlmacenCriteria;
         }
 
-        public override EntradaAlmacenDto Create(EntradaAlmacenDto dto, long idUser)
+        public void ActualizaEstado(long idEntrada, long idEstado, long idUsuario)
         {
-            var producto = this.productoRepository.GetById(dto.IdProducto) ?? throw new Exception("No se ha selecionado un producto.");
+            var entity = Repository.GetById(idEntrada);
+            if (entity == null)
+                throw new Exception($"No se ha encontrado la entrada con ID: {idEntrada}.");
+
+            var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la seccion ALMACEN.");
+            var estatus = this.estadoService.GetById(idEstado) ?? throw new Exception("No se ha selecionado un estado para la entrada.");
+            
+            if (estatus.IdSeccion != seccion.Id)
+                throw new Exception($"El estado {estatus.Nombre} no pertenece a la seccion {seccion.Nombre}.");
+
+            Repository.ClearTracker(true);
+
+            entity.IdEstado = estatus.Id.Value;
+            entity.Update(idUsuario);
+            Repository.SaveChanges();
+            Repository.ClearTracker(true);
+        }
+
+        public List<EntradaAlmacenDto> PorAlmacen(long idAlmacen)
+        {
+            var result = Repository.GetListByCriteria(entradaAlmacenCriteria.PorAlmacen(idAlmacen));
+            if (result == null || result.Count == 0)
+                return null;
+            return Mapper.Map<List<EntradaAlmacenDto>>(result);
+        }
+
+        protected override void Validaciones(EntradaAlmacenDto dto)
+        {
+            base.Validaciones(dto);
+
+            var producto = this.productoService.GetById(dto.IdProducto) ?? throw new Exception("No se ha selecionado un producto.");
             dto.IdProducto = producto.Id.Value;
 
-            var almacen = this.almacenRepository.GetById(dto.IdAlmacen) ?? throw new Exception("No se ha selecionado un almancén.");
+            var almacen = this.almacenService.GetById(dto.IdAlmacen) ?? throw new Exception("No se ha selecionado un almancén.");
             dto.IdAlmacen = almacen.Id.Value;
 
-            var unidad = this.unidadRepository.GetById(dto.IdUnidad) ?? throw new Exception("No se ha selecionado una unidad de carga.");
+            var unidad = this.unidadService.GetById(dto.IdUnidad) ?? throw new Exception("No se ha selecionado una unidad de producto.");
             dto.IdUnidad = unidad.Id.Value;
 
-            return base.Create(dto, idUser);
+            var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la seccion ALMACEN.");
+            var estatus = this.estadoService.GetById(dto.IdEstado) ?? throw new Exception("No se ha selecionado un estado para la entrada.");
+            dto.IdEstado = estatus.Id.Value;
+
+            if (estatus.IdSeccion != seccion.Id)
+                throw new Exception($"El estado {estatus.Nombre} no pertenece a la seccion {seccion.Nombre}.");
         }
     }
 }

@@ -14,5 +14,7 @@ namespace CommonCore.Entities.Warehouse
         public Unidad Unidad { get; set; }
         public decimal Cantidad { get; set; }
         public DateTime FechaEntrada { get; set; }
+        public long IdEstado { get; set; }
+        public Estado Estado { get; set; }
     }
 }

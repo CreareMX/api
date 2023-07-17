@@ -15,6 +15,7 @@ namespace AlmacenInfraestructure.EntityConfigurations
             builder.Property(p => p.IdAlmacen).HasColumnName("id_almacen").IsRequired();
             builder.Property(p => p.IdProducto).HasColumnName("id_producto").IsRequired();
             builder.Property(p => p.IdUnidad).HasColumnName("id_unidad").IsRequired();
+            builder.Property(p => p.IdEstado).HasColumnName("id_estado").IsRequired();
             builder.Property(p => p.Cantidad).HasColumnName("cantidad").IsRequired();
             builder.Property(p => p.FechaSalida).HasColumnName("fecha_salida").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
@@ -42,6 +43,10 @@ namespace AlmacenInfraestructure.EntityConfigurations
             builder.HasOne(p => p.Unidad)
                 .WithMany()
                 .HasForeignKey(p => p.IdUnidad);
+
+            builder.HasOne(p => p.Estado)
+                .WithMany()
+                .HasForeignKey(p => p.IdEstado);
         }
     }
 }
