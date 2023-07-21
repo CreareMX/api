@@ -16,5 +16,7 @@ namespace AlmacenApplication.Dtos
         public DateTime FechaSalida { get; set; }
         public long IdEstado { get; set; }
         public EstadoDto Estado { get; set; }
+        public long IdConcepto { get; set; }
+        public ConceptoDto Concepto { get; set; }
     }
 }

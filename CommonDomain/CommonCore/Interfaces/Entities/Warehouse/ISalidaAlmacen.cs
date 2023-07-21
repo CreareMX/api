@@ -8,5 +8,6 @@
         long IdProducto { get; set; }
         long IdUnidad { get; set; }
         public long IdEstado { get; set; }
+        public long IdConcepto { get; set; }
     }
 }

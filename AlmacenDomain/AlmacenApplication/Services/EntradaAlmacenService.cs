@@ -16,26 +16,26 @@ namespace AlmacenApplication.Services
         readonly IUnidadService unidadService;
         readonly ISeccionService seccionService;
         readonly IEstadoService estadoService;
+        readonly IConceptoService conceptoService;
         readonly IEntradaAlmacenCriteria entradaAlmacenCriteria;
 
         public EntradaAlmacenService(IEntradaAlmacenRepository repository, IProductoService productoService,
             IAlmacenService almacenService, IUnidadService unidadService, ISeccionService seccionService,
-            IEstadoService estadoService, IEntradaAlmacenCriteria entradaAlmacenCriteria, IMapper mapper) : base(repository, mapper)
+            IEstadoService estadoService, IConceptoService conceptoService, IEntradaAlmacenCriteria entradaAlmacenCriteria, 
+            IMapper mapper) : base(repository, mapper)
         {
             this.productoService = productoService;
             this.almacenService = almacenService;
             this.unidadService = unidadService;
             this.seccionService = seccionService;
             this.estadoService = estadoService;
+            this.conceptoService = conceptoService;
             this.entradaAlmacenCriteria = entradaAlmacenCriteria;
         }
 
         public void ActualizaEstado(long idEntrada, long idEstado, long idUsuario)
         {
-            var entity = Repository.GetById(idEntrada);
-            if (entity == null)
-                throw new Exception($"No se ha encontrado la entrada con ID: {idEntrada}.");
-
+            var entity = Repository.GetById(idEntrada) ?? throw new Exception($"No se ha encontrado la entrada con ID: {idEntrada}.");
             var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la seccion ALMACEN.");
             var estatus = this.estadoService.GetById(idEstado) ?? throw new Exception("No se ha selecionado un estado para la entrada.");
             
@@ -53,8 +53,10 @@ namespace AlmacenApplication.Services
         public List<EntradaAlmacenDto> PorAlmacen(long idAlmacen)
         {
             var result = Repository.GetListByCriteria(entradaAlmacenCriteria.PorAlmacen(idAlmacen));
+            Repository.ClearTracker(true);
             if (result == null || result.Count == 0)
                 return null;
+
             return Mapper.Map<List<EntradaAlmacenDto>>(result);
         }
 
@@ -77,6 +79,10 @@ namespace AlmacenApplication.Services
 
             if (estatus.IdSeccion != seccion.Id)
                 throw new Exception($"El estado {estatus.Nombre} no pertenece a la seccion {seccion.Nombre}.");
+
+            var conceptos = this.conceptoService.PorSeccion("ENTRADA DE ALMACEN") ?? throw new Exception("No se ha creado la sección ENTRADA DE ALMACEN");
+            if (!conceptos.Any(c => c.Id == dto.IdConcepto))
+                throw new Exception($"No existe un concepto con ID {dto.IdConcepto}");
         }
     }
 }
