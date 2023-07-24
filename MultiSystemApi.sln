@@ -53,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBase
 		DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql = DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql
 		DataBaseScripts\ADD TABLE tipos_precios.sql = DataBaseScripts\ADD TABLE tipos_precios.sql
 		CREATE TABLE conceptos.sql = CREATE TABLE conceptos.sql
+		CREATE TABLE transferencias.sql = CREATE TABLE transferencias.sql
 		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
 	EndProjectSection
 EndProject
