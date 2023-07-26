@@ -20,24 +20,6 @@ try
     #region ASSAMBLIES
     var executingAssembly = Assembly.GetExecutingAssembly();
     var commonCoreAssembly = Assembly.Load(new AssemblyName("CommonCore"));
-    //var commonInfraestructureAssembly = Assembly.Load(new AssemblyName("CommonInfraestructure"));
-    //var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplication"));
-
-    //var contabilidadInfraestructureAssembly = Assembly.Load(new AssemblyName("ContabilidadInfraestructure"));
-    //var contabilidadApplicationAssembly = Assembly.Load(new AssemblyName("ContabilidadApplication"));
-
-    //var rrhhInfraestructureAssembly = Assembly.Load(new AssemblyName("RRHHInfraestructure"));
-    //var rrhhApplicationAssembly = Assembly.Load(new AssemblyName("RRHHApplication"));
-
-    //var almacenInfraestructureAssembly = Assembly.Load(new AssemblyName("AlmacenInfraestructure"));
-    //var almacenApplicationAssembly = Assembly.Load(new AssemblyName("AlmacenApplication"));
-
-    //var ventasInfraestructureAssembly = Assembly.Load(new AssemblyName("VentasInfraestructure"));
-    //var ventasApplicationAssembly = Assembly.Load(new AssemblyName("VentasApplication"));
-
-    //var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
-    //var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
-
     var infraestructures = new List<Assembly> {
         Assembly.Load(new AssemblyName("ContabilidadInfraestructure")),
         Assembly.Load(new AssemblyName("CommonInfraestructure")),
@@ -62,20 +44,8 @@ try
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
         var assemblies = new List<Assembly> {
-        executingAssembly,
-        commonCoreAssembly,
-        //commonInfraestructureAssembly,
-        //commonApplicationAssembly,
-        //contabilidadInfraestructureAssembly,
-        //contabilidadApplicationAssembly,
-        //rrhhInfraestructureAssembly,
-        //rrhhApplicationAssembly,
-        //almacenInfraestructureAssembly,
-        //almacenApplicationAssembly,
-        //ventasInfraestructureAssembly,
-        //ventasApplicationAssembly,
-        //comprasInfraestructureAssembly,
-        //comprasApplicationAssembly,
+            executingAssembly,
+            commonCoreAssembly
         };
         assemblies.AddRange(infraestructures);
         assemblies.AddRange(applications);
