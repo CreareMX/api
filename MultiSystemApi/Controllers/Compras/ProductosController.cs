@@ -1,7 +1,7 @@
 ﻿using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
 using ComprasApplication.Dtos;
-using EssentialCore.Shared;
+using CommonCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

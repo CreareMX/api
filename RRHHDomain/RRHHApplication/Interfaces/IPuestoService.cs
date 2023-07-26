@@ -1,5 +1,5 @@
 ﻿using CommonCore.Entities.Rrhh;
-using EssentialCore.Interfaces.Service;
+using CommonCore.Interfaces.Service;
 using RRHHApplication.Dtos;
 using RRHHCore.Interfaces.Repositories;
 

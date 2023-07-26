@@ -4,7 +4,7 @@ using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Repositories.Catalogs;
 using ContabilidadApplication.Dtos;
 using ContabilidadApplication.Interfaces;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace ContabilidadApplication.Services
 {

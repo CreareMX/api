@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities.Rrhh;
-using EssentialCore.DbContexts;
-using EssentialCore.Repositories;
+using CommonCore.DbContexts;
+using CommonCore.Repositories;
 using RRHHCore.Interfaces.Repositories;
 
 namespace RRHHInfraestructure.Repositories

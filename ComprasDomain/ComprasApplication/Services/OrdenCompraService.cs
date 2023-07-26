@@ -6,7 +6,7 @@ using CommonCore.Interfaces.Repositories.Purchases;
 using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
 using ContabilidadApplication.Interfaces;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace ComprasApplication.Services
 {

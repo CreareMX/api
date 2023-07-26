@@ -1,6 +1,6 @@
 ﻿using CommonApplication.Interfaces;
-using EssentialApplication.dtos;
-using EssentialApplication.Interfaces;
+using CommonApplication.dtos;
+using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;

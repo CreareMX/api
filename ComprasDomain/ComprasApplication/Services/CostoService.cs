@@ -3,7 +3,7 @@ using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
 using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace ComprasApplication.Services
 {

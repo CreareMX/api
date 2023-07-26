@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Criterias.Purchases;
-using EssentialCore.Criterias;
+using CommonCore.Criterias;
 
 namespace CommonCore.Criterias.Purchases
 {

@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities.Types;
 using CommonCore.Interfaces.Entities.Catalogs;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Catalogs
 {
@@ -11,5 +11,7 @@ namespace CommonCore.Entities.Catalogs
         public string Codigo { get; set; }
         public long IdTipoAlmacen { get; set; }
         public TipoAlmacen TipoAlmacen { get; set; }
+        public long IdSucursal { get; set; }
+        public Sucursal Sucursal { get; set; }
     }
 }

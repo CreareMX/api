@@ -1,8 +1,8 @@
 ﻿using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
-using EssentialCore.DbContexts;
-using EssentialCore.Interfaces.Criterias;
-using EssentialCore.Repositories;
+using CommonCore.DbContexts;
+using CommonCore.Interfaces.Criterias;
+using CommonCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace ComprasInfraestructure.Repositories

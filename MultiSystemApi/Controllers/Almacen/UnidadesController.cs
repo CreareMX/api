@@ -1,6 +1,6 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
-using EssentialCore.Shared;
+using CommonCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

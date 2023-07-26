@@ -1,4 +1,4 @@
-﻿using EssentialCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities;
 
 namespace CommonCore.Interfaces.Entities.Catalogs
 {

@@ -4,7 +4,7 @@ using AutoMapper;
 using CommonCore.Entities.Warehouse;
 using CommonCore.Interfaces.Repositories.Catalogs;
 using CommonCore.Interfaces.Repositories.Warehouse;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace AlmacenApplication.Services
 {

@@ -1,8 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CommonApplication.Dtos;
-using EssentialCore.DbContexts;
-using EssentialCore.Entities;
+using CommonCore.DbContexts;
+using CommonCore.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
@@ -18,29 +18,42 @@ try
     var entity = typeof(BaseEntityLongId).Assembly;
 
     #region ASSAMBLIES
-    var essentialCoreAssembly = Assembly.Load(new AssemblyName("EssentialCore"));
-    var essentialInfraestructureAssembly = Assembly.Load(new AssemblyName("EssentialInfraestructure"));
-    var essentialApplicationAssembly = Assembly.Load(new AssemblyName("EssentialApplication"));
     var executingAssembly = Assembly.GetExecutingAssembly();
-
     var commonCoreAssembly = Assembly.Load(new AssemblyName("CommonCore"));
-    var commonInfraestructureAssembly = Assembly.Load(new AssemblyName("CommonInfraestructure"));
-    var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplication"));
+    //var commonInfraestructureAssembly = Assembly.Load(new AssemblyName("CommonInfraestructure"));
+    //var commonApplicationAssembly = Assembly.Load(new AssemblyName("CommonApplication"));
 
-    var contabilidadInfraestructureAssembly = Assembly.Load(new AssemblyName("ContabilidadInfraestructure"));
-    var contabilidadApplicationAssembly = Assembly.Load(new AssemblyName("ContabilidadApplication"));
+    //var contabilidadInfraestructureAssembly = Assembly.Load(new AssemblyName("ContabilidadInfraestructure"));
+    //var contabilidadApplicationAssembly = Assembly.Load(new AssemblyName("ContabilidadApplication"));
 
-    var rrhhInfraestructureAssembly = Assembly.Load(new AssemblyName("RRHHInfraestructure"));
-    var rrhhApplicationAssembly = Assembly.Load(new AssemblyName("RRHHApplication"));
+    //var rrhhInfraestructureAssembly = Assembly.Load(new AssemblyName("RRHHInfraestructure"));
+    //var rrhhApplicationAssembly = Assembly.Load(new AssemblyName("RRHHApplication"));
 
-    var almacenInfraestructureAssembly = Assembly.Load(new AssemblyName("AlmacenInfraestructure"));
-    var almacenApplicationAssembly = Assembly.Load(new AssemblyName("AlmacenApplication"));
+    //var almacenInfraestructureAssembly = Assembly.Load(new AssemblyName("AlmacenInfraestructure"));
+    //var almacenApplicationAssembly = Assembly.Load(new AssemblyName("AlmacenApplication"));
 
-    var ventasInfraestructureAssembly = Assembly.Load(new AssemblyName("VentasInfraestructure"));
-    var ventasApplicationAssembly = Assembly.Load(new AssemblyName("VentasApplication"));
+    //var ventasInfraestructureAssembly = Assembly.Load(new AssemblyName("VentasInfraestructure"));
+    //var ventasApplicationAssembly = Assembly.Load(new AssemblyName("VentasApplication"));
 
-    var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
-    var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
+    //var comprasInfraestructureAssembly = Assembly.Load(new AssemblyName("ComprasInfraestructure"));
+    //var comprasApplicationAssembly = Assembly.Load(new AssemblyName("ComprasApplication"));
+
+    var infraestructures = new List<Assembly> {
+        Assembly.Load(new AssemblyName("ContabilidadInfraestructure")),
+        Assembly.Load(new AssemblyName("CommonInfraestructure")),
+        Assembly.Load(new AssemblyName("RRHHInfraestructure")),
+        Assembly.Load(new AssemblyName("AlmacenInfraestructure")),
+        Assembly.Load(new AssemblyName("VentasInfraestructure")),
+        Assembly.Load(new AssemblyName("ComprasInfraestructure"))
+    };
+    var applications = new List<Assembly> {
+        Assembly.Load(new AssemblyName("CommonApplication")),
+        Assembly.Load(new AssemblyName("ContabilidadApplication")),
+        Assembly.Load(new AssemblyName("RRHHApplication")),
+        Assembly.Load(new AssemblyName("AlmacenApplication")),
+        Assembly.Load(new AssemblyName("VentasApplication")),
+        Assembly.Load(new AssemblyName("ComprasApplication"))
+    };
     #endregion
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -48,25 +61,25 @@ try
 
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
-        containerBuilder.RegisterAssemblyTypes(new List<Assembly> {
-        essentialCoreAssembly,
-        essentialInfraestructureAssembly,
-        essentialApplicationAssembly,
+        var assemblies = new List<Assembly> {
         executingAssembly,
         commonCoreAssembly,
-        commonInfraestructureAssembly,
-        commonApplicationAssembly,
-        contabilidadInfraestructureAssembly,
-        contabilidadApplicationAssembly,
-        rrhhInfraestructureAssembly,
-        rrhhApplicationAssembly,
-        almacenInfraestructureAssembly,
-        almacenApplicationAssembly,
-        ventasInfraestructureAssembly,
-        ventasApplicationAssembly,
-        comprasInfraestructureAssembly,
-        comprasApplicationAssembly,
-        }.ToArray()).AsImplementedInterfaces();
+        //commonInfraestructureAssembly,
+        //commonApplicationAssembly,
+        //contabilidadInfraestructureAssembly,
+        //contabilidadApplicationAssembly,
+        //rrhhInfraestructureAssembly,
+        //rrhhApplicationAssembly,
+        //almacenInfraestructureAssembly,
+        //almacenApplicationAssembly,
+        //ventasInfraestructureAssembly,
+        //ventasApplicationAssembly,
+        //comprasInfraestructureAssembly,
+        //comprasApplicationAssembly,
+        };
+        assemblies.AddRange(infraestructures);
+        assemblies.AddRange(applications);
+        containerBuilder.RegisterAssemblyTypes(assemblies.ToArray()).AsImplementedInterfaces();
 
         var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -83,13 +96,8 @@ try
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
         var context = new SqlServerDbContext(optionsBuilder.Options);
-        context.AddConfigurations(commonInfraestructureAssembly);
-        context.AddConfigurations(essentialInfraestructureAssembly);
-        context.AddConfigurations(contabilidadInfraestructureAssembly);
-        context.AddConfigurations(rrhhInfraestructureAssembly);
-        context.AddConfigurations(almacenInfraestructureAssembly);
-        context.AddConfigurations(ventasInfraestructureAssembly);
-        context.AddConfigurations(comprasInfraestructureAssembly);
+        foreach(var assm in infraestructures)
+            context.AddConfigurations(assm);
 
         containerBuilder.RegisterInstance(context).AsSelf();
         containerBuilder.RegisterInstance(jwt).AsImplementedInterfaces();
@@ -118,26 +126,18 @@ try
             Description = "La autorizacion JWT usa el esquema Bearer. \r\n\r\nEscriba 'bearer' [espacio] y luego el valore del token de autorización.\r\n\r\nPor ejemplo: \"bearer 1safsfsdfdfd\""
         });
         c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
+            {
+                new OpenApiSecurityScheme {
+                    Reference = new OpenApiReference {
+                        Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
     });
-    });
-    builder.Services.AddAutoMapper(new List<Assembly> {
-    commonApplicationAssembly,
-    essentialApplicationAssembly,
-    contabilidadApplicationAssembly,
-    rrhhApplicationAssembly,
-    almacenApplicationAssembly,
-    ventasApplicationAssembly,
-    comprasApplicationAssembly
-});
+    builder.Services.AddAutoMapper(applications);
     builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

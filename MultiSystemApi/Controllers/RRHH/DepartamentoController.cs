@@ -1,4 +1,4 @@
-﻿using EssentialCore.Shared;
+﻿using CommonCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RRHHApplication.Dtos;

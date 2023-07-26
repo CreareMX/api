@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CommonCore.Entities.Rrhh;
 using ContabilidadApplication.Interfaces;
-using EssentialCore.Services;
+using CommonCore.Services;
 using RRHHApplication.Dtos;
 using RRHHApplication.Interfaces;
 using RRHHCore.Interfaces.Repositories;

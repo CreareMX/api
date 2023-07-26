@@ -3,7 +3,7 @@ using AlmacenApplication.Interfaces;
 using AutoMapper;
 using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Repositories.Catalogs;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace AlmacenApplication.Services
 {

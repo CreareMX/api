@@ -1,7 +1,7 @@
 ﻿using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
-using EssentialCore.DbContexts;
-using EssentialCore.Repositories;
+using CommonCore.DbContexts;
+using CommonCore.Repositories;
 
 namespace ComprasInfraestructure.Repositories
 {

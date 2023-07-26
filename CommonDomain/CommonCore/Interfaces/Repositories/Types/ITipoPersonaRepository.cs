@@ -1,5 +1,5 @@
 ﻿using CommonCore.Entities.Types;
-using EssentialCore.Interfaces.Repositories;
+using CommonCore.Interfaces.Repositories;
 
 namespace CommonCore.Interfaces.Repositories.Types
 {

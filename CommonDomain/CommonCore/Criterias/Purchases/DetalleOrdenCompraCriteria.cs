@@ -1,7 +1,7 @@
 ﻿using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Criterias.Purchases;
-using EssentialCore.Criterias;
-using EssentialCore.Interfaces.Criterias;
+using CommonCore.Criterias;
+using CommonCore.Interfaces.Criterias;
 using System.Linq.Expressions;
 
 namespace CommonCore.Criterias.Purchases

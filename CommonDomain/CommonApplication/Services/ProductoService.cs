@@ -3,7 +3,7 @@ using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
 using CommonCore.Entities.Catalogs;
 using ComprasCore.Interfaces.Repositories;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace CommonApplication.Services
 {

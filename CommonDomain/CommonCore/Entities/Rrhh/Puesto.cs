@@ -1,5 +1,5 @@
 ﻿using CommonCore.Interfaces.Entities.Rrhh;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Rrhh
 {

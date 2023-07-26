@@ -5,7 +5,7 @@ using CommonApplication.Interfaces;
 using CommonCore.Entities.Warehouse;
 using CommonCore.Interfaces.Criterias.Warehouse;
 using CommonCore.Interfaces.Repositories.Warehouse;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace AlmacenApplication.Services
 {

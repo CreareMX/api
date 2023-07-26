@@ -1,7 +1,7 @@
 ﻿using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Entities.Catalogs;
 using CommonCore.Interfaces.Entities.Warehouse;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Warehouse
 {

@@ -1,7 +1,7 @@
 ﻿using AlmacenApplication.Dtos;
 using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Repositories.Catalogs;
-using EssentialCore.Interfaces.Service;
+using CommonCore.Interfaces.Service;
 
 namespace AlmacenApplication.Interfaces
 {

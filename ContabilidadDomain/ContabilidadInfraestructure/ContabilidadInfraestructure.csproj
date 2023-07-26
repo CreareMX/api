@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
-    <ProjectReference Include="..\..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
   </ItemGroup>
 
 </Project>

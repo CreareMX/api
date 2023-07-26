@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities.Types;
 using CommonCore.Interfaces.Entities.Catalogs;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Catalogs
 {

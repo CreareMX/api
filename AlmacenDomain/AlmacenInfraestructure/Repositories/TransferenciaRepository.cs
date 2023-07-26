@@ -1,7 +1,7 @@
 ﻿using CommonCore.Entities.Warehouse;
 using CommonCore.Interfaces.Repositories.Warehouse;
-using EssentialCore.DbContexts;
-using EssentialCore.Repositories;
+using CommonCore.DbContexts;
+using CommonCore.Repositories;
 
 namespace AlmacenInfraestructure.Repositories
 {

@@ -1,5 +1,5 @@
 ﻿using CommonCore.Entities.Catalogs;
-using EssentialCore.Interfaces.Criterias;
+using CommonCore.Interfaces.Criterias;
 
 namespace CommonCore.Interfaces.Criterias.Catalogs
 {

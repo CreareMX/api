@@ -1,7 +1,7 @@
 ﻿using CommonApplication.Dtos;
 using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
-using EssentialCore.Interfaces.Service;
+using CommonCore.Interfaces.Service;
 
 namespace CommonApplication.Interfaces
 {

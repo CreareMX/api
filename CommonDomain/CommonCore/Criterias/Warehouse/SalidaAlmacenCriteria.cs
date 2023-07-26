@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities.Warehouse;
 using CommonCore.Interfaces.Criterias.Warehouse;
-using EssentialCore.Criterias;
+using CommonCore.Criterias;
 
 namespace CommonCore.Criterias.Warehouse
 {

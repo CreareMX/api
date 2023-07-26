@@ -1,6 +1,6 @@
-﻿using EssentialApplication.dtos;
-using EssentialApplication.Interfaces;
-using EssentialCore.Shared;
+﻿using CommonApplication.dtos;
+using CommonApplication.Interfaces;
+using CommonCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,6 @@
 ﻿using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Entities.Purchases;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Purchases
 {

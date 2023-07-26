@@ -1,7 +1,7 @@
 ﻿using CommonApplication.Dtos;
 using CommonCore.Entities.Catalogs;
 using ComprasCore.Interfaces.Repositories;
-using EssentialCore.Interfaces.Service;
+using CommonCore.Interfaces.Service;
 
 namespace CommonApplication.Interfaces
 {

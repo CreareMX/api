@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
-    <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

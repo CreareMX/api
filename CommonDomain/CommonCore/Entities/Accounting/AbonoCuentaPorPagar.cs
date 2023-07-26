@@ -1,5 +1,5 @@
 ﻿using CommonCore.Interfaces.Entities.Accounting;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Accounting
 {

@@ -4,7 +4,7 @@ using CommonApplication.Interfaces;
 using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Criterias.Catalogs;
 using CommonCore.Interfaces.Repositories.Catalogs;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace CommonApplication.Services
 {

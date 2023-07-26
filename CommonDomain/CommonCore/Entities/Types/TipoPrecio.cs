@@ -1,5 +1,5 @@
 ﻿using CommonCore.Interfaces.Entities.Types;
-using EssentialCore.Entities;
+using CommonCore.Entities;
 
 namespace CommonCore.Entities.Types
 {

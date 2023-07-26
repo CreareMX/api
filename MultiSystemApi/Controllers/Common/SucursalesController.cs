@@ -1,7 +1,7 @@
 ﻿using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using EssentialCore.Shared;
+using CommonCore.Shared;
 using Microsoft.AspNetCore.Authorization;
 
 namespace MultiSystemApi.Controllers.Common

@@ -1,7 +1,7 @@
 ﻿using AlmacenApplication.Dtos;
 using CommonCore.Entities.Warehouse;
 using CommonCore.Interfaces.Repositories.Warehouse;
-using EssentialCore.Interfaces.Service;
+using CommonCore.Interfaces.Service;
 
 namespace AlmacenApplication.Interfaces
 {

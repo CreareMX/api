@@ -1,18 +1,21 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
 using AutoMapper;
+using CommonApplication.Interfaces;
 using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Repositories.Catalogs;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace AlmacenApplication.Services
 {
     internal class AlmacenService : BaseService<IAlmacenRepository, Almacen, long, AlmacenDto>, IAlmacenService
     {
         private readonly ITipoAlmacenService tipoAlmacenService;
-        public AlmacenService(IAlmacenRepository repository, ITipoAlmacenService tipoAlmacenService, IMapper mapper) : base(repository, mapper)
+        private readonly ISucursalService sucursalService;
+        public AlmacenService(IAlmacenRepository repository, ISucursalService sucursalService, ITipoAlmacenService tipoAlmacenService, IMapper mapper) : base(repository, mapper)
         {
             this.tipoAlmacenService = tipoAlmacenService;
+            this.sucursalService = sucursalService;
         }
 
         public override AlmacenDto Create(AlmacenDto dto, long idUser)
@@ -25,11 +28,9 @@ namespace AlmacenApplication.Services
 
         public override void Update(AlmacenDto dto, long idUser)
         {
+            Validaciones(dto);
             var almacen = this.Repository.GetById(dto.Id.Value) ?? throw new Exception($"No se ha encontrado el almacen con ID {dto.Id}.");
-            var tipoAlmacen = tipoAlmacenService.GetById(dto.IdTipoAlmacen) ?? throw new Exception($"No se encotrado un tipo de almacen con ID {dto.IdTipoAlmacen}.");
-            this.Repository.ClearTracker(true);
 
-            almacen.IdTipoAlmacen = tipoAlmacen.Id.Value;
             almacen.Nombre = dto.Nombre;
             almacen.Codigo = dto.Codigo;
             almacen.Descripcion = dto.Descripcion;
@@ -37,6 +38,16 @@ namespace AlmacenApplication.Services
 
             this.Repository.Update(almacen);
             this.Repository.SaveChanges();
+            this.Repository.ClearTracker(true);
+        }
+
+        protected override void Validaciones(AlmacenDto dto)
+        {
+            var tipoAlmacen = tipoAlmacenService.GetById(dto.IdTipoAlmacen) ?? throw new Exception($"No se encotrado un tipo de almacen con ID {dto.IdTipoAlmacen}.");
+            dto.IdTipoAlmacen = tipoAlmacen.Id.Value;
+            var sucursal = sucursalService.GetById(dto.IdSucursal) ?? throw new Exception($"No se encotrado una sucursal con ID {dto.IdTipoAlmacen}.");
+            dto.IdSucursal = sucursal.Id.Value;
+
             this.Repository.ClearTracker(true);
         }
     }

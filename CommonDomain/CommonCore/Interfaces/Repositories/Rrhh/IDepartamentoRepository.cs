@@ -1,5 +1,5 @@
 ﻿using CommonCore.Entities.Rrhh;
-using EssentialCore.Interfaces.Repositories;
+using CommonCore.Interfaces.Repositories;
 
 namespace RRHHCore.Interfaces.Repositories
 {

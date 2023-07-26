@@ -42,9 +42,6 @@
     <ProjectReference Include="..\ComprasDomain\ComprasInfraestructure\ComprasInfraestructure.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadInfraestructure\ContabilidadInfraestructure.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialApplication\EssentialApplication.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
     <ProjectReference Include="..\RRHHDomain\RRHHApplication\RRHHApplication.csproj" />
     <ProjectReference Include="..\RRHHDomain\RRHHInfraestructure\RRHHInfraestructure.csproj" />
     <ProjectReference Include="..\VentasDomain\VentasApplication\VentasApplication.csproj" />

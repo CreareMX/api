@@ -4,7 +4,7 @@ using CommonApplication.Interfaces;
 using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
 using ComprasCore.Interfaces.Repositories;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace CommonApplication.Services
 {
