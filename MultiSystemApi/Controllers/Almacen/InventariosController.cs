@@ -1,4 +1,4 @@
-﻿using AlmacenApplication.Dtos;
+﻿using AlmacenApplication.Dtos.Kardex;
 using AlmacenApplication.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +29,14 @@ namespace MultiSystemApi.Controllers.Almacen
         /// <param name="idAlmacen">Identificador unico de almacén</param>
         /// <returns>Kardex</returns>
         [HttpGet("kardex/{fecha}/{idAlmacen}")]
-        public KardexDto GetById(DateTime fecha, long idAlmacen) => Service.ObtenerKardex(fecha, idAlmacen);        
+        public KardexDto ObtenerKardex(DateTime fecha, long idAlmacen) => Service.ObtenerKardex(fecha, idAlmacen);
+        /// <summary>
+        /// Obtiene el kardex de un almacen hasta la fecha indicada con únicamente los productos debajo del punto de reorden
+        /// </summary>
+        /// <param name="fecha">Fecha final del kardex</param>
+        /// <param name="idAlmacen">Identificador unico de almacén</param>
+        /// <returns>Kardex</returns>
+        [HttpGet("bajostock/{fecha}/{idAlmacen}")]
+        public KardexDto ObtenerBajoStock(DateTime fecha, long idAlmacen) => Service.ObtenerBajoStock(fecha, idAlmacen);
     }
 }

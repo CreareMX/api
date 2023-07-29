@@ -51,7 +51,7 @@ try
         assemblies.AddRange(applications);
         containerBuilder.RegisterAssemblyTypes(assemblies.ToArray()).AsImplementedInterfaces();
 
-        var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>();        
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         var jwt = builder.Configuration.GetSection("Jwt").Get<Jwt>();
 
@@ -63,12 +63,15 @@ try
         {
             Console.WriteLine(connectionString);
         }
-        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options => {
+            options.EnableRetryOnFailure(3);
+            options.CommandTimeout(3600);
+        });
 
         var context = new SqlServerDbContext(optionsBuilder.Options);
         foreach(var assm in infraestructures)
             context.AddConfigurations(assm);
-
+        context.DisableLazyLoading();
         containerBuilder.RegisterInstance(context).AsSelf();
         containerBuilder.RegisterInstance(jwt).AsImplementedInterfaces();
     });
@@ -121,9 +124,11 @@ try
         {
             ValidateIssuer = true,
             ValidateAudience = true,
+            ValidateLifetime = true,
             ValidAudience = builder.Configuration["Jwt:Audience"],
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            ClockSkew = TimeSpan.FromHours(8)
         };
     });
     builder.Services.AddCors(options =>

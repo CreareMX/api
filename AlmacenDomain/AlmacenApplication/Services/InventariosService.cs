@@ -1,84 +1,112 @@
-﻿using AlmacenApplication.Dtos;
+﻿using AlmacenApplication.Dtos.Kardex;
 using AlmacenApplication.Interfaces;
-using AutoMapper;
-using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
-using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Warehouse;
 
 namespace AlmacenApplication.Services
 {
     public class InventariosService : IInventariosService
     {
-        readonly IEntradaAlmacenService _entradaAlmacen;
-        readonly ISalidaAlmacenService _salidaAlmacen;
-        readonly IAlmacenService _almacenService;
+        readonly IKardexRepository _repository;
         readonly IEstadoService _estadoService;
-        readonly IProductoService _productoService;
-        readonly IUnidadService _unidadService;
-        readonly IMapper _mapper;
 
-        public InventariosService(IEntradaAlmacenService entradaAlmacen, ISalidaAlmacenService salidaAlmacen, IAlmacenService almacenService, 
-            IEstadoService estadoService, IProductoService productoService, IUnidadService unidadService, IMapper mapper)
+        public InventariosService(IEstadoService estadoService, IKardexRepository repository)
         {
-            _entradaAlmacen = entradaAlmacen;
-            _salidaAlmacen = salidaAlmacen;
-            _almacenService = almacenService;
+            _repository = repository;
             _estadoService = estadoService;
-            _productoService = productoService;
-            _unidadService = unidadService;
-            _mapper = mapper;
         }
 
         public KardexDto ObtenerKardex(DateTime fecha, long idAlmacen)
         {
-            var estadoActivo = _estadoService.PorSeccion("almacen").FirstOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase)) ?? 
-                throw new Exception("No se ha ocnfigurado un estado ACTIVO para la sección ALMACEN.");
-            var almacen = _almacenService.GetById(idAlmacen) ?? throw new Exception($"No existe el almacen con ID: {idAlmacen}.");
-            var entradas = _entradaAlmacen.PorAlmacen(idAlmacen).Where(e => e.IdEstado == estadoActivo.Id).ToList();
-            var salidas = _salidaAlmacen.PorAlmacen(idAlmacen).Where(s => s.IdEstado == estadoActivo.Id).ToList();
+            var estadoEntrada = _estadoService.PorSeccion("ENTRADA DE ALMACEN")?.FirstOrDefault(e => e.Nombre.Equals("AUTORIZADO", StringComparison.InvariantCultureIgnoreCase));
+            var estadoSalida = _estadoService.PorSeccion("SALIDA DE ALMACEN")?.FirstOrDefault(e => e.Nombre.Equals("AUTORIZADO", StringComparison.InvariantCultureIgnoreCase));
 
-            var idProductos = entradas.Select(e => $"{e.IdProducto}-{e.IdUnidad}").ToList();
-            idProductos.AddRange(salidas.Select(s => $"{s.IdProducto}-{s.IdUnidad}"));
-            idProductos = idProductos.Distinct().ToList();
+            if (estadoEntrada == null)
+                throw new Exception("No existe un estado AUTORIZADO para la seccion ENTRADA DE ALMACEN.");
 
-            var kardex = new KardexDto(fecha, almacen);
-            foreach(var idProducto in idProductos)
+            if (estadoSalida == null)
+                throw new Exception("No existe un estado AUTORIZADO para la seccion SALIDA DE ALMACEN.");
+
+            var kardex = _repository.GetKardex(idAlmacen, fecha, estadoEntrada.Id.Value, estadoSalida.Id.Value);
+            if (kardex.Count <= 0)
+                return null;
+
+            var result = new KardexDto(fecha, new ElementoKardexDto(kardex.First().IdAlmacen, kardex.First().Almacen));
+            result.Detalles = kardex
+                .GroupBy(k => new { k.IdProducto, k.IdUnidad })
+                .Select(k => {
+                    var detalle = new DetalleKardexDto();
+                    detalle.Entradas = k.Where(itm => itm.FechaEntrada.HasValue)
+                                        .Select(itm => new MovimientoKardexDto
+                                        {
+                                            IdProducto = itm.IdProducto,
+                                            IdAlmacen = itm.IdAlmacen,
+                                            IdUnidad = itm.IdUnidad,
+                                            Cantidad = itm.Entrada.Value,
+                                            Fecha = itm.FechaEntrada.Value,
+                                            Concepto = new ElementoKardexDto(itm.IdConcepto, itm.Concepto),
+                                            Estado = new ElementoKardexDto(itm.IdEstado, itm.Estado)
+                                        }).ToList();
+
+                    detalle.Salidas = k.Where(itm => itm.FechaSalida.HasValue).Select(itm => new MovimientoKardexDto
+                    {
+                        IdProducto = itm.IdProducto,
+                        IdAlmacen = itm.IdAlmacen,
+                        IdUnidad = itm.IdUnidad,
+                        Cantidad = itm.Salida.Value,
+                        Fecha = itm.FechaSalida.Value,
+                        Concepto = new ElementoKardexDto(itm.IdConcepto, itm.Concepto),
+                        Estado = new ElementoKardexDto(itm.IdEstado, itm.Estado)
+                    }).ToList();
+
+                    detalle.Producto = new ElementoKardexDto(k.First().IdProducto, k.First().Producto);
+                    detalle.Unidad = new ElementoKardexDto(k.First().IdUnidad, k.First().Unidad);
+                    detalle.Existencia = detalle.Entradas.Sum(e => e.Cantidad) - detalle.Salidas.Sum(e => e.Cantidad);
+
+                    return detalle;
+                }).ToList();
+
+            foreach(var detalle in result.Detalles.Where(d => d.Existencia <= 0))
             {
-                var ids = idProducto.Split('-').Select(id => long.Parse(id));
-                var detalle = CreaDetalle(ids.First(), ids.Last(), fecha, entradas, salidas);
-                if (detalle.Existencia < 0)
-                    kardex.ExistenciasNegativas.Add(new Tuple<ProductoDto, UnidadDto>(detalle.Producto, detalle.Unidad));
-                else if (detalle.Existencia == 0)
-                    kardex.SinExistencias.Add(new Tuple<ProductoDto, UnidadDto>(detalle.Producto, detalle.Unidad));
-
-                kardex.Detalles.Add(detalle);
+                if (detalle.Existencia == 0)
+                    result.SinExistencias.Add(new Tuple<ElementoKardexDto, ElementoKardexDto>(detalle.Producto, detalle.Unidad));
+                else
+                    result.ExistenciasNegativas.Add(new Tuple<ElementoKardexDto, ElementoKardexDto>(detalle.Producto, detalle.Unidad));
             }
 
-            return kardex;
+            _repository.ClearTracker(true);
+
+            return result;
         }
 
-        private DetalleKardexDto CreaDetalle(long idProducto, long idUnidad, DateTime fecha, List<EntradaAlmacenDto> entradas, List<SalidaAlmacenDto> salidas)
+        public KardexDto ObtenerBajoStock(DateTime fecha, long idAlmacen)
         {
-            var detalle = new DetalleKardexDto();
-            var entradasProducto = entradas.Where(e => e.IdProducto == idProducto && e.IdUnidad == idUnidad && e.FechaEntrada <= fecha);
-            var salidasProducto = salidas.Where(s => s.IdProducto == idProducto && s.IdUnidad == idUnidad && s.FechaSalida <= fecha);
-            if (entradasProducto == null)
-            {
-                var salida = salidasProducto.First();
-                detalle.Producto = _productoService.GetById(salida.IdProducto);
-                detalle.Unidad = _unidadService.GetById(salida.IdUnidad);
-            }
-            else
-            {
-                var entrada = entradasProducto.First();
-                detalle.Producto = _productoService.GetById(entrada.IdProducto);
-                detalle.Unidad = _unidadService.GetById(entrada.IdUnidad);
-            }
+            throw new NotImplementedException();
+            //var estadoActivo = _estadoService.PorSeccion("almacen").FirstOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase)) ??
+            //    throw new Exception("No se ha ocnfigurado un estado ACTIVO para la sección ALMACEN.");
+            //var almacen = _almacenService.GetById(idAlmacen) ?? throw new Exception($"No existe el almacen con ID: {idAlmacen}.");
+            //var entradas = _entradaAlmacen.PorAlmacen(idAlmacen).Where(e => e.IdEstado == estadoActivo.Id).ToList();
+            //var salidas = _salidaAlmacen.PorAlmacen(idAlmacen).Where(s => s.IdEstado == estadoActivo.Id).ToList();
 
-            detalle.Entradas.AddRange(entradasProducto);
-            detalle.Salidas.AddRange(salidasProducto);
-            detalle.Existencia = entradas.Sum(e => e.Cantidad) - salidas.Sum(s => s.Cantidad);
-            return detalle;
+            //var idProductos = entradas.Select(e => $"{e.IdProducto}-{e.IdUnidad}").ToList();
+            //idProductos.AddRange(salidas.Select(s => $"{s.IdProducto}-{s.IdUnidad}"));
+            //idProductos = idProductos.Distinct().ToList();
+
+            //var kardex = new KardexDto(fecha, almacen);
+            //foreach (var idProducto in idProductos)
+            //{
+            //    var ids = idProducto.Split('-').Select(id => long.Parse(id));
+            //    var detalle = CreaDetalle(ids.First(), ids.Last(), fecha, entradas, salidas, true);
+            //    if (detalle.Existencia < 0)
+            //        kardex.ExistenciasNegativas.Add(new Tuple<ProductoDto, UnidadDto>(detalle.Producto, detalle.Unidad));
+            //    else if (detalle.Existencia == 0)
+            //        kardex.SinExistencias.Add(new Tuple<ProductoDto, UnidadDto>(detalle.Producto, detalle.Unidad));
+
+            //    kardex.Detalles.Add(detalle);
+            //}
+            //_repository.ClearTracker(true);
+
+            //return kardex;
         }
     }
 }

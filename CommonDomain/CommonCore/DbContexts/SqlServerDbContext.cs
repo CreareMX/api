@@ -7,9 +7,11 @@ namespace CommonCore.DbContexts
     {
         private List<Assembly> assemblies;
         public SqlServerDbContext(DbContextOptions<SqlServerDbContext> options) : base(options)
-        {
-            assemblies = new List<Assembly>();
-            assemblies.Add(this.GetType().Assembly);
+        {            
+            assemblies = new List<Assembly>
+            {
+                this.GetType().Assembly
+            };
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,5 +22,10 @@ namespace CommonCore.DbContexts
         }
 
         public void AddConfigurations(Assembly assembly) => assemblies.Add(assembly);
+        public void DisableLazyLoading()
+        {
+            this.ChangeTracker.LazyLoadingEnabled = false;
+            this.ChangeTracker.AutoDetectChangesEnabled = false;
+        }
     }
 }

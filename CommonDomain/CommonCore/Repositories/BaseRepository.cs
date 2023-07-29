@@ -27,14 +27,38 @@ namespace CommonCore.Repositories
         public virtual void Update(E entity) => Context.Update(entity);
         public virtual void Delete(E entity) => Context.Remove(entity);
 
-        public virtual IList<E> GetAll() => Context.Set<E>().Where(e => e.Activo).ToList();
+        public virtual IList<E> GetAll()
+        {
+            var result = Context.Set<E>().AsNoTracking().Where(e => e.Activo).ToList();
+            ClearTracker(true);
+            return result;
+        }
 
-        public virtual E GetById(T id) => Context.Set<E>().FirstOrDefault(e => e.Id.ToString() == id.ToString() && e.Activo);
+        public virtual E GetById(T id)
+        {
+            var result = Context.Set<E>().AsNoTracking().FirstOrDefault(e => e.Id.ToString() == id.ToString() && e.Activo);
+            ClearTracker(true);
+            return result;
+        }
 
-        public void SaveChanges() => Context.SaveChanges();
+        public void SaveChanges()
+        {
+            Context.SaveChanges();
+            ClearTracker(true);
+        }
 
-        public virtual E GetByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().FirstOrDefault(criteria.GetExpression());
+        public virtual E GetByCriteria(IBaseCriteria<E, T> criteria)
+        {
+            var result = Context.Set<E>().AsNoTracking().FirstOrDefault(criteria.GetExpression());
+            ClearTracker(true);
+            return result;
+        }
 
-        public virtual IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria) => Context.Set<E>().Where(criteria.GetExpression()).ToList();
+        public virtual IList<E> GetListByCriteria(IBaseCriteria<E, T> criteria)
+        {
+            var result = Context.Set<E>().AsNoTracking().Where(criteria.GetExpression()).ToList();
+            ClearTracker(true);
+            return result;
+        }
     }
 }

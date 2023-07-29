@@ -1,8 +1,8 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
 using AutoMapper;
+using CommonApplication.Interfaces;
 using CommonCore.Entities.Warehouse;
-using CommonCore.Interfaces.Repositories.Catalogs;
 using CommonCore.Interfaces.Repositories.Warehouse;
 using CommonCore.Services;
 
@@ -12,14 +12,14 @@ namespace AlmacenApplication.Services
     {
         readonly IEntradaAlmacenService _entradaAlmacen;
         readonly ISalidaAlmacenService _salidaAlmacen;
-        readonly IPersonaRepository _personaService;
+        readonly IUsuarioService _usuarioService;
 
         public TransferenciaService(ITransferenciaRepository repository, IEntradaAlmacenService entradaAlmacen, ISalidaAlmacenService salidaAlmacen, 
-            IPersonaRepository personaService, IMapper mapper) : base(repository, mapper)
+            IUsuarioService usuarioService, IMapper mapper) : base(repository, mapper)
         {
             _entradaAlmacen = entradaAlmacen;
             _salidaAlmacen = salidaAlmacen;
-            _personaService = personaService;
+            _usuarioService = usuarioService;
         }
 
         protected override void Validaciones(TransferenciaDto dto)
@@ -30,7 +30,7 @@ namespace AlmacenApplication.Services
             var salida = this._salidaAlmacen.GetById(dto.IdSalidaAlmacen) ?? throw new Exception("No se ha selecionado una salida de almancén.");
             dto.IdSalidaAlmacen = salida.Id.Value;
 
-            var personaTransfiere = this._personaService.GetById(dto.IdUsuarioTransfiere) ?? throw new Exception("No se ha selecionado un usuario de transferencia.");
+            var personaTransfiere = this._usuarioService.GetById(dto.IdUsuarioTransfiere) ?? throw new Exception("No se ha selecionado un usuario de transferencia.");
             dto.IdUsuarioTransfiere = personaTransfiere.Id.Value;
 
             if (dto.FechaTranferencia > DateTime.Now)

@@ -43,8 +43,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBase
 	ProjectSection(SolutionItems) = preProject
 		DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql = DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql
 		DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql = DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql
+		DataBaseScripts\ADD FIELD id_sucursal TO almacenes - usuarios.sql = DataBaseScripts\ADD FIELD id_sucursal TO almacenes - usuarios.sql
 		DataBaseScripts\ADD TABLE tipos_precios.sql = DataBaseScripts\ADD TABLE tipos_precios.sql
 		DataBaseScripts\CREATE TABLE conceptos.sql = DataBaseScripts\CREATE TABLE conceptos.sql
+		DataBaseScripts\CREATE TABLE configuraciones.sql = DataBaseScripts\CREATE TABLE configuraciones.sql
 		DataBaseScripts\CREATE TABLE transferencias.sql = DataBaseScripts\CREATE TABLE transferencias.sql
 		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
 	EndProjectSection
