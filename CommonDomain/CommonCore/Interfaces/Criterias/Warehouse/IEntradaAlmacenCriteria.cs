@@ -1,5 +1,4 @@
 ﻿using CommonCore.Entities.Warehouse;
-using CommonCore.Interfaces.Criterias;
 
 namespace CommonCore.Interfaces.Criterias.Warehouse
 {

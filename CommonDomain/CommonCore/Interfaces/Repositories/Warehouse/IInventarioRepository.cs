@@ -2,7 +2,7 @@
 
 namespace CommonCore.Interfaces.Repositories.Warehouse
 {
-    public interface IEntradaAlmacenRepository : IRepository<EntradaAlmacen, long>
+    public interface IInventarioRepository : IRepository<Inventario, long>
     {
     }
 }

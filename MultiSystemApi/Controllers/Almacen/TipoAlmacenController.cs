@@ -10,7 +10,7 @@ namespace MultiSystemApi.Controllers.Almacen
     /// Controlador del API de tipos de almacen
     /// </summary>
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/Almacen/[controller]")]
     [ApiController]
     public class TiposAlmacenController : ControllerBase
     {

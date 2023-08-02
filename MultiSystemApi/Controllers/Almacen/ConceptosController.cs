@@ -10,7 +10,7 @@ namespace MultiSystemApi.Controllers.Almacen
     /// Controlador del API de Conceptos
     /// </summary>
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/Almacen/[controller]")]
     [ApiController]
     public class ConceptosController : ControllerBase
     {

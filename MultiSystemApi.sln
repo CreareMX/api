@@ -47,7 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBase
 		DataBaseScripts\ADD TABLE tipos_precios.sql = DataBaseScripts\ADD TABLE tipos_precios.sql
 		DataBaseScripts\CREATE TABLE conceptos.sql = DataBaseScripts\CREATE TABLE conceptos.sql
 		DataBaseScripts\CREATE TABLE configuraciones.sql = DataBaseScripts\CREATE TABLE configuraciones.sql
+		DataBaseScripts\CREATE TABLE gastos_generales_fijos.SQL = DataBaseScripts\CREATE TABLE gastos_generales_fijos.SQL
+		DataBaseScripts\CREATE TABLE inventarios.sql = DataBaseScripts\CREATE TABLE inventarios.sql
 		DataBaseScripts\CREATE TABLE transferencias.sql = DataBaseScripts\CREATE TABLE transferencias.sql
+		DataBaseScripts\CREATE VIEW kardex_vw.sql = DataBaseScripts\CREATE VIEW kardex_vw.sql
 		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
 	EndProjectSection
 EndProject

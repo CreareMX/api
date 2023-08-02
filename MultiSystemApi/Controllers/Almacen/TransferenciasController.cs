@@ -10,7 +10,7 @@ namespace MultiSystemApi.Controllers.Transferencia
     /// Controlador del API de Transferencias
     /// </summary>
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/Almacen/[controller]")]
     [ApiController]
     public class TransferenciasController : ControllerBase
     {
