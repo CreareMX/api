@@ -1,5 +1,5 @@
 ﻿using CommonApplication.Dtos;
-using ContabilidadCore.Interfaces.Entities;
+using CommonCore.Interfaces.Entities.Accounting;
 
 namespace ContabilidadApplication.Dtos
 {

@@ -8,7 +8,7 @@ namespace CommonInfraestructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Producto> builder)
         {
-            builder.ToTable("Productos");
+            builder.ToTable("productos");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("Id").IsRequired();

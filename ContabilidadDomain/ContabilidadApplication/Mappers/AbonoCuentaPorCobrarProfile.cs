@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using CommonCore.Entities.Accounting;
 using ContabilidadApplication.Dtos;
-using ContabilidadCore.Entities;
 
 namespace ContabilidadApplication.Mappers
 {

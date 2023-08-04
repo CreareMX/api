@@ -1,6 +1,7 @@
 ﻿using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
-using EssentialCore.Shared;
+using CommonCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Compras
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Compras
     /// <summary>
     /// Controlador del API de Detalles de Ordenes de Compras
     /// </summary>
+    [Authorize]
     [Route("api/Compras/[controller]")]
     [ApiController]
     public class DetallesOrdenesComprasController : ControllerBase
@@ -34,6 +36,13 @@ namespace MultiSystemApi.Controllers.Compras
         /// <returns>Detalles de Ordenes de Compras</returns>
         [HttpGet("all")]
         public List<DetalleOrdenCompraDto> GetAll() => Service.GetAll().ToList();
+        /// <summary>
+        /// Obtiene toda la lista de Detalles de Ordenes de Compras
+        /// <param name="idOrdenCompra">Identificador de la orden de compra</param>
+        /// </summary>
+        /// <returns>Detalles de Ordenes de Compras</returns>
+        [HttpGet("ordencompra/{idOrdenCompra}")]
+        public List<DetalleOrdenCompraDto> GetByOrdenCompra(long idOrdenCompra) => Service.GetByOrdenCompra(idOrdenCompra).ToList();
         /// <summary>
         /// Crea una nueva Detalle de Orden de Compra
         /// </summary>

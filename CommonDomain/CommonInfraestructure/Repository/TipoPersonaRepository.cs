@@ -1,7 +1,7 @@
-﻿using CommonCore.Entities;
-using CommonCore.Interfaces.Repositories;
-using EssentialCore.DbContexts;
-using EssentialCore.Repositories;
+﻿using CommonCore.Entities.Types;
+using CommonCore.Interfaces.Repositories.Types;
+using CommonCore.DbContexts;
+using CommonCore.Repositories;
 
 namespace CommonInfraestructure.Repository
 {

@@ -1,5 +1,5 @@
-﻿using AlmacenCore.Interfaces.Entities;
-using CommonApplication.Dtos;
+﻿using CommonApplication.Dtos;
+using CommonCore.Interfaces.Entities.Warehouse;
 
 namespace AlmacenApplication.Dtos
 {
@@ -14,5 +14,9 @@ namespace AlmacenApplication.Dtos
         public UnidadDto Unidad { get; set; }
         public decimal Cantidad { get; set; }
         public DateTime FechaSalida { get; set; }
+        public long IdEstado { get; set; }
+        public EstadoDto Estado { get; set; }
+        public long IdConcepto { get; set; }
+        public ConceptoDto Concepto { get; set; }
     }
 }

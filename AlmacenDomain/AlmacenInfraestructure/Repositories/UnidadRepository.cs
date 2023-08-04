@@ -1,7 +1,7 @@
-﻿using AlmacenCore.Entities;
-using AlmacenCore.Interfaces.Repositories;
-using EssentialCore.DbContexts;
-using EssentialCore.Repositories;
+﻿using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Catalogs;
+using CommonCore.DbContexts;
+using CommonCore.Repositories;
 
 namespace AlmacenInfraestructure.Repositories
 {

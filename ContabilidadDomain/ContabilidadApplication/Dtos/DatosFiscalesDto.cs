@@ -1,5 +1,5 @@
-﻿using CommonCore.Entities;
-using ContabilidadCore.Interfaces.Entities;
+﻿using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Entities.Catalogs;
 
 namespace ContabilidadApplication.Dtos
 {

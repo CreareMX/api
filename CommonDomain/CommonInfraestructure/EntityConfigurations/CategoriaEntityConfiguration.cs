@@ -1,4 +1,4 @@
-﻿using CommonCore.Entities;
+﻿using CommonCore.Entities.Catalogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,7 +8,7 @@ namespace CommonInfraestructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-            builder.ToTable("Categorias");
+            builder.ToTable("categorias");
             builder.HasKey(x => x.Id);
 
             builder.Property(p => p.Id).HasColumnName("id").IsRequired();

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using CommonApplication.Interfaces;
+using CommonCore.Entities.Accounting;
+using CommonCore.Interfaces.Repositories.Accounting;
 using ContabilidadApplication.Dtos;
 using ContabilidadApplication.Interfaces;
-using ContabilidadCore.Entities;
-using ContabilidadCore.Interfaces.Reporitories;
-using EssentialCore.Services;
+using CommonCore.Services;
 
 namespace ContabilidadApplication.Services
 {

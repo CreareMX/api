@@ -1,4 +1,5 @@
-﻿using EssentialCore.Shared;
+﻿using CommonCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RRHHApplication.Dtos;
 using RRHHApplication.Interfaces;
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.RRHH
     /// <summary>
     /// Controlador del API de puesto
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PuestoController : ControllerBase

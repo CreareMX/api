@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-    <ProjectReference Include="..\RRHHCore\RRHHCore.csproj" />
+    <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
   </ItemGroup>
 
 </Project>

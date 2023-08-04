@@ -1,6 +1,7 @@
 ﻿using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
-using EssentialCore.Shared;
+using CommonCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Compras
@@ -8,6 +9,7 @@ namespace MultiSystemApi.Controllers.Compras
     /// <summary>
     /// Controlador del API de Ordenes de Compras
     /// </summary>
+    [Authorize]
     [Route("api/Compras/[controller]")]
     [ApiController]
     public class OrdenesComprasController : ControllerBase
@@ -34,6 +36,21 @@ namespace MultiSystemApi.Controllers.Compras
         /// <returns>Ordenes de Compras</returns>
         [HttpGet("all")]
         public List<OrdenCompraDto> GetAll() => Service.GetAll().ToList();
+        /// <summary>
+        /// Obtiene las ordenes de compra de un almacén en específico
+        /// </summary>
+        /// <param name="idAlmacen">Identificador único de almacén</param>
+        /// <returns>Ordenes de compras</returns>
+        [HttpGet("poralmacen/{idAlmacen}")] 
+        public List<OrdenCompraDto> GetOrdenesByAlmacen(long idAlmacen) => Service.OrdenesPorAlmacen(idAlmacen).ToList();
+        /// <summary>
+        /// Obtiene las ordenes de compra con estatus de requisición de una sucursal en específico
+        /// </summary>
+        /// <param name="idSucursal">Identificador único de sucursal</param>
+        /// <returns>Ordenes de compras</returns>
+        [HttpGet("requisiciones/{idSucursal}")]
+        public List<OrdenCompraDto> RequisicionesPorSucursal(long idSucursal) => Service.RequisicionesPorSucursal(idSucursal).ToList();
+
         /// <summary>
         /// Crea una nueva Orden de Compra
         /// </summary>
@@ -74,6 +91,27 @@ namespace MultiSystemApi.Controllers.Compras
                 return BadRequest(ExceptionHelper.GetFullMessage(ex));
             }
         }
+        /// <summary>
+        /// Cancela una orden de compra
+        /// </summary>
+        /// <param name="idOrdenCompra">Identificador único de la requisición</param>
+        /// <param name="idEstado">Identificador único de la estado de la OC</param>
+        /// <param name="idUser">Identificador único del usuario que cancela</param>
+        /// <returns></returns>
+        [HttpPut("estado/{idOrdenCompra}/{idEstado}/{idUser}")]
+        public IActionResult UpdateStatus(long idOrdenCompra, long idEstado, long idUser)
+        {
+            try
+            {
+                Service.UpdateStatus(idOrdenCompra, idEstado, idUser);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
+            }
+        }
+
         /// <summary>
         /// Desactiva una Orden de Compra existente
         /// </summary>

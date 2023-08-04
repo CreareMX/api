@@ -11,14 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Development.pubxml" />
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Local.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
@@ -27,26 +34,30 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AlmacenDomain\AlmacenApplication\AlmacenApplication.csproj" />
-    <ProjectReference Include="..\AlmacenDomain\AlmacenCore\AlmacenCore.csproj" />
     <ProjectReference Include="..\AlmacenDomain\AlmacenInfraestructure\AlmacenInfraestructure.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonCore\CommonCore.csproj" />
     <ProjectReference Include="..\CommonDomain\CommonInfraestructure\CommonInfraestructure.csproj" />
-    <ProjectReference Include="..\ComprasApplication\ComprasApplication.csproj" />
-    <ProjectReference Include="..\ComprasDomain\ComprasCore\ComprasCore.csproj" />
-    <ProjectReference Include="..\ComprasInfraestructure\ComprasInfraestructure.csproj" />
+    <ProjectReference Include="..\ComprasDomain\ComprasApplication\ComprasApplication.csproj" />
+    <ProjectReference Include="..\ComprasDomain\ComprasInfraestructure\ComprasInfraestructure.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
-    <ProjectReference Include="..\ContabilidadDomain\ContabilidadCore\ContabilidadCore.csproj" />
     <ProjectReference Include="..\ContabilidadDomain\ContabilidadInfraestructure\ContabilidadInfraestructure.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialApplication\EssentialApplication.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-    <ProjectReference Include="..\EssentialDomain\EssentialInfraestructure\EssentialInfraestructure.csproj" />
     <ProjectReference Include="..\RRHHDomain\RRHHApplication\RRHHApplication.csproj" />
-    <ProjectReference Include="..\RRHHDomain\RRHHCore\RRHHCore.csproj" />
     <ProjectReference Include="..\RRHHDomain\RRHHInfraestructure\RRHHInfraestructure.csproj" />
     <ProjectReference Include="..\VentasDomain\VentasApplication\VentasApplication.csproj" />
-    <ProjectReference Include="..\VentasDomain\VentasCore\VentasCore.csproj" />
     <ProjectReference Include="..\VentasDomain\VentasInfraestructure\VentasInfraestructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\launchSettings - Copia.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Ventas\" />
   </ItemGroup>
 
 </Project>

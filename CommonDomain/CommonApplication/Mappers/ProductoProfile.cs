@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CommonApplication.Dtos;
-using CommonCore.Entities;
+using CommonCore.Entities.Catalogs;
 
-namespace CommonApplication.Mappers
+namespace ComprasApplication.Mappers
 {
     public class ProductoProfile : Profile
     {

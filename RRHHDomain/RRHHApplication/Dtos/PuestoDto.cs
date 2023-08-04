@@ -1,4 +1,4 @@
-﻿using RRHHCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities.Rrhh;
 
 namespace RRHHApplication.Dtos
 {

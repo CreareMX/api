@@ -1,0 +1,59 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
+      - qa
+      - develop
+      - feature/*
+
+pool: 'Azure Pipelines'
+
+variables:
+  solution: 'MultiSystemApi.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGets'
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Project'
+  inputs:
+    command: 'build'
+    arguments: '$(solution)'
+- task: VSTest@2
+  displayName: 'Running Tests'
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    diagnosticsEnabled: true
+    codeCoverageEnabled: true
+    platform: '$(buildPlatform)'
+    configuration: '$(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing'
+  inputs:
+    command: publish
+    publishWebProjects: True
+    projects: |
+      Sources/NetCore6/*.csproj
+      !**/*Tests*.csproj
+    arguments: '--configuration $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)'
+    modifyOutputPath: true
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Creating Artifact'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'CreareAPI'

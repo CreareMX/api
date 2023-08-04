@@ -1,6 +1,7 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
-using EssentialCore.Shared;
+using CommonCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Almacen
@@ -8,7 +9,8 @@ namespace MultiSystemApi.Controllers.Almacen
     /// <summary>
     /// Controlador del API de Salidas de almacen
     /// </summary>
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/Almacen/[controller]")]
     [ApiController]
     public class SalidasAlmacenController : ControllerBase
     {
@@ -67,6 +69,26 @@ namespace MultiSystemApi.Controllers.Almacen
             try
             {
                 Service.Update(dto, idUser);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ExceptionHelper.GetFullMessage(ex));
+            }
+        }
+        /// <summary>
+        /// Actualiza el estatus de una entrada de almacen
+        /// </summary>
+        /// <param name="idEntrada">Identificador de la entrada</param>
+        /// <param name="idEstado">Identificador del nuevo estado de la entrada</param>
+        /// <param name="idUsuario">Identificador del usuario que modifica el registro</param>
+        /// <returns>Success</returns>
+        [HttpPut("actualiza/estatus/{idEntrada}/{idEstado}/{idUsuario}")]
+        public IActionResult UpdateStatus(long idEntrada, long idEstado, long idUsuario)
+        {
+            try
+            {
+                Service.ActualizaEstado(idEntrada, idEstado, idUsuario);
                 return Ok();
             }
             catch (Exception ex)

@@ -1,6 +1,6 @@
 ﻿using AlmacenApplication.Dtos;
-using AlmacenCore.Entities;
 using AutoMapper;
+using CommonCore.Entities.Catalogs;
 
 namespace AlmacenApplication.Mappers
 {

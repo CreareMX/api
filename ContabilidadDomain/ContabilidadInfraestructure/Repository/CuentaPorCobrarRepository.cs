@@ -1,7 +1,7 @@
-﻿using ContabilidadCore.Entities;
-using ContabilidadCore.Interfaces.Reporitories;
-using EssentialCore.DbContexts;
-using EssentialCore.Repositories;
+﻿using CommonCore.Entities.Accounting;
+using CommonCore.Interfaces.Repositories.Accounting;
+using CommonCore.DbContexts;
+using CommonCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadInfraestructure.Repository

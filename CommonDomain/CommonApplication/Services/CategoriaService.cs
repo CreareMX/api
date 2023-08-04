@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using CommonApplication.Dtos;
 using CommonApplication.Interfaces;
-using CommonCore.Entities;
-using CommonCore.Interfaces.Repositories;
-using EssentialCore.Services;
+using CommonCore.Entities.Catalogs;
+using CommonCore.Interfaces.Repositories.Catalogs;
+using CommonCore.Services;
 
 namespace CommonApplication.Services
 {

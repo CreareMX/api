@@ -1,4 +1,4 @@
-﻿using CommonCore.Interfaces.Entities;
+﻿using CommonCore.Interfaces.Entities.Catalogs;
 
 namespace CommonApplication.Dtos
 {
@@ -11,6 +11,7 @@ namespace CommonApplication.Dtos
         public string NumeroSerie { get; set; }
         public long IdCategoria { get; set; }
         public CategoriaDto Categoria { get; set; }
+        public List<PrecioDto> Precios { get; set; }
         public long? Id { get; set; }
     }
 }

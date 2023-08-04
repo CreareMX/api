@@ -1,5 +1,5 @@
 ﻿using CommonApplication.Dtos;
-using ContabilidadCore.Interfaces.Entities;
+using CommonCore.Interfaces.Entities.Catalogs;
 
 namespace ContabilidadApplication.Dtos
 {
@@ -7,8 +7,8 @@ namespace ContabilidadApplication.Dtos
     {
         public long? Id { get; set; }
         public string Email { get; set; }
-        public long? idDatosFiscales { get; set; }
-        public long idTipoPersona { get; set; }
+        public long? IdDatosFiscales { get; set; }
+        public long IdTipoPersona { get; set; }
         public string Nombre { get; set; }
         public string SitioWeb { get; set; }
         public string Telefono { get; set; }

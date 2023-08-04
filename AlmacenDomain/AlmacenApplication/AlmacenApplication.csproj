@@ -8,8 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CommonDomain\CommonApplication\CommonApplication.csproj" />
-    <ProjectReference Include="..\..\EssentialDomain\EssentialCore\EssentialCore.csproj" />
-    <ProjectReference Include="..\AlmacenCore\AlmacenCore.csproj" />
+    <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
   </ItemGroup>
 
 </Project>

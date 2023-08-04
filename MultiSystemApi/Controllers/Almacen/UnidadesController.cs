@@ -1,6 +1,7 @@
 ﻿using AlmacenApplication.Dtos;
 using AlmacenApplication.Interfaces;
-using EssentialCore.Shared;
+using CommonCore.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MultiSystemApi.Controllers.Almacen
@@ -8,7 +9,8 @@ namespace MultiSystemApi.Controllers.Almacen
     /// <summary>
     /// Controlador del API de Unidades
     /// </summary>
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/Almacen/[controller]")]
     [ApiController]
     public class UnidadesController : ControllerBase
     {
