@@ -1,5 +1,4 @@
-﻿using AlmacenApplication.Dtos;
-using AlmacenApplication.Dtos.Inventario;
+﻿using AlmacenApplication.Dtos.Inventario;
 using CommonCore.Shared;
 using InventarioApplication.Interfaces;
 using Microsoft.AspNetCore.Authorization;

@@ -24,23 +24,28 @@ namespace AlmacenInfraestructure.EntityConfigurations
 
             builder.HasOne(p => p.UsuarioCrea)
                 .WithMany()
-                .HasForeignKey(p => p.UsuarioCreaId);
+                .HasForeignKey(p => p.UsuarioCreaId)
+                .HasPrincipalKey(p => p.Id);
 
             builder.HasOne(p => p.UsuarioActualiza)
                 .WithMany()
-                .HasForeignKey(p => p.UsuarioActualizaId);
+                .HasForeignKey(p => p.UsuarioActualizaId)
+                .HasPrincipalKey(p => p.Id);
 
             builder.HasOne(p => p.EntradaAlmacen)
                 .WithMany()
-                .HasForeignKey(p => p.IdEntradaAlmacen);
+                .HasForeignKey(p => p.IdEntradaAlmacen)
+                .HasPrincipalKey(p => p.Id);
 
             builder.HasOne(p => p.SalidaAlmacen)
                 .WithMany()
-                .HasForeignKey(p => p.IdSalidaAlmacen);
+                .HasForeignKey(p => p.IdSalidaAlmacen)
+                .HasPrincipalKey(p => p.Id);
 
             builder.HasOne(p => p.UsuarioTransfiere)
                 .WithMany()
-                .HasForeignKey(p => p.IdUsuarioTransfiere);
+                .HasForeignKey(p => p.IdUsuarioTransfiere)
+                .HasPrincipalKey(p => p.Id);
         }
     }
 }

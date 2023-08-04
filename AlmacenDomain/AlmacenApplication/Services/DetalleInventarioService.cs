@@ -6,6 +6,7 @@ using CommonCore.Entities.Warehouse;
 using CommonCore.Interfaces.Repositories.Warehouse;
 using CommonCore.Services;
 using DetalleInventarioApplication.Interfaces;
+using InventarioApplication.Interfaces;
 
 namespace DetalleInventarioApplication.Services
 {
@@ -15,12 +16,15 @@ namespace DetalleInventarioApplication.Services
         readonly IUnidadService _unidadService;
         readonly IUsuarioService _usuarioService;
         readonly IRolService _rolService;
-        public DetalleInventarioService(IDetalleInventarioRepository repository, IProductoService productoService, IUnidadService unidadService, IMapper mapper, IUsuarioService usuarioService, IRolService rolService) : base(repository, mapper)
+        readonly IInventarioService _inventarioService;
+        public DetalleInventarioService(IDetalleInventarioRepository repository, IProductoService productoService, IUnidadService unidadService, IMapper mapper, 
+            IUsuarioService usuarioService, IRolService rolService, IInventarioService inventarioService) : base(repository, mapper)
         {
             _productoService = productoService;
             _unidadService = unidadService;
             _usuarioService = usuarioService;
             _rolService = rolService;
+            _inventarioService = inventarioService;
         }
 
         public override void Update(DetalleInventarioDto dto, long idUser) 
@@ -45,6 +49,10 @@ namespace DetalleInventarioApplication.Services
 
         protected override void Validaciones(DetalleInventarioDto dto)
         {
+            var inventario = _inventarioService.GetById(dto.IdInventario) ?? throw new Exception($"No existe el inventario ID: {dto.IdInventario}");
+            if (inventario.FechaFin.HasValue)
+                throw new Exception("No se pueden agregar detalles a inventarios cerrados.");
+
             var producto = _productoService.GetById(dto.IdProducto) ?? throw new Exception($"No existe un producto con ID: {dto.IdProducto}.");
             dto.IdProducto = producto.Id.Value;
 

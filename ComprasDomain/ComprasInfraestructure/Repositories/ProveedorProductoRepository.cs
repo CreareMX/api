@@ -29,6 +29,11 @@ namespace ComprasInfraestructure.Repositories
 
         public override IList<ProveedorProducto> GetListByCriteria(IBaseCriteria<ProveedorProducto, long> criteria) => 
             Context.Set<ProveedorProducto>()
+                .Include(pp => pp.Proveedor)
+                .ThenInclude(p => p.TipoPersona)
+                .Include(pp => pp.Proveedor)
+                .ThenInclude(p => p.DatosFiscales)
+                .Include(pp => pp.Costo)
                 .Include(pp => pp.Producto)
                 .ThenInclude(p => p.Categoria)
                 .Include(pp => pp.Producto)
@@ -37,8 +42,27 @@ namespace ComprasInfraestructure.Repositories
                 .Where(criteria.GetExpression())
                 .ToList();
 
+        public override ProveedorProducto GetByCriteria(IBaseCriteria<ProveedorProducto, long> criteria) =>
+            Context.Set<ProveedorProducto>()
+               .Include(pp => pp.Proveedor)
+                .ThenInclude(p => p.TipoPersona)
+                .Include(pp => pp.Proveedor)
+                .ThenInclude(p => p.DatosFiscales)
+                .Include(pp => pp.Costo)
+                .Include(pp => pp.Producto)
+                .ThenInclude(p => p.Categoria)
+                .Include(pp => pp.Producto)
+                .ThenInclude(p => p.Precios)
+                .ThenInclude(pr => pr.TipoPrecio)
+                .FirstOrDefault(criteria.GetExpression());
+
         public override IList<ProveedorProducto> GetAll() =>
             Context.Set<ProveedorProducto>()
+                .Include(pp => pp.Proveedor)
+                .ThenInclude(p => p.TipoPersona)
+                .Include(pp => pp.Proveedor)
+                .ThenInclude(p => p.DatosFiscales)
+                .Include(pp => pp.Costo)
                 .Include(pp => pp.Producto)
                 .ThenInclude(p => p.Categoria)
                 .Include(pp => pp.Producto)

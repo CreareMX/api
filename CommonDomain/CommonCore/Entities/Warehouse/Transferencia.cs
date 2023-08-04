@@ -11,7 +11,7 @@ namespace CommonCore.Entities.Warehouse
         public long IdSalidaAlmacen { get; set; }
         public SalidaAlmacen SalidaAlmacen { get; set; }
         public long IdUsuarioTransfiere { get; set; }
-        public Persona UsuarioTransfiere { get; set; }
+        public Usuario UsuarioTransfiere { get; set; }
         public DateTime FechaTranferencia { get; set; }
     }
 }

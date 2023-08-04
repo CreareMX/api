@@ -40,6 +40,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComprasDomain", "ComprasDomain", "{BA5A4689-70DC-4A8A-8EC1-856D54D418B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBaseScripts", "{60899E56-ABD1-411B-885F-43514F0391EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasInfraestructure", "ComprasDomain\ComprasInfraestructure\ComprasInfraestructure.csproj", "{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasApplication", "ComprasDomain\ComprasApplication\ComprasApplication.csproj", "{97C9CBA0-363F-4FED-989B-4221F89E3685}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "V1.0.0", "V1.0.0", "{A15FD3AB-805A-4DF4-9758-7A8C6A78C9F8}"
 	ProjectSection(SolutionItems) = preProject
 		DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql = DataBaseScripts\ADD FIELD id_almacen TO ordenes.sql
 		DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql = DataBaseScripts\ADD FIELD id_estado TO entradas-salidas almacen.sql
@@ -53,10 +59,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseScripts", "DataBase
 		DataBaseScripts\CREATE VIEW kardex_vw.sql = DataBaseScripts\CREATE VIEW kardex_vw.sql
 		DataBaseScripts\DataBase Main Structure.sql = DataBaseScripts\DataBase Main Structure.sql
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasInfraestructure", "ComprasDomain\ComprasInfraestructure\ComprasInfraestructure.csproj", "{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComprasApplication", "ComprasDomain\ComprasApplication\ComprasApplication.csproj", "{97C9CBA0-363F-4FED-989B-4221F89E3685}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,6 +140,7 @@ Global
 		{D4A38B93-8AA3-4833-884F-2F1B4FA5D65C} = {0618E389-25FE-4E68-9AD1-762D3FB921A8}
 		{D5151F16-23A0-47ED-A639-8A2BAB4EF7E5} = {BA5A4689-70DC-4A8A-8EC1-856D54D418B4}
 		{97C9CBA0-363F-4FED-989B-4221F89E3685} = {BA5A4689-70DC-4A8A-8EC1-856D54D418B4}
+		{A15FD3AB-805A-4DF4-9758-7A8C6A78C9F8} = {60899E56-ABD1-411B-885F-43514F0391EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B85928C-3671-4A6B-92DC-8127AAF5E6AD}

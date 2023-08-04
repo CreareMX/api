@@ -28,6 +28,13 @@ namespace ComprasInfraestructure.Repositories
                 .Where(criteria.GetExpression())
                 .ToList();
 
+        public override Producto GetByCriteria(IBaseCriteria<Producto, long> criteria) =>
+            Context.Set<Producto>()
+                .Include(p => p.Categoria)
+                .Include(p => p.Precios)
+                .ThenInclude(pr => pr.TipoPrecio)
+                .FirstOrDefault(criteria.GetExpression());
+
         public override IList<Producto> GetAll() =>
             Context.Set<Producto>()
                 .Include(p => p.Categoria)

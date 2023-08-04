@@ -33,6 +33,7 @@ namespace CommonCore.Services
 
             Repository.SaveChanges();
             Repository.ClearTracker(true);
+            entity = Repository.GetById((T)entity.Id);
             return Mapper.Map<D>(entity);
         }
 

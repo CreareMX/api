@@ -18,6 +18,7 @@ namespace CommonInfraestructure.Repositories
                                 (x.FechaEntrada.HasValue && x.FechaEntrada.Value.Date <= fechaLimite.Date) || 
                                 (x.FechaSalida.HasValue && x.FechaSalida.Value.Date <= fechaLimite.Date) &&
                                 (x.IdEstado == idEstadoEntrada || x.IdEstado == idEstadoSalida)
-                            )).ToList();
+                            ))
+                    .ToList();
     }
 }
