@@ -24,7 +24,10 @@ namespace ContabilidadInfraestructure.EntityConfigurations
             builder.Property(p => p.Domicilio).HasColumnName("domicilio").IsRequired(false);
             builder.Property(p => p.Colonia).HasColumnName("colonia").IsRequired(false);
             builder.Property(p => p.CodigoPostal).HasColumnName("codigo_postal").IsRequired();
-            builder.Property(p => p.IdEntidadFederativa).HasColumnName("id_entidad_federativa").IsRequired();
+            builder.Property(p => p.IdEntidadFederativa).HasColumnName("id_entidad_federativa").IsRequired(false);
+            builder.Property(p => p.RegimenFiscal).HasColumnName("regimen_fiscal").IsRequired();
+            builder.Property(p => p.UsoCFDi).HasColumnName("uso_cfdi").IsRequired(false);
+            builder.Property(p => p.Email).HasColumnName("email").IsRequired();
             builder.Property(p => p.Activo).HasColumnName("activo").IsRequired();
             builder.Property(p => p.FechaCreacion).HasColumnName("fecha_creacion").IsRequired();
             builder.Property(p => p.UsuarioCreaId).HasColumnName("id_usuario_creacion").IsRequired();

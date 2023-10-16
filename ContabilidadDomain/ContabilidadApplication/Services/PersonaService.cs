@@ -2,9 +2,9 @@
 using CommonApplication.Interfaces;
 using CommonCore.Entities.Catalogs;
 using CommonCore.Interfaces.Repositories.Catalogs;
+using CommonCore.Services;
 using ContabilidadApplication.Dtos;
 using ContabilidadApplication.Interfaces;
-using CommonCore.Services;
 
 namespace ContabilidadApplication.Services
 {
@@ -13,7 +13,7 @@ namespace ContabilidadApplication.Services
         private readonly ITipoPersonaService tipoPersonaService;
         private readonly IDatosFiscalesService datosFiscalesService;
 
-        public PersonaService(IPersonaRepository repository, ITipoPersonaService tipoPersonaService, 
+        public PersonaService(IPersonaRepository repository, ITipoPersonaService tipoPersonaService,
             IDatosFiscalesService datosFiscalesService, IMapper mapper) : base(repository, mapper)
         {
             this.tipoPersonaService = tipoPersonaService;
@@ -22,7 +22,7 @@ namespace ContabilidadApplication.Services
 
         public override PersonaDto Create(PersonaDto dto, long idUser)
         {
-            var tipoPersona = this.tipoPersonaService.GetById(dto.IdTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
+            var tipoPersona = this.tipoPersonaService.GetById(dto.IdTipoPersona) ?? throw new Exception("No se ha seleccionado un tipo de persona válido.");
 
             if (tipoPersona.EsPersonaMoral && dto.DatosFiscales == null)
                 throw new Exception("Una persona moral debe tener datos fiscales");
@@ -42,8 +42,8 @@ namespace ContabilidadApplication.Services
 
         public override void Update(PersonaDto dto, long idUser)
         {
-            var tipoPersona = this.tipoPersonaService.GetById(dto.IdTipoPersona) ?? throw new Exception("No se ha selecionado un tipo de persona válido.");
-            var persona = this.Repository.GetById(dto.Id.Value) ?? throw new Exception("No se ha selecionado el registro de la personas que desea actualizar.");
+            var tipoPersona = this.tipoPersonaService.GetById(dto.IdTipoPersona) ?? throw new Exception("No se ha seleccionado un tipo de persona válido.");
+            var persona = this.Repository.GetById(dto.Id.Value) ?? throw new Exception("No se ha seleccionado el registro de la personas que desea actualizar.");
             Repository.ClearTracker(true);
 
             if (tipoPersona.EsPersonaMoral && dto.DatosFiscales == null)
@@ -55,7 +55,7 @@ namespace ContabilidadApplication.Services
             persona.Nombre = dto.Nombre;
             persona.SitioWeb = dto.SitioWeb;
             persona.Telefono = dto.Telefono;
-                        
+
             persona.Update(idUser);
             persona.DatosFiscales?.Update(idUser);
 

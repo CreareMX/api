@@ -16,13 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CommonDomain\CommonApplication\CommonApplication.csproj" />
     <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Mappers\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\..\ContabilidadDomain\ContabilidadApplication\ContabilidadApplication.csproj" />
   </ItemGroup>
 
 </Project>

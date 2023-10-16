@@ -21,7 +21,7 @@ namespace AlmacenApplication.Services
 
         public EntradaAlmacenService(IEntradaAlmacenRepository repository, IProductoService productoService,
             IAlmacenService almacenService, IUnidadService unidadService, ISeccionService seccionService,
-            IEstadoService estadoService, IConceptoService conceptoService, IEntradaAlmacenCriteria entradaAlmacenCriteria, 
+            IEstadoService estadoService, IConceptoService conceptoService, IEntradaAlmacenCriteria entradaAlmacenCriteria,
             IMapper mapper) : base(repository, mapper)
         {
             this.productoService = productoService;
@@ -36,9 +36,9 @@ namespace AlmacenApplication.Services
         public void ActualizaEstado(long idEntrada, long idEstado, long idUsuario)
         {
             var entity = Repository.GetById(idEntrada) ?? throw new Exception($"No se ha encontrado la entrada con ID: {idEntrada}.");
-            var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la seccion ALMACEN.");
-            var estatus = this.estadoService.GetById(idEstado) ?? throw new Exception("No se ha selecionado un estado para la entrada.");
-            
+            var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la sección ALMACEN.");
+            var estatus = this.estadoService.GetById(idEstado) ?? throw new Exception("No se ha seleccionado un estado para la entrada.");
+
             if (estatus.IdSeccion != seccion.Id)
                 throw new Exception($"El estado {estatus.Nombre} no pertenece a la seccion {seccion.Nombre}.");
 
@@ -64,17 +64,17 @@ namespace AlmacenApplication.Services
         {
             base.Validaciones(dto);
 
-            var producto = this.productoService.GetById(dto.IdProducto) ?? throw new Exception("No se ha selecionado un producto.");
+            var producto = this.productoService.GetById(dto.IdProducto) ?? throw new Exception("No se ha seleccionado un producto.");
             dto.IdProducto = producto.Id.Value;
 
-            var almacen = this.almacenService.GetById(dto.IdAlmacen) ?? throw new Exception("No se ha selecionado un almancén.");
+            var almacen = this.almacenService.GetById(dto.IdAlmacen) ?? throw new Exception("No se ha seleccionado un almacén.");
             dto.IdAlmacen = almacen.Id.Value;
 
-            var unidad = this.unidadService.GetById(dto.IdUnidad) ?? throw new Exception("No se ha selecionado una unidad de producto.");
+            var unidad = this.unidadService.GetById(dto.IdUnidad) ?? throw new Exception("No se ha seleccionado una unidad de producto.");
             dto.IdUnidad = unidad.Id.Value;
 
-            var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la seccion ALMACEN.");
-            var estatus = this.estadoService.GetById(dto.IdEstado) ?? throw new Exception("No se ha selecionado un estado para la entrada.");
+            var seccion = seccionService.PorSeccion("ALMACEN") ?? throw new Exception("No se ha creado la sección ALMACEN.");
+            var estatus = this.estadoService.GetById(dto.IdEstado) ?? throw new Exception("No se ha seleccionado un estado para la entrada.");
             dto.IdEstado = estatus.Id.Value;
 
             if (estatus.IdSeccion != seccion.Id)

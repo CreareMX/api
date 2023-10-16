@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\..\CommonDomain\CommonCore\CommonCore.csproj" />
   </ItemGroup>
 
 </Project>

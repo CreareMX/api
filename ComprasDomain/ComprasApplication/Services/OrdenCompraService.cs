@@ -3,10 +3,10 @@ using CommonApplication.Interfaces;
 using CommonCore.Entities.Purchases;
 using CommonCore.Interfaces.Criterias.Purchases;
 using CommonCore.Interfaces.Repositories.Purchases;
+using CommonCore.Services;
 using ComprasApplication.Dtos;
 using ComprasApplication.Interfaces;
 using ContabilidadApplication.Interfaces;
-using CommonCore.Services;
 
 namespace ComprasApplication.Services
 {
@@ -18,7 +18,7 @@ namespace ComprasApplication.Services
         readonly IOrdenCompraCriteria ordenCompraCriteria;
 
         public OrdenCompraService(IOrdenCompraRepository repository, IOrdenCompraCriteria ordenCompraCriteria,
-            IPersonaService personaService, IEstadoService estadoService, 
+            IPersonaService personaService, IEstadoService estadoService,
             ISucursalService sucursalService, IMapper mapper) : base(repository, mapper)
         {
             this.personaService = personaService;
@@ -45,7 +45,7 @@ namespace ComprasApplication.Services
             ValidaOrdenCompra(dto);
 
             var estados = estadoService.GetAll();
-            var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("req_pendiente", StringComparison.InvariantCultureIgnoreCase)) ?? 
+            var estadoPendientePago = estados.SingleOrDefault(e => e.Nombre.Equals("req_pendiente", StringComparison.InvariantCultureIgnoreCase)) ??
                 throw new Exception("No se ha dado de alta el estado 'REQUISICION PENDIENTE' (req_pendiente) comuniquese con su administrador del sistema.");
             dto.IdEstado = estadoPendientePago.Id.Value;
 
@@ -55,9 +55,7 @@ namespace ComprasApplication.Services
         public override void Update(OrdenCompraDto dto, long idUser)
         {
             ValidaOrdenCompra(dto);
-            var ordenCompra = Repository.GetById(dto.Id.Value);
-            if (ordenCompra == null)
-                throw new Exception($"La orden de compra con ID {dto.Id} no ha sido localizada o bien ya no esta activa");
+            var ordenCompra = Repository.GetById(dto.Id.Value) ?? throw new Exception($"La orden de compra con ID {dto.Id} no ha sido localizada o bien ya no esta activa");
 
             Repository.ClearTracker(true);
 
@@ -84,7 +82,7 @@ namespace ComprasApplication.Services
         {
             var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
             var estadoAutorizado = estados.SingleOrDefault(e => e.Nombre.Equals("autorizado", StringComparison.InvariantCultureIgnoreCase)) ??
-                throw new Exception("No esiste un estado AUTORIZADO para la sección ORDENES DE COMPRA.");
+                throw new Exception("No existe un estado AUTORIZADO para la sección ORDENES DE COMPRA.");
 
             var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idAlmacen)).Where(oc => oc.IdEstado == estadoAutorizado.Id).ToList();
             if (results == null || results.Count == 0)
@@ -97,7 +95,7 @@ namespace ComprasApplication.Services
         {
             var estados = estadoService.PorSeccion("ORDENES DE COMPRA");
             var estadoRequisicion = estados.SingleOrDefault(e => e.Nombre.Equals("requisicion", StringComparison.InvariantCultureIgnoreCase)) ??
-                throw new Exception("No esiste un estado REQUISICION para la sección ORDENES DE COMPRA.");
+                throw new Exception("No existe un estado REQUISICION para la sección ORDENES DE COMPRA.");
 
             var results = Repository.GetListByCriteria(ordenCompraCriteria.PorAlmacen(idSucursal)).Where(oc => oc.IdEstado == estadoRequisicion.Id).ToList();
             if (results == null || results.Count == 0)

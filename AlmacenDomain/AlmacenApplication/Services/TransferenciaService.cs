@@ -14,7 +14,7 @@ namespace AlmacenApplication.Services
         readonly ISalidaAlmacenService _salidaAlmacen;
         readonly IUsuarioService _usuarioService;
 
-        public TransferenciaService(ITransferenciaRepository repository, IEntradaAlmacenService entradaAlmacen, ISalidaAlmacenService salidaAlmacen, 
+        public TransferenciaService(ITransferenciaRepository repository, IEntradaAlmacenService entradaAlmacen, ISalidaAlmacenService salidaAlmacen,
             IUsuarioService usuarioService, IMapper mapper) : base(repository, mapper)
         {
             _entradaAlmacen = entradaAlmacen;
@@ -24,13 +24,13 @@ namespace AlmacenApplication.Services
 
         protected override void Validaciones(TransferenciaDto dto)
         {
-            var entrada = this._entradaAlmacen.GetById(dto.IdEntradaAlmacen) ?? throw new Exception("No se ha selecionado una entrada de almacén.");
+            var entrada = this._entradaAlmacen.GetById(dto.IdEntradaAlmacen) ?? throw new Exception("No se ha seleccionado una entrada de almacén.");
             dto.IdEntradaAlmacen = entrada.Id.Value;
 
-            var salida = this._salidaAlmacen.GetById(dto.IdSalidaAlmacen) ?? throw new Exception("No se ha selecionado una salida de almancén.");
+            var salida = this._salidaAlmacen.GetById(dto.IdSalidaAlmacen) ?? throw new Exception("No se ha seleccionado una salida de almacén.");
             dto.IdSalidaAlmacen = salida.Id.Value;
 
-            var personaTransfiere = this._usuarioService.GetById(dto.IdUsuarioTransfiere) ?? throw new Exception("No se ha selecionado un usuario de transferencia.");
+            var personaTransfiere = this._usuarioService.GetById(dto.IdUsuarioTransfiere) ?? throw new Exception("No se ha seleccionado un usuario de transferencia.");
             dto.IdUsuarioTransfiere = personaTransfiere.Id.Value;
 
             if (dto.FechaTranferencia > DateTime.Now)

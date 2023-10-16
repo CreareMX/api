@@ -1,5 +1,4 @@
-﻿using CommonApplication.Interfaces;
-using CommonApplication.dtos;
+﻿using CommonApplication.dtos;
 using CommonApplication.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +16,7 @@ namespace MultiSystemApi.Controllers.Seguridad
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
-    {        
+    {
         readonly IJwt _jwt;
         readonly IUsuarioService _usuarioService;
         /// <summary>

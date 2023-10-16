@@ -24,7 +24,7 @@ namespace MultiSystemApi.Controllers.Almacen
             Service = service;
         }
         /// <summary>
-        /// Obtiene una Almacen por medio de su ID
+        /// Obtiene un Almacen por medio de su ID
         /// </summary>
         /// <param name="id">Identificador único de Almacen</param>
         /// <returns>Almacen</returns>
@@ -39,8 +39,8 @@ namespace MultiSystemApi.Controllers.Almacen
         /// <summary>
         /// Crea una nueva Almacen
         /// </summary>
-        /// <param name="dto">Datos de la Almacen</param>
-        /// <param name="idUser">ID del usuario que crea la Almacen</param>
+        /// <param name="dto">Datos del Almacen</param>
+        /// <param name="idUser">ID del usuario que crea el Almacen</param>
         /// <returns>Almacen</returns>
         [HttpPost("{idUser}")]
         public IActionResult Create(AlmacenDto dto, long idUser)
@@ -60,7 +60,7 @@ namespace MultiSystemApi.Controllers.Almacen
         /// <summary>
         /// Actualiza una Almacen
         /// </summary>
-        /// <param name="dto">Datos de la Almacen</param>
+        /// <param name="dto">Datos del Almacen</param>
         /// <param name="idUser">ID del usuario que actualiza la Almacen</param>
         /// <returns>Success</returns>
         [HttpPut("{idUser}")]
@@ -79,8 +79,8 @@ namespace MultiSystemApi.Controllers.Almacen
         /// <summary>
         /// Desactiva una Almacen existente
         /// </summary>
-        /// <param name="dto">Datos de la Almacen (se requiere únicamente el ID)</param>
-        /// <param name="idUser">ID del usuario que desactiva la Almacen</param>
+        /// <param name="dto">Datos del Almacen (se requiere únicamente el ID)</param>
+        /// <param name="idUser">ID del usuario que desactiva el Almacen</param>
         /// <returns>success</returns>
         [HttpDelete("{idUser}")]
         public IActionResult Delete(AlmacenDto dto, long idUser)
